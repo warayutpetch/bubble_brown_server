@@ -105,5 +105,8 @@ appRouteReport(app);
 var appRouteMenuType = require('./routes/appRouteMenuType');
 appRouteMenuType(app);
 
+var appRouteMenu = require('./routes/appRouteMenu');
+appRouteMenu(app);
+
 // var appRouterOmisePayment = require('./routes/appRouterOmisePayment')
 // appRouterOmisePayment(app)
