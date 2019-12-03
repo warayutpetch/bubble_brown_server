@@ -108,5 +108,11 @@ appRouteMenuType(app);
 var appRouteMenu = require('./routes/appRouteMenu');
 appRouteMenu(app);
 
+var appRouteOrder = require('./routes/appRouteOrder');
+appRouteOrder(app);
+
+var appRouteOrderList = require('./routes/appRouteOrderList');
+appRouteOrderList(app);
+
 // var appRouterOmisePayment = require('./routes/appRouterOmisePayment')
 // appRouterOmisePayment(app)
