@@ -13,6 +13,17 @@ module.exports = function (app) {
             res.send(task);
         });
     })
+    app.post('/menu/getMenuByCode', function (req, res) {
+        console.log('/menu/getMenuByCode', req.body)
+        MenuController.getMenuByCode(req.body, function (err, task) {
+
+            if (err) {
+                res.send(err);
+            }
+            // console.log('res', task);
+            res.send(task);
+        });
+    })
 
 //     app.post('/user/getUserLoginBy', function (req, res) {
 //         console.log('/user/getUserLoginBy', req.body)

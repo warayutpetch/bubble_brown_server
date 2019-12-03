@@ -41,6 +41,38 @@ Task.getMenuBy = function getMenuBy(data) {
         });
     });
 };
+Task.getMenuByCode = function getMenuByCode(data) {
+    return new Promise(function (resolve, reject) {//user list
+        var str = "SELECT  * FROM tb_menu as tb1"
+            + " LEFT JOIN tb_menu_type as tb2 ON tb1.menu_type_code = tb2.menu_type_code "
+            + " WHERE tb1.menu_type_code = '" + data.menu_type_code + "' ";
+
+        console.log('checkLogin : ', str);
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
 
 // Task.getUserMaxCode = function getUserMaxCode(data) {
 //     return new Promise(function (resolve, reject) {

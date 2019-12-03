@@ -10,6 +10,10 @@ Task.getMenuBy = async function getMenuBy(data, result) {
     var menu = await MenuModel.getMenuBy(data);
     result(menu);
 }
+Task.getMenuByCode = async function getMenuByCode(data, result) {
+    var menu = await MenuModel.getMenuByCode(data);
+    result(menu);
+}
 
 // Task.getUserMaxCode = async function getUserMaxCode(data, result) {
 //     var user = await userModel.getUserMaxCode(data);
