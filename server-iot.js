@@ -116,5 +116,8 @@ appRouteOrderList(app);
 
 var appRouteBooking = require('./routes/appRouteBooking');
 appRouteBooking(app);
+
+var appRoutePromotion = require('./routes/appRoutePromotion');
+appRoutePromotion(app);
 // var appRouterOmisePayment = require('./routes/appRouterOmisePayment')
 // appRouterOmisePayment(app)
