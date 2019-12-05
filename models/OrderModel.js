@@ -17,12 +17,14 @@ Task.insertOrder = function insertOrder(data) {
             + "`order_code`,"
             + "`order_date`,"
             + "`table_id`,"
-            + "`customer_code` "
+            + "`customer_code`, "
+            + "`order_total_price` "
             + ") VALUES ("
             + " '" + data[0].order_code + "', "
             + " '" + data[0].order_date + "', "
             + " '" + data[0].table_id + "', "
-            + " '" + data[0].customer_code + "' "
+            + " '" + data[0].customer_code + "', "
+            + " '" + data[0].order_total_price + "' "
             + " ) "
 
 
@@ -54,36 +56,36 @@ Task.insertOrder = function insertOrder(data) {
     });
 };
 
-// Task.getMenuTypeBy = function getMenuTypeBy(data) {
-//     return new Promise(function (resolve, reject) {//user list
-//         var str = "SELECT  * FROM tb_menu_type ";
+Task.getOrderBy = function getOrderBy(data) {
+    return new Promise(function (resolve, reject) {//user list
+        var str = "SELECT  * FROM tb_order ";
 
-//         console.log('checkLogin : ', str);
+        console.log('checkLogin : ', str);
 
-//         sql.query(str, function (err, res) {
+        sql.query(str, function (err, res) {
 
-//             if (err) {
-//                 console.log("error: ", err);
-//                 const require = {
-//                     data: [],
-//                     error: err,
-//                     query_result: false,
-//                     server_result: true
-//                 };
-//                 resolve(require);
-//             }
-//             else {
-//                 const require = {
-//                     data: res,
-//                     error: [],
-//                     query_result: true,
-//                     server_result: true
-//                 };
-//                 resolve(require);
-//             }
-//         });
-//     });
-// };
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
 
 Task.getOrderMaxCode = function getOrderMaxCode(data) {
     return new Promise(function (resolve, reject) {

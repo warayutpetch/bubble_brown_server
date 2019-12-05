@@ -16,10 +16,10 @@ Task.insertOrder = async function insertOrder(data, result) {
     result(order);
 }
 
-// Task.insertUserBy = async function insertUserBy(data, result) {
-//     var user = await userModel.insertUserBy(data);
-//     result(user);
-// }
+Task.getOrderBy = async function getOrderBy(data, result) {
+    var order = await OrderModel.getOrderBy(data);
+    result(order);
+}
 
 // Task.updateUserBy = async function updateUserBy(data, result) {
 //     var user = await userModel.updateUserBy(data);

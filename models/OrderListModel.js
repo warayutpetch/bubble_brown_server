@@ -62,36 +62,37 @@ Task.insertOrderList = function insertOrderList(data) {
     });
 };
 
-// Task.getMenuTypeBy = function getMenuTypeBy(data) {
-//     return new Promise(function (resolve, reject) {//user list
-//         var str = "SELECT  * FROM tb_menu_type ";
+Task.getOrderListBy = function getOrderListBy(data) {
+    return new Promise(function (resolve, reject) {//user list
+        var str = "SELECT  * FROM tb_order_list "
+            + "WHERE order_code = '" + data.order_code + "'";
 
-//         console.log('checkLogin : ', str);
+        console.log('checkLogin : ', str);
 
-//         sql.query(str, function (err, res) {
+        sql.query(str, function (err, res) {
 
-//             if (err) {
-//                 console.log("error: ", err);
-//                 const require = {
-//                     data: [],
-//                     error: err,
-//                     query_result: false,
-//                     server_result: true
-//                 };
-//                 resolve(require);
-//             }
-//             else {
-//                 const require = {
-//                     data: res,
-//                     error: [],
-//                     query_result: true,
-//                     server_result: true
-//                 };
-//                 resolve(require);
-//             }
-//         });
-//     });
-// };
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
 
 Task.getOrderListMaxCode = function getOrderListMaxCode(data) {
     return new Promise(function (resolve, reject) {
