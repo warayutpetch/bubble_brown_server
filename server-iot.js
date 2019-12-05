@@ -114,5 +114,7 @@ appRouteOrder(app);
 var appRouteOrderList = require('./routes/appRouteOrderList');
 appRouteOrderList(app);
 
+var appRouteBooking = require('./routes/appRouteBooking');
+appRouteBooking(app);
 // var appRouterOmisePayment = require('./routes/appRouterOmisePayment')
 // appRouterOmisePayment(app)
