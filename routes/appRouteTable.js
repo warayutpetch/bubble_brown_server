@@ -14,17 +14,17 @@ module.exports = function (app) {
         });
     })
 
-//     app.post('/table/insertTable', function (req, res) {
-//         console.log('/table/insertTable', req.body)
-//         TableController.insertTable(req.body, function (err, task) {
+    app.post('/table/getTableByCode', function (req, res) {
+        console.log('/table/getTableByCode', req.body)
+        TableController.getTableByCode(req.body, function (err, task) {
 
-//             if (err) {
-//                 res.send(err);
-//             }
-//             // console.log('res', task);
-//             res.send(task);
-//         });
-//     })
-// // 
+            if (err) {
+                res.send(err);
+            }
+            // console.log('res', task);
+            res.send(task);
+        });
+    })
+// 
    
 }

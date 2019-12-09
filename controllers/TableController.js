@@ -11,10 +11,10 @@ Task.getTableBy = async function getTableBy(data, result) {
     result(table);
 }
 
-// Task.insertTable = async function insertTable(data, result) {
-//     var table = await TableModel.insertTable(data);
-//     result(table);
-// }
+Task.getTableByCode = async function getTableByCode(data, result) {
+    var table = await TableModel.getTableByCode(data);
+    result(table);
+}
 
 
 
