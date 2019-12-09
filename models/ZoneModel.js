@@ -11,45 +11,9 @@ var Task = function (task) {
     this.created_at = new Date();
 };
 
-
-
-Task.getTableBy = function getTableBy(data) {
-    return new Promise(function (resolve, reject) {
-        var str = "SELECT * FROM `tb_table`";
-
-
-        console.log('checkLogin565664646 : ', str);
-
-        sql.query(str, function (err, res) {
-
-            if (err) {
-                console.log("error: ", err);
-                const require = {
-                    data: [],
-                    error: err,
-                    query_result: false,
-                    server_result: true
-                };
-                resolve(require);
-            }
-            else {
-                const require = {
-                    data: res,
-                    error: [],
-                    query_result: true,
-                    server_result: true
-                };
-                resolve(require);
-            }
-        });
-    });
-};
-
-Task.getTableByCode = function getTableByCode(data) {
+Task.getZoneBy = function getZoneBy(data) {
     return new Promise(function (resolve, reject) {//user list
-        var str = "SELECT  * FROM tb_Table as tb1"
-            + " LEFT JOIN tb_zone as tb2 ON tb1.zone_id = tb2.zone_id "
-            + " WHERE tb1.zone_id = '" + data.zone_id + "' ";
+        var str = "SELECT  * FROM tb_zone ";
 
         console.log('checkLogin : ', str);
 
@@ -77,6 +41,85 @@ Task.getTableByCode = function getTableByCode(data) {
         });
     });
 };
+
+
+// Task.insertOrder = function insertOrder(data) {
+//     return new Promise(function (resolve, reject) {
+//         var str = "INSERT INTO `tb_order` ("
+//             + "`order_code`,"
+//             + "`order_date`,"
+//             + "`table_id`,"
+//             + "`customer_code`, "
+//             + "`order_total_price` "
+//             + ") VALUES ("
+//             + " '" + data[0].order_code + "', "
+//             + " '" + data[0].order_date + "', "
+//             + " '" + data[0].table_id + "', "
+//             + " '" + data[0].customer_code + "', "
+//             + " '" + data[0].order_total_price + "' "
+//             + " ) "
+
+
+//         console.log('checkLogin : ', data[0].order_date);
+//         // console.log('checkLogin : ', str);
+
+//         sql.query(str, function (err, res) {
+
+//             if (err) {
+//                 console.log("error: ", err);
+//                 const require = {
+//                     data: false,
+//                     error: err,
+//                     query_result: false,
+//                     server_result: true
+//                 };
+//                 resolve(require);
+//             }
+//             else {
+//                 const require = {
+//                     data: true,
+//                     error: [],
+//                     query_result: true,
+//                     server_result: true
+//                 };
+//                 resolve(require);
+//             }
+//         });
+//     });
+// };
+
+
+// Task.getOrderMaxCode = function getOrderMaxCode(data) {
+//     return new Promise(function (resolve, reject) {
+//         var str = "SELECT  IFNULL(LPAD( SUBSTRING(max(order_code),3 ,7)+1,6, '0'),'000001') AS order_code_max FROM `tb_order` "
+         
+
+//         console.log('checkLogin565664646 : ', str);
+
+//         sql.query(str, function (err, res) {
+
+//             if (err) {
+//                 console.log("error: ", err);
+//                 const require = {
+//                     data: [],
+//                     error: err,
+//                     query_result: false,
+//                     server_result: true
+//                 };
+//                 resolve(require);
+//             }
+//             else {
+//                 const require = {
+//                     data: res[0],
+//                     error: [],
+//                     query_result: true,
+//                     server_result: true
+//                 };
+//                 resolve(require);
+//             }
+//         });
+//     });
+// };
 
 
 
