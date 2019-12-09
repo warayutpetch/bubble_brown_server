@@ -119,5 +119,10 @@ appRouteBooking(app);
 
 var appRoutePromotion = require('./routes/appRoutePromotion');
 appRoutePromotion(app);
+
+var appRouteTable = require('./routes/appRouteTable');
+appRouteTable(app);
+
+
 // var appRouterOmisePayment = require('./routes/appRouterOmisePayment')
 // appRouterOmisePayment(app)
