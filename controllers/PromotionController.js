@@ -21,10 +21,10 @@ Task.insertPromotion = async function insertPromotion(data, result) {
 //     var coverpageList = await journalModel.getJournalByCol(data);
 //     result(coverpageList)
 // }
-// Task.updateCoverPage = async function updateCoverPage(data, result) {
-//     var JournalList = await journalModel.updateJournal(data.set, data.where);
-//     result(JournalList);
-// }
+Task.updatePromotion = async function updatePromotion(data, result) {
+    var promotionList = await promotionModel.updatePromotion(data.set, data.where);
+    result(promotionList);
+}
 
 // Task.deleteCoverPage = async function deleteCoverPage(data, result) {
 //     var set_data = {

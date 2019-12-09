@@ -29,15 +29,15 @@ module.exports = function (app) {
             res.send(task);
         });
     })
-    // app.post('/journal/updateCoverPage', function (req, res) {
-    //     console.log('/journal/updateCoverPage', req.body)
-    //     journalController.updateCoverPage(req.body, function (err, task) {
-    //         if (err) {
-    //             res.send(err);
-    //         }
-    //         res.send(task);
-    //     });
-    // })
+    app.post('/promotion/updatePromotion', function (req, res) {
+        console.log('/promotion/updatePromotion', req.body)
+        promotionController.updatePromotion(req.body, function (err, task) {
+            if (err) {
+                res.send(err);
+            }
+            res.send(task);
+        });
+    })
     // app.post('/journal/deleteCoverPage', function (req, res) {
     //     console.log('/journal/deleteCoverPage', req.body)
     //     journalController.deleteCoverPage(req.body, function (err, task) {
