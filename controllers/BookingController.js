@@ -16,6 +16,15 @@ Task.insertBooking = async function insertBooking(data, result) {
     result(booking);
 }
 
+Task.checkBook = async function checkBook(data, result) {
+    var booking = await BookingModel.checkBook(data);
+    result(booking);
+}
+
+Task.checkTable = async function checkTable(data, result) {
+    var booking = await BookingModel.checkTable(data);
+    result(booking);
+}
 
 
 module.exports = Task;
