@@ -15,6 +15,7 @@ Task.insertBooking = function insertBooking(data) {
     return new Promise(function (resolve, reject) {
         var str = "INSERT INTO `tb_booking` ("
             + "`booking_code`,"
+            + "`table_code`,"
             + "`booking_firstname`,"
             + "`booking_lastname`,"
             + "`booking_tel`, "
@@ -23,6 +24,7 @@ Task.insertBooking = function insertBooking(data) {
             + "`booking_amount` "
             + ") VALUES ("
             + " '" + data.booking_code + "', "
+            + " '" + data.table_code + "', "
             + " '" + data.booking_firstname + "', "
             + " '" + data.booking_lastname + "', "
             + " '" + data.booking_tel + "', "
@@ -84,6 +86,76 @@ Task.getBookingMaxCode = function getBookingMaxCode(data) {
             else {
                 const require = {
                     data: res[0],
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
+
+
+
+Task.checkBook = function checkBook(data) {
+    return new Promise(function (resolve, reject) {
+        var str = "SELECT  * FROM `tb_table` "
+        + " LEFT JOIN tb_booking ON `tb_table`.`table_code` = tb_booking.table_code "
+        + " WHERE table_amount = '" + data.table_amount + "'"
+        + " AND tb_booking.booking_date = '" + timeController.reformatTo(data.booking_date) + "'"
+       
+        console.log('checkLogin565664646 : ', str);
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
+
+Task.checkTable = function checkTable(data) {
+    return new Promise(function (resolve, reject) {
+        var str = "SELECT  * FROM `tb_table` " 
+        + " WHERE table_amount = '" + data.table_amount + "'"
+       
+       
+         
+        console.log('checkLogin565664646 : ', str);
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res,
                     error: [],
                     query_result: true,
                     server_result: true

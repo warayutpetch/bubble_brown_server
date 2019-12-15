@@ -16,20 +16,19 @@ Task.insertOrder = function insertOrder(data) {
         var str = "INSERT INTO `tb_order` ("
             + "`order_code`,"
             + "`order_date`,"
-            + "`table_id`,"
+            + "`table_code`,"
             + "`customer_code`, "
             + "`order_total_price` "
             + ") VALUES ("
-            + " '" + data[0].order_code + "', "
-            + " '" + data[0].order_date + "', "
-            + " '" + data[0].table_id + "', "
-            + " '" + data[0].customer_code + "', "
-            + " '" + data[0].order_total_price + "' "
+            + " '" + data.order_code + "', "
+            + " '" + data.order_date + "', "
+            + " '" + data.table_code + "', "
+            + " '" + data.customer_code + "', "
+            + " '" + data.order_total_price + "' "
             + " ) "
 
 
-        console.log('checkLogin : ', data[0].order_date);
-        // console.log('checkLogin : ', str);
+        console.log('checkLogin : ', str);
 
         sql.query(str, function (err, res) {
 
@@ -90,7 +89,39 @@ Task.getOrderBy = function getOrderBy(data) {
 Task.getOrderMaxCode = function getOrderMaxCode(data) {
     return new Promise(function (resolve, reject) {
         var str = "SELECT  IFNULL(LPAD( SUBSTRING(max(order_code),3 ,7)+1,6, '0'),'000001') AS order_code_max FROM `tb_order` "
-         
+
+
+        console.log('checkLogin565664646 : ', str);
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res[0],
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
+
+Task.getOrderByCode = function getOrderByCode(data) {
+    return new Promise(function (resolve, reject) {
+        var str = "SELECT  * FROM `tb_order` "
+            + "WHERE order_code = '" + data.order_code + "'";
 
         console.log('checkLogin565664646 : ', str);
 
@@ -121,86 +152,46 @@ Task.getOrderMaxCode = function getOrderMaxCode(data) {
 
 
 
-// Task.updateUserBy = function updateUserBy(data) {
-//     return new Promise(function (resolve, reject) {
-//         var str = "UPDATE `tb_user` SET "
-//             + "`user_code` = '" + data.user_code + "',"
-//             + "`user_prefix` = '" + data.user_prefix + "',"
-//             + "`user_name` = '" + data.user_name + "',"
-//             + "`user_lastname` = '" + data.user_lastname + "',"
-//             + "`user_email` = '" + data.user_email + "',"
-//             + "`user_mobile` = '" + data.user_mobile + "',"
-//             + "`user_password` = " + sql.escape(data.user_password) + ","
-//             + "`user_username` = " + sql.escape(data.user_username) + ","
-//             + "`user_address` = '" + data.user_address + "',"
-//             + "`user_profile_img` = '" + data.user_profile_img + "',"
-//             + "`district_id` = '" + data.district_id + "',"
-//             + "`amphur_id`= '" + data.amphur_id + "',"
-//             + "`province_id` = '" + data.province_id + "',"
-//             + "`user_zipcode` = '" + data.user_zipcode + "',"
-//             + "`updateby` = '" + data.updateby + "',"
-//             + "`lastupdate` = '" + timeController.reformatToSave(new Date()) + "'"
-//             + "WHERE tb_user.user_code = '" + data.user_code + "'";
+Task.updateOrderByCode = function updateOrderByCode(data) {
+    return new Promise(function (resolve, reject) {
+        var str = "UPDATE `tb_order` SET "
+            + "`order_code` = '" + data.order_code + "',"
+            + "`order_date` = '" + data.order_date + "',"
+            + "`table_code` = '" + data.table_code + "',"
+            + "`customer_code` = '" + data.customer_code + "', "
+            + "`order_total_price` = '" + data.order_total_price + "' "
+            + "WHERE order_code = '" + data.order_code + "'";
 
 
-//         // console.log('checkLogin : ', data);
-//         console.log('checkLogin : ', str);
+        // console.log('checkLogin : ', data);
+        console.log('checkLogin : ', str);
 
-//         sql.query(str, function (err, res) {
+        sql.query(str, function (err, res) {
 
-//             if (err) {
-//                 console.log("error: ", err);
-//                 const require = {
-//                     data: false,
-//                     error: err,
-//                     query_result: false,
-//                     server_result: true
-//                 };
-//                 resolve(require);
-//             }
-//             else {
-//                 const require = {
-//                     data: true,
-//                     error: [],
-//                     query_result: true,
-//                     server_result: true
-//                 };
-//                 resolve(require);
-//             }
-//         });
-//     });
-// };
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: false,
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: true,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
 
-// Task.deleteByCode = function deleteByCode(data) {
-//     return new Promise(function (resolve, reject) {
-//         var str = "DELETE FROM tb_user WHERE user_code = '" + data.user_code + "'";//showdata editview
 
-//         console.log('checkLogin : ', str);
-
-//         sql.query(str, function (err, res) {
-
-//             if (err) {
-//                 console.log("error: ", err);
-//                 const require = {
-//                     data: false,
-//                     error: err,
-//                     query_result: false,
-//                     server_result: true
-//                 };
-//                 resolve(require);
-//             }
-//             else {
-//                 const require = {
-//                     data: true,
-//                     error: [],
-//                     query_result: true,
-//                     server_result: true
-//                 };
-//                 resolve(require);
-//             }
-//         });
-//     });
-// };
 
 // Task.getUserByCode = function getUserByCode(data) {
 //     return new Promise(function (resolve, reject) {

@@ -38,17 +38,29 @@ module.exports = function (app) {
         });
     })
 
-//     app.post('/user/insertUserBy', function (req, res) {
-//         console.log('/user/insertUserBy', req.body)
-//         userController.insertUserBy(req.body, function (err, task) {
+    app.post('/order/getOrderByCode', function (req, res) {
+        console.log('/order/getOrderByCode', req.body)
+        OrderController.getOrderByCode(req.body, function (err, task) {
 
-//             if (err) {
-//                 res.send(err);
-//             }
-//             // console.log('res', task);
-//             res.send(task);
-//         });
-//     })
+            if (err) {
+                res.send(err);
+            }
+            // console.log('res', task);
+            res.send(task);
+        });
+    })
+
+    app.post('/order/updateOrderByCode', function (req, res) {
+        console.log('/order/updateOrderByCode', req.body)
+        OrderController.updateOrderByCode(req.body, function (err, task) {
+
+            if (err) {
+                res.send(err);
+            }
+            // console.log('res', task);
+            res.send(task);
+        });
+    })
 
 //     app.post('/user/updateUserBy', function (req, res) {
 //         console.log('/user/updateUserBy', req.body)
