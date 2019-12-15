@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 15, 2019 at 01:35 PM
+-- Generation Time: Dec 15, 2019 at 01:51 PM
 -- Server version: 5.7.17-log
 -- PHP Version: 5.6.30
 
@@ -28,6 +28,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `tb_customer` (
   `customer_code` varchar(20) NOT NULL,
+  `customer_name` varchar(100) NOT NULL,
   `customer_id` varchar(100) NOT NULL,
   `customer_email` varchar(100) NOT NULL,
   `customer_phone` varchar(10) NOT NULL,
@@ -38,8 +39,8 @@ CREATE TABLE `tb_customer` (
 -- Dumping data for table `tb_customer`
 --
 
-INSERT INTO `tb_customer` (`customer_code`, `customer_id`, `customer_email`, `customer_phone`, `customer_img`) VALUES
-('CM001', '', '', '', '');
+INSERT INTO `tb_customer` (`customer_code`, `customer_name`, `customer_id`, `customer_email`, `customer_phone`, `customer_img`) VALUES
+('CM001', '', '', '', '', '');
 
 --
 -- Indexes for dumped tables
