@@ -126,6 +126,9 @@ appRouteTable(app);
 var appRouteZone = require('./routes/appRouteZone');
 appRouteZone(app);
 
+var appRouteCustomer = require('./routes/appRouteCustomer');
+appRouteCustomer(app);
+
 
 // var appRouterOmisePayment = require('./routes/appRouterOmisePayment')
 // appRouterOmisePayment(app)
