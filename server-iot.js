@@ -132,6 +132,12 @@ appRouteCustomer(app);
 var appRouteGPSCalculate = require('./routes/appRouteGPSCalculate');
 appRouteGPSCalculate(app);
 
+var appRouteRecipe = require('./routes/appRouteRecipe');
+appRouteRecipe(app);
+
+var appRouteProduct = require('./routes/appRouteProduct');
+appRouteProduct(app);
+
 
 // var appRouterOmisePayment = require('./routes/appRouterOmisePayment')
 // appRouterOmisePayment(app)
