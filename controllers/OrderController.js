@@ -21,10 +21,10 @@ Task.getOrderBy = async function getOrderBy(data, result) {
     result(order);
 }
 
-// Task.updateUserBy = async function updateUserBy(data, result) {
-//     var user = await userModel.updateUserBy(data);
-//     result(user);
-// }
+Task.updateOrderBy = async function updateOrderBy(data, result) {
+    var order = await OrderModel.updateOrderBy(data);
+    result(order);
+}
 
 // Task.deleteByCode = async function deleteByCode(data, result) {
 //     var user = await userModel.deleteByCode(data);

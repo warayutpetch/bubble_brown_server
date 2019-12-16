@@ -62,6 +62,47 @@ Task.insertOrderList = function insertOrderList(data) {
     });
 };
 
+Task.updateOrderList = function updateOrderList(data) {
+    return new Promise(function (resolve, reject) {
+        var str = "UPDATE `tb_order_list` SET"
+            // + "`order_list_code`= '" + data.order_list_code + "',"
+            + "`order_list_name`= '" + data.order_list_name + "',"
+            + "`menu_code`= '" + data.menu_code + "',"
+            + "`order_list_qty`= '" + data.order_list_qty + "',"
+            + "`order_list_price_qty`= '" + data.order_list_price_qty + "',"
+            + "`order_list_price_sum_qty`= '" + data.order_list_price_sum_qty + "',"
+            + "`order_list_price_sum`= '" + data.order_list_price_sum + "'"
+            + "WHERE tb_order_list.order_code = '" + data.order_code + "'";
+
+
+        // console.log('checkLogin : ', data.order_list_date);
+        // console.log('checkLogin : ', str);
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: false,
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: true,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
+
 Task.getOrderListBy = function getOrderListBy(data) {
     return new Promise(function (resolve, reject) {//user list
         var str = "SELECT  * FROM tb_order_list "
@@ -178,36 +219,36 @@ Task.getOrderListMaxCode = function getOrderListMaxCode(data) {
 //     });
 // };
 
-// Task.deleteByCode = function deleteByCode(data) {
-//     return new Promise(function (resolve, reject) {
-//         var str = "DELETE FROM tb_user WHERE user_code = '" + data.user_code + "'";//showdata editview
+Task.deleteByCode = function deleteByCode(data) {
+    return new Promise(function (resolve, reject) {
+        var str = "DELETE FROM tb_order_list WHERE order_code = '" + data.order_code  + "'";//showdata editview
 
-//         console.log('checkLogin : ', str);
+        console.log('checkLogin : ', str);
 
-//         sql.query(str, function (err, res) {
+        sql.query(str, function (err, res) {
 
-//             if (err) {
-//                 console.log("error: ", err);
-//                 const require = {
-//                     data: false,
-//                     error: err,
-//                     query_result: false,
-//                     server_result: true
-//                 };
-//                 resolve(require);
-//             }
-//             else {
-//                 const require = {
-//                     data: true,
-//                     error: [],
-//                     query_result: true,
-//                     server_result: true
-//                 };
-//                 resolve(require);
-//             }
-//         });
-//     });
-// };
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: false,
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: true,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
 
 // Task.getUserByCode = function getUserByCode(data) {
 //     return new Promise(function (resolve, reject) {
