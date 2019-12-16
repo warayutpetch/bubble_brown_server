@@ -25,6 +25,15 @@ Task.updateOrderList = async function updateOrderList(data, result) {
     var order_list = await OrderListModel.updateOrderList(data);
     result(order_list);
 }
+Task.getOrderListByOrderCode = async function getOrderListByOrderCode(data, result) {
+    var order_list = await OrderListModel.getOrderListByOrderCode(data);
+    result(order_list);
+}
+
+Task.deleteOrderListByCode = async function deleteOrderListByCode(data, result) {
+    var order_list = await OrderListModel.deleteOrderListByCode(data);
+    result(order_list);
+}
 
 Task.deleteByCode = async function deleteByCode(data, result) {
     var order_list = await OrderListModel.deleteByCode(data);

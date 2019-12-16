@@ -26,6 +26,11 @@ Task.updatePromotion = async function updatePromotion(data, result) {
     result(promotionList);
 }
 
+Task.getPromotionByCode = async function getPromotionByCode(data, result) {
+    var promotionList = await promotionModel.getPromotionByCode(data);
+    result(promotionList);
+}
+
 // Task.deleteCoverPage = async function deleteCoverPage(data, result) {
 //     var set_data = {
 //         deleted: 1,

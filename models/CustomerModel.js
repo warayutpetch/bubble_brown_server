@@ -12,9 +12,9 @@ var Task = function (task) {
 };
 
 
-Task.getPromotionBy = function getPromotionBy() {
+Task.getCustomerBy = function getCustomerBy() {
     return new Promise(function (resolve, reject) {
-        var str = "SELECT * FROM tb_promotion WHERE deleted = 0 ";
+        var str = "SELECT * FROM tb_customer ";
         sql.query(str, function (err, res) {
             if (err) {
                 console.log("error: ", err);
@@ -39,13 +39,11 @@ Task.getPromotionBy = function getPromotionBy() {
     });
 }
 
-Task.getPromotionByCode = function getPromotionByCode(data) {
-    return new Promise(function (resolve, reject) {//user list
-        var str = "SELECT  * FROM tb_promotion as tb1"
-            + " LEFT JOIN tb_menu_type as tb2 ON tb1.menu_type_code = tb2.menu_type_code "
-            + " WHERE tb1.menu_type_code = '" + data.menu_type_code + "' ";
+Task.getCustomerMaxCode = function getCustomerMaxCode(data) {
+    return new Promise(function (resolve, reject) {
+        var str = "SELECT  LPAD( SUBSTRING(max(customer_code),4,5)+1,3,'0') AS customer_code_max FROM `tb_customer` "; //insert customer_code
 
-        console.log('checkLogin : ', data);
+        console.log('checkLogin : ', str);
 
         sql.query(str, function (err, res) {
 
@@ -61,7 +59,7 @@ Task.getPromotionByCode = function getPromotionByCode(data) {
             }
             else {
                 const require = {
-                    data: res,
+                    data: res[0],
                     error: [],
                     query_result: true,
                     server_result: true
@@ -72,22 +70,56 @@ Task.getPromotionByCode = function getPromotionByCode(data) {
     });
 };
 
-Task.insertPromotion = function insertPromotion(data) {
+// Task.getCustomerByCode = function getCustomerByCode(data) {
+//     return new Promise(function (resolve, reject) {//user list
+//         var str = "SELECT  * FROM tb_customer as tb1"
+//             + " LEFT JOIN tb_menu_type as tb2 ON tb1.menu_type_code = tb2.menu_type_code "
+//             + " WHERE tb1.menu_type_code = '" + data.menu_type_code + "' ";
+
+//         console.log('checkLogin : ', data);
+
+//         sql.query(str, function (err, res) {
+
+//             if (err) {
+//                 console.log("error: ", err);
+//                 const require = {
+//                     data: [],
+//                     error: err,
+//                     query_result: false,
+//                     server_result: true
+//                 };
+//                 resolve(require);
+//             }
+//             else {
+//                 const require = {
+//                     data: res,
+//                     error: [],
+//                     query_result: true,
+//                     server_result: true
+//                 };
+//                 resolve(require);
+//             }
+//         });
+//     });
+// };
+
+Task.insertCustomer = function insertCustomer(data) {
     return new Promise(function (resolve, reject) {
-        var str = "INSERT INTO `tb_promotion` ("
-            // + "`promotion_code`,"
-            + "`promotion_header`,"
-            + "`promotion_detail`,"
-            + "`promotion_type_code`, "
-            // + "`promotion_image`, "
-            + "`addby` "
+        var str = "INSERT INTO `tb_customer` ("
+            + "`customer_code`,"
+            + "`customer_id`,"
+            + "`customer_email`,"
+            + "`customer_phone`,"
+            + "`customer_img` "
+            // + "`addby` "
             + ") VALUES ("
-            // + " '" + data[0].order_code + "', "
-            + " '" + data[0].promotion_header + "', "
-            + " '" + data[0].promotion_detail + "', "
-            + " '" + data[0].promotion_type_code + "', "
+            + " '" + data.order_code + "', "
+            + " '" + data.customer_id + "', "
+            + " '" + data.customer_email + "', "
+            + " '" + data.customer_phone + "', "
+            + " '" + data.customer_img + "' "
             // + " '" + data[0].promotion_image + "', "
-            + " '" + data[0].addby + "' "
+            // + " '" + data[0].addby + "' "
             + " ) "
 
         // console.log(str);
@@ -192,9 +224,9 @@ Task.insertPromotion = function insertPromotion(data) {
 //     });
 // }
 
-Task.updatePromotion = function updatePromotion(set, where) {
+Task.updateCustomer = function updateCustomer(set, where) {
     return new Promise(function (resolve, reject) {
-        var str_sql = " UPDATE tb_promotion ";
+        var str_sql = " UPDATE tb_customer ";
         var str_set = " SET ";
         var str_where = " WHERE ";
         var i = 0;

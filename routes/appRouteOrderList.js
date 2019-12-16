@@ -38,6 +38,30 @@ module.exports = function (app) {
         });
     })
 
+    app.post('/order_list/getOrderListByOrderCode', function (req, res) {
+        console.log('/order_list/getOrderListByOrderCode', req.body)
+        OrderListController.getOrderListByOrderCode(req.body, function (err, task) {
+
+            if (err) {
+                res.send(err);
+            }
+            // console.log('res', task);
+            res.send(task);
+        });
+    })
+
+    app.post('/order_list/deleteOrderListByCode', function (req, res) {
+        console.log('/order_list/deleteOrderListByCode', req.body)
+        OrderListController.deleteOrderListByCode(req.body, function (err, task) {
+
+            if (err) {
+                res.send(err);
+            }
+            // console.log('res', task);
+            res.send(task);
+        });
+    })
+
 //     app.post('/user/insertUserBy', function (req, res) {
 //         console.log('/user/insertUserBy', req.body)
 //         userController.insertUserBy(req.body, function (err, task) {

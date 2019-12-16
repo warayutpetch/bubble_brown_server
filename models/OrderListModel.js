@@ -135,6 +135,38 @@ Task.getOrderListBy = function getOrderListBy(data) {
     });
 };
 
+Task.getOrderListByOrderCode = function getOrderListByOrderCode(data) {
+    return new Promise(function (resolve, reject) {//user list
+        var str = "SELECT  * FROM tb_order_list "
+            + "WHERE order_code = '" + data.order_code + "'";
+
+        console.log('checkLogin : ', str);
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
+
 Task.getOrderListMaxCode = function getOrderListMaxCode(data) {
     return new Promise(function (resolve, reject) {
         var str = "SELECT  IFNULL(LPAD( SUBSTRING(max(order_list_code),3 ,7)+1,6, '0'),'000001') AS order_list_code_max FROM `tb_order_list` "
@@ -169,59 +201,10 @@ Task.getOrderListMaxCode = function getOrderListMaxCode(data) {
 
 
 
-// Task.updateUserBy = function updateUserBy(data) {
-//     return new Promise(function (resolve, reject) {
-//         var str = "UPDATE `tb_user` SET "
-//             + "`user_code` = '" + data.user_code + "',"
-//             + "`user_prefix` = '" + data.user_prefix + "',"
-//             + "`user_name` = '" + data.user_name + "',"
-//             + "`user_lastname` = '" + data.user_lastname + "',"
-//             + "`user_email` = '" + data.user_email + "',"
-//             + "`user_mobile` = '" + data.user_mobile + "',"
-//             + "`user_password` = " + sql.escape(data.user_password) + ","
-//             + "`user_username` = " + sql.escape(data.user_username) + ","
-//             + "`user_address` = '" + data.user_address + "',"
-//             + "`user_profile_img` = '" + data.user_profile_img + "',"
-//             + "`district_id` = '" + data.district_id + "',"
-//             + "`amphur_id`= '" + data.amphur_id + "',"
-//             + "`province_id` = '" + data.province_id + "',"
-//             + "`user_zipcode` = '" + data.user_zipcode + "',"
-//             + "`updateby` = '" + data.updateby + "',"
-//             + "`lastupdate` = '" + timeController.reformatToSave(new Date()) + "'"
-//             + "WHERE tb_user.user_code = '" + data.user_code + "'";
 
-
-//         // console.log('checkLogin : ', data);
-//         console.log('checkLogin : ', str);
-
-//         sql.query(str, function (err, res) {
-
-//             if (err) {
-//                 console.log("error: ", err);
-//                 const require = {
-//                     data: false,
-//                     error: err,
-//                     query_result: false,
-//                     server_result: true
-//                 };
-//                 resolve(require);
-//             }
-//             else {
-//                 const require = {
-//                     data: true,
-//                     error: [],
-//                     query_result: true,
-//                     server_result: true
-//                 };
-//                 resolve(require);
-//             }
-//         });
-//     });
-// };
-
-Task.deleteByCode = function deleteByCode(data) {
+Task.deleteOrderListByCode = function deleteOrderListByCode(data) {
     return new Promise(function (resolve, reject) {
-        var str = "DELETE FROM tb_order_list WHERE order_code = '" + data.order_code  + "'";//showdata editview
+        var str = "DELETE FROM tb_order_list WHERE order_code = '" + data.order_code + "'";//showdata editview
 
         console.log('checkLogin : ', str);
 

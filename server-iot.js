@@ -41,7 +41,7 @@ app.use((req, res, next) => {
 
 
 app.listen(3004, () => {
-  console.log('API Start server at port 3006.')
+  console.log('API Start server at port 3004.')
 })
 
 var appRouteAdmin = require('./routes/appRouteAdmin');
@@ -119,5 +119,16 @@ appRouteBooking(app);
 
 var appRoutePromotion = require('./routes/appRoutePromotion');
 appRoutePromotion(app);
+
+var appRouteTable = require('./routes/appRouteTable');
+appRouteTable(app);
+
+var appRouteZone = require('./routes/appRouteZone');
+appRouteZone(app);
+
+var appRouteCustomer = require('./routes/appRouteCustomer');
+appRouteCustomer(app);
+
+
 // var appRouterOmisePayment = require('./routes/appRouterOmisePayment')
 // appRouterOmisePayment(app)
