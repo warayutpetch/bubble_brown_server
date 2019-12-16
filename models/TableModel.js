@@ -83,7 +83,7 @@ Task.getTableByCode = function getTableByCode(data) {
         var str = "SELECT  *  FROM tb_table "
             + "WHERE table_code = '" + data.table_code + "'";
 
-        console.log('checkLogin : ', str);
+        console.log('zzzzz : ', str);
 
         sql.query(str, function (err, res) {
 

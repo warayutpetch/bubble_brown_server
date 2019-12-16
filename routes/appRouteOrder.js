@@ -25,7 +25,17 @@ module.exports = function (app) {
             res.send(task);
         });
     })
+    app.post('/order/updateOrder', function (req, res) {
+        console.log('/order/updateOrder', req.body)
+        OrderController.updateOrderBy(req.body, function (err, task) {
 
+            if (err) {
+                res.send(err);
+            }
+            // console.log('res', task);
+            res.send(task);
+        });
+    })
     app.post('/order/getOrderBy', function (req, res) {
         console.log('/order/getOrderBy', req.body)
         OrderController.getOrderBy(req.body, function (err, task) {

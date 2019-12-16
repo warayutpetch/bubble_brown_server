@@ -29,6 +29,7 @@ Task.insertOrder = function insertOrder(data) {
             + " '" + data.order_total_price + "' "
             + " ) "
 
+console.log("strrrrrrrr",str);
 
         console.log('checkLogin : ', str);
 
@@ -46,7 +47,7 @@ Task.insertOrder = function insertOrder(data) {
             }
             else {
                 const require = {
-                    data: true,
+                    data: res,
                     error: [],
                     query_result: true,
                     server_result: true
