@@ -41,7 +41,7 @@ app.use((req, res, next) => {
 
 
 app.listen(3004, () => {
-  console.log('API Start server at port 3006.')
+  console.log('API Start server at port 3004.')
 })
 
 var appRouteAdmin = require('./routes/appRouteAdmin');
