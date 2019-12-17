@@ -77,6 +77,36 @@ Task.getTableByZoneCode = function getTableByZoneCode(data) {
         });
     });
 };
+Task.getTableMaxCode = function getTableMaxCode(data) {
+    return new Promise(function (resolve, reject) {
+        var str = "SELECT IFNULL(LPAD( SUBSTRING(max(table_code),2 ,3)+1,2, '0'),'01') AS table_code_max FROM `tb_table` "; //insert usercode
+
+        console.log('checkLogin : ', str);
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res[0],
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
 
 Task.getTableByCode = function getTableByCode(data) {
     return new Promise(function (resolve, reject) {
@@ -110,7 +140,49 @@ Task.getTableByCode = function getTableByCode(data) {
     });
 };
 
+Task.insertTable = function insertTable(data) {
+    return new Promise(function (resolve, reject) {
+        var str = "INSERT INTO `tb_table` ("
+            + "`table_code`,"
+            + "`table_name`,"
+            + "`table_amount`,"
+            + "`zone_id`"
+           
+            + ") VALUES ("
+            + " '" + data.table_code + "', "
+            + " '" + data.table_name + "', "
+            + " '" + data.table_amount + "', "
+            + " '" + data.zone_id + "' "
+            + " ) "
 
+console.log("strrrrrrrr",str);
+
+        console.log('checkLogin : ', str);
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: false,
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
 
 Task.updateTebleBy = function updateTebleBy(data) {
     return new Promise(function (resolve, reject) {
