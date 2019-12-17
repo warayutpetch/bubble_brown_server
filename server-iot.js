@@ -138,6 +138,9 @@ appRouteRecipe(app);
 var appRouteProduct = require('./routes/appRouteProduct');
 appRouteProduct(app);
 
+var appRouteStock = require('./routes/appRouteStock');
+appRouteStock(app);
+
 
 // var appRouterOmisePayment = require('./routes/appRouterOmisePayment')
 // appRouterOmisePayment(app)

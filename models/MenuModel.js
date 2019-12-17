@@ -44,8 +44,8 @@ Task.getMenuBy = function getMenuBy(data) {
 Task.getMenuByRecipe = function getMenuByRecipe(data) {
     return new Promise(function (resolve, reject) {//user list
         var str = "SELECT  * FROM tb_menu "
-            // + " LEFT JOIN tb_recipe  ON tb_menu.menu_code = tb_recipe.menu_code "
-            // + " LEFT JOIN tb_product  ON tb_product.product_code = tb_recipe.product_code "
+        // + " LEFT JOIN tb_recipe  ON tb_menu.menu_code = tb_recipe.menu_code "
+        // + " LEFT JOIN tb_product  ON tb_product.product_code = tb_recipe.product_code "
         console.log('checkLogin : ', str);
 
         sql.query(str, function (err, res) {
@@ -105,36 +105,37 @@ Task.getMenuByCode = function getMenuByCode(data) {
     });
 };
 
-// Task.getUserMaxCode = function getUserMaxCode(data) {
-//     return new Promise(function (resolve, reject) {
-//         var str = "SELECT  LPAD( SUBSTRING(max(user_code),2 ,7)+1,6, '0') AS user_code_max FROM `tb_user` "; //insert usercode
+Task.getManuMaxCode = function getManuMaxCode(data) {
+    return new Promise(function (resolve, reject) {
+        var str = "SELECT  IFNULL(LPAD( SUBSTRING(max(menu_code),3 ,7)+1,6, '0'),'001') AS menu_code_max FROM `tb_menu` "
+            + "WHERE menu_type_code = '" + data.menu_type_code + "'"
 
-//         console.log('checkLogin : ', str);
+        console.log('checkLogin565664646 : ', str);
 
-//         sql.query(str, function (err, res) {
+        sql.query(str, function (err, res) {
 
-//             if (err) {
-//                 console.log("error: ", err);
-//                 const require = {
-//                     data: [],
-//                     error: err,
-//                     query_result: false,
-//                     server_result: true
-//                 };
-//                 resolve(require);
-//             }
-//             else {
-//                 const require = {
-//                     data: res[0],
-//                     error: [],
-//                     query_result: true,
-//                     server_result: true
-//                 };
-//                 resolve(require);
-//             }
-//         });
-//     });
-// };
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res[0],
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
 
 
 
