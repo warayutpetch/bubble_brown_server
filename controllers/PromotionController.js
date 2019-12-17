@@ -8,7 +8,12 @@ var Task = function (task) {
 };
 
 Task.getPromotionBy = async function getPromotionBy(data, result) {
-    var promotionList = await promotionModel.getPromotionBy();
+    var promotionList = await promotionModel.getPromotionBy(data);
+    result(promotionList)
+}
+
+Task.getPromotionByCode = async function getPromotionByCode(data, result) {
+    var promotionList = await promotionModel.getPromotionByCode(data);
     result(promotionList)
 }
 
