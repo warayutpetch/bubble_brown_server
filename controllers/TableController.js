@@ -16,8 +16,18 @@ Task.getTableByZoneCode = async function getTableByZoneCode(data, result) {
     result(table);
 }
 
+Task.getTableMaxCode = async function getTableMaxCode(data, result) {
+    var table = await TableModel.getTableMaxCode(data);
+    result(table);
+}
+
 Task.getTableByCode = async function getTableByCode(data, result) {
     var table = await TableModel.getTableByCode(data);
+    result(table);
+}
+
+Task.insertTable = async function insertTable(data, result) {
+    var table = await TableModel.insertTable(data);
     result(table);
 }
 
