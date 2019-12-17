@@ -19,6 +19,7 @@ Task.insertOrder = function insertOrder(data) {
             + "`order_service`,"
             + "`table_code`,"
             + "`customer_code`, "
+            + "`amount`, "
             + "`order_total_price` "
             + ") VALUES ("
             + " '" + data.order_code + "', "
@@ -26,6 +27,7 @@ Task.insertOrder = function insertOrder(data) {
             + " '" + data.order_service + "', "
             + " '" + data.table_code + "', "
             + " '" + data.customer_code + "', "
+            + " '" + data.amount + "', "
             + " '" + data.order_total_price + "' "
             + " ) "
 
@@ -161,8 +163,9 @@ Task.updateOrderByCode = function updateOrderByCode(data) {
             + "`order_code` = '" + data.order_code + "',"
             + "`order_date` = '" + data.order_date + "',"
             + "`order_service` = '" + data.order_service + "',"
-            + "`table_code` = '" + data.table_code + "',"
+            // + "`table_code` = '" + data.table_code + "',"
             + "`customer_code` = '" + data.customer_code + "', "
+            + "`amount` = '" + data.amount + "', "
             + "`order_total_price` = '" + data.order_total_price + "' "
             + "WHERE order_code = '" + data.order_code + "'";
 

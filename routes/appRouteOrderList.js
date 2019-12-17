@@ -86,17 +86,17 @@ module.exports = function (app) {
         });
     })
 
-    app.post('/order_list/deleteByCode', function (req, res) {
-        console.log('/order_list/deleteByCode', req.body)
-        OrderListController.deleteByCode(req.body, function (err, task) {
+    // app.post('/order_list/deleteByCode', function (req, res) {
+    //     console.log('/order_list/deleteByCode', req.body)
+    //     OrderListController.deleteByCode(req.body, function (err, task) {
 
-            if (err) {
-                res.send(err);
-            }
-            // console.log('res', task);
-            res.send(task);
-        });
-    })
+    //         if (err) {
+    //             res.send(err);
+    //         }
+    //         // console.log('res', task);
+    //         res.send(task);
+    //     });
+    // })
 
 //     app.post('/user/getUserByCode', function (req, res) {
 //         console.log('/user/getUserByCode', req.body)

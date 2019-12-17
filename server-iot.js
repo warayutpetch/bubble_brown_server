@@ -120,6 +120,9 @@ appRouteBooking(app);
 var appRoutePromotion = require('./routes/appRoutePromotion');
 appRoutePromotion(app);
 
+var appRoutePromotionUse = require('./routes/appRoutePromotionUse');
+appRoutePromotionUse(app);
+
 var appRouteTable = require('./routes/appRouteTable');
 appRouteTable(app);
 
