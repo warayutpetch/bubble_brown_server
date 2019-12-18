@@ -26,17 +26,22 @@ Task.insertCustomer = async function insertCustomer(data, result) {
 //     var coverpageList = await journalModel.getJournalByCol(data);
 //     result(coverpageList)
 // }
-// Task.updateCustomer = async function updateCustomer(data, result) {
-//     var customerList = await customerModel.updateCustomer(data.set, data.where);
-//     result(customerList);
-// }
+Task.updateCustomerByCode = async function updateCustomerByCode(data, result) {
+    var customerList = await customerModel.updateCustomerByCode(data);
+    result(customerList);
+}
 
-// Task.getCustomerByCode = async function getCustomerByCode(data, result) {
-//     var customerList = await customerModel.getCustomerByCode(data);
-//     result(customerList);
-// }
+Task.getCustomerByCode = async function getCustomerByCode(data, result) {
+    var customerList = await customerModel.getCustomerByCode(data);
+    result(customerList);
+}
 
-// Task.deleteCoverPage = async function deleteCoverPage(data, result) {
+Task.deleteCustomerByCode = async function deleteCustomerByCode(data, result) {
+    var customerList = await customerModel.deleteCustomerByCode(data);
+    result(customerList);
+}
+
+// Task.deleteCustomerByCode = async function deleteCustomerByCode(data, result) {
 //     var set_data = {
 //         deleted: 1,
 //         deleteby: data.member_code,

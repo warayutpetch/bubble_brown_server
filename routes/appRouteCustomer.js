@@ -11,15 +11,15 @@ module.exports = function (app) {
             res.send(task);
         });
     })
-    // app.post('/journal/getJournalByCol', function (req, res) {
-    //     console.log('/journal/getJournalByCol', req.body)
-    //     journalController.getCoverPageByCol(req.body, function (err, task) {
-    //         if (err) {
-    //             res.send(err);
-    //         }
-    //         res.send(task);
-    //     });
-    // })
+    app.post('/customer/getCustomerMaxCode', function (req, res) {
+        console.log('/customer/getCustomerMaxCode', req.body)
+        customerController.getCustomerMaxCode(req.body, function (err, task) {
+            if (err) {
+                res.send(err);
+            }
+            res.send(task);
+        });
+    })
 
 
     app.post('/customer/insertCustomer', function (req, res) {
@@ -33,26 +33,36 @@ module.exports = function (app) {
     })
 
 
-    // app.post('/customer/updateCustomer', function (req, res) {
-    //     console.log('/customer/updateCustomer', req.body)
-    //     customerController.updateCustomer(req.body, function (err, task) {
-    //         if (err) {
-    //             res.send(err);
-    //         }
-    //         res.send(task);
-    //     });
-    // })
+    app.post('/customer/updateCustomerByCode', function (req, res) {
+        console.log('/customer/updateCustomerByCode', req.body)
+        customerController.updateCustomerByCode(req.body, function (err, task) {
+            if (err) {
+                res.send(err);
+            }
+            res.send(task);
+        });
+    })
 
 
-    // app.post('/customer/getCustomerByCode', function (req, res) {
-    //     console.log('/customer/getCustomerByCode', req.body)
-    //     customerController.getCustomerByCode(req.body, function (err, task) {
-    //         if (err) {
-    //             res.send(err);
-    //         }
-    //         res.send(task);
-    //     });
-    // })
+    app.post('/customer/getCustomerByCode', function (req, res) {
+        console.log('/customer/getCustomerByCode', req.body)
+        customerController.getCustomerByCode(req.body, function (err, task) {
+            if (err) {
+                res.send(err);
+            }
+            res.send(task);
+        });
+    })
+
+    app.post('/customer/deleteCustomerByCode', function (req, res) {
+        console.log('/customer/deleteCustomerByCode', req.body)
+        customerController.deleteCustomerByCode(req.body, function (err, task) {
+            if (err) {
+                res.send(err);
+            }
+            res.send(task);
+        });
+    })
 
 
     // app.post('/journal/deleteCoverPage', function (req, res) {
