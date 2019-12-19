@@ -12,7 +12,7 @@ var Task = function (task) {
 };
 
 Task.getMenuBy = function getMenuBy(data) {
-    return new Promise(function (resolve, reject) {//user list
+    return new Promise(function (resolve, reject) {//menu list
         var str = "SELECT  * FROM tb_menu ";
 
         console.log('checkLogin : ', str);
@@ -42,7 +42,7 @@ Task.getMenuBy = function getMenuBy(data) {
     });
 };
 Task.getMenuByCode = function getMenuByCode(data) {
-    return new Promise(function (resolve, reject) {//user list
+    return new Promise(function (resolve, reject) {//menu list
         var str = "SELECT  * FROM tb_menu as tb1"
             + " LEFT JOIN tb_menu_type as tb2 ON tb1.menu_type_code = tb2.menu_type_code "
             + " WHERE tb1.menu_type_code = '" + data.menu_type_code + "' ";
@@ -74,92 +74,167 @@ Task.getMenuByCode = function getMenuByCode(data) {
     });
 };
 
-// Task.getUserMaxCode = function getUserMaxCode(data) {
-//     return new Promise(function (resolve, reject) {
-//         var str = "SELECT  LPAD( SUBSTRING(max(user_code),2 ,7)+1,6, '0') AS user_code_max FROM `tb_user` "; //insert usercode
+Task.insertMenu = function insertMenu(data) {
+    // console.log('str : ', data);
+    return new Promise(function (resolve, reject) {
+        var str = "INSERT INTO `tb_menu` ("
+            + "`menu_code`,"
+            // + "`menu_id`,"
+            + "`menu_type_code`,"
+            + "`menu_name`,"
+            // + "`menu_image`,"
+            + "`menu_price`,"
+            // + "`adddate`,"
+            // + "`lastupdate`"
+            // + "`updateby`,"
+            // + "`addby`,"
 
-//         console.log('checkLogin : ', str);
-
-//         sql.query(str, function (err, res) {
-
-//             if (err) {
-//                 console.log("error: ", err);
-//                 const require = {
-//                     data: [],
-//                     error: err,
-//                     query_result: false,
-//                     server_result: true
-//                 };
-//                 resolve(require);
-//             }
-//             else {
-//                 const require = {
-//                     data: res[0],
-//                     error: [],
-//                     query_result: true,
-//                     server_result: true
-//                 };
-//                 resolve(require);
-//             }
-//         });
-//     });
-// };
+            + ") VALUES ("
+            + " '" + data.menu_code + "', "
+            // + " '" + data.menu_id + "', "
+            + " '" + data.menu_type_code + "', "
+            + " '" + data.menu_name + "', "
+            // + " '" + data.menu_image + "', "
+            + " '" + data.menu_price + "' "
+            // + " '" + data.addby + "', "
+            // + " '" + timeController.reformatToSave(new Date()) + "', "
+            + " ) "
 
 
+        // console.log('checkLogin : ', data);
+        console.log('str : ', str);
 
-// Task.updateUserBy = function updateUserBy(data) {
-//     return new Promise(function (resolve, reject) {
-//         var str = "UPDATE `tb_user` SET "
-//             + "`user_code` = '" + data.user_code + "',"
-//             + "`user_prefix` = '" + data.user_prefix + "',"
-//             + "`user_name` = '" + data.user_name + "',"
-//             + "`user_lastname` = '" + data.user_lastname + "',"
-//             + "`user_email` = '" + data.user_email + "',"
-//             + "`user_mobile` = '" + data.user_mobile + "',"
-//             + "`user_password` = " + sql.escape(data.user_password) + ","
-//             + "`user_username` = " + sql.escape(data.user_username) + ","
-//             + "`user_address` = '" + data.user_address + "',"
-//             + "`user_profile_img` = '" + data.user_profile_img + "',"
-//             + "`district_id` = '" + data.district_id + "',"
-//             + "`amphur_id`= '" + data.amphur_id + "',"
-//             + "`province_id` = '" + data.province_id + "',"
-//             + "`user_zipcode` = '" + data.user_zipcode + "',"
-//             + "`updateby` = '" + data.updateby + "',"
-//             + "`lastupdate` = '" + timeController.reformatToSave(new Date()) + "'"
-//             + "WHERE tb_user.user_code = '" + data.user_code + "'";
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: false,
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: true,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
 
 
-//         // console.log('checkLogin : ', data);
-//         console.log('checkLogin : ', str);
+Task.getMenuMaxCode = function getMenuMaxCode(data) {
+    return new Promise(function (resolve, reject) {
+        var str = "SELECT  LPAD( SUBSTRING(IFNULL( max(menu_code),1),4,5)+1,3,'0') AS menu_code_max FROM `tb_menu` "; //insert menucode
 
-//         sql.query(str, function (err, res) {
+        console.log('checkLogin : ', str);
 
-//             if (err) {
-//                 console.log("error: ", err);
-//                 const require = {
-//                     data: false,
-//                     error: err,
-//                     query_result: false,
-//                     server_result: true
-//                 };
-//                 resolve(require);
-//             }
-//             else {
-//                 const require = {
-//                     data: true,
-//                     error: [],
-//                     query_result: true,
-//                     server_result: true
-//                 };
-//                 resolve(require);
-//             }
-//         });
-//     });
-// };
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res[0],
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
+
+Task.updateMenuByCode = function updateMenuByCode(data) {
+    
+    return new Promise(function (resolve, reject) {  
+        console.log('update : ', data);
+        var str = "UPDATE `tb_menu` SET "
+            // + "`menu_code` = '" + data.menu_code + "',"
+            // + "`menu_id`= '" + data.menu_id + "',"
+            + "`menu_type_code`= '" + data.menu_type_code + "',"
+            + "`menu_name`= '" + data.menu_name + "',"
+            // + "`menu_image`= '" + data.menu_image + "',"
+            + "`menu_price` = '" + data.menu_price + "'"
+            + "WHERE menu_code = '" + data.menu_code + "'";
+      
+        // console.log('str111111111 : ', str);
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: false,
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: true,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
+
+Task.deleteMenuByCode = function deleteMenuByCode(data) {
+    return new Promise(function (resolve, reject) {//user list
+        var str = "DELETE FROM `tb_menu` WHERE `tb_menu`.`menu_code` ='"+ data.menu_code +"'" ;
+
+        console.log('menu_codedel : ', str);
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: false,
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: true,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
 
 // Task.deleteByCode = function deleteByCode(data) {
 //     return new Promise(function (resolve, reject) {
-//         var str = "DELETE FROM tb_user WHERE user_code = '" + data.user_code + "'";//showdata editview
+//         var str = "DELETE FROM tb_menu WHERE menu_code = '" + data.menu_code + "'";//showdata editview
 
 //         console.log('checkLogin : ', str);
 
@@ -190,7 +265,7 @@ Task.getMenuByCode = function getMenuByCode(data) {
 
 // Task.getUserByCode = function getUserByCode(data) {
 //     return new Promise(function (resolve, reject) {
-//         var str = "SELECT  * FROM tb_user WHERE user_code = '" + data.user_code + "'";//showdata editview
+//         var str = "SELECT  * FROM tb_menu WHERE menu_code = '" + data.menu_code + "'";//showdata editview
 
 //         console.log('checkLogin : ', str);
 
@@ -220,9 +295,9 @@ Task.getMenuByCode = function getMenuByCode(data) {
 // };
 
 // Task.getUserLoginBy = function getUserLoginBy(data) {
-//     return new Promise(function (resolve, reject) { //user list
-//         var str = "SELECT  * FROM tb_user WHERE  `user_username`= " + sql.escape(data.user_username) + ""
-//             + " AND `user_password` =" + sql.escape(data.user_password) + "";
+//     return new Promise(function (resolve, reject) { //menu list
+//         var str = "SELECT  * FROM tb_menu WHERE  `menu_menuname`= " + sql.escape(data.menu_menuname) + ""
+//             + " AND `menu_password` =" + sql.escape(data.menu_password) + "";
 
 //         console.log('checkLogin : ', str);
 

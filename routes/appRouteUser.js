@@ -14,17 +14,17 @@ module.exports = function (app) {
         });
     })
 
-    app.post('/user/getUserLoginBy', function (req, res) {
-        console.log('/user/getUserLoginBy', req.body)
-        userController.getUserLoginBy(req.body, function (err, task) {
+    // app.post('/user/getUserLoginBy', function (req, res) {
+    //     console.log('/user/getUserLoginBy', req.body)
+    //     userController.getUserLoginBy(req.body, function (err, task) {
 
-            if (err) {
-                res.send(err);
-            }
-            // console.log('res', task);
-            res.send(task);
-        });
-    })
+    //         if (err) {
+    //             res.send(err);
+    //         }
+    //         // console.log('res', task);
+    //         res.send(task);
+    //     });
+    // })
 
     app.post('/user/getUserMaxCode', function (req, res) {
         console.log('/user/getUserMaxCode', req.body)
@@ -50,9 +50,9 @@ module.exports = function (app) {
         });
     })
 
-    app.post('/user/updateUserBy', function (req, res) {
-        console.log('/user/updateUserBy', req.body)
-        userController.updateUserBy(req.body, function (err, task) {
+    app.post('/user/updateUserByCode', function (req, res) {
+        console.log('/user/updateUserByCode', req.body)
+        userController.updateUserByCode(req.body, function (err, task) {
 
             if (err) {
                 res.send(err);
@@ -62,9 +62,9 @@ module.exports = function (app) {
         });
     })
 
-    app.post('/user/deleteByCode', function (req, res) {
-        console.log('/user/deleteByCode', req.body)
-        userController.deleteByCode(req.body, function (err, task) {
+    app.post('/user/deleteUserByCode', function (req, res) {
+        console.log('/user/deleteUserByCode', req.body)
+        userController.deleteUserByCode(req.body, function (err, task) {
 
             if (err) {
                 res.send(err);

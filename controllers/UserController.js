@@ -21,13 +21,13 @@ Task.insertUserBy = async function insertUserBy(data, result) {
     result(user);
 }
 
-Task.updateUserBy = async function updateUserBy(data, result) {
-    var user = await userModel.updateUserBy(data);
+Task.updateUserByCode = async function updateUserByCode(data, result) {
+    var user = await userModel.updateUserByCode(data);
     result(user);
 }
 
-Task.deleteByCode = async function deleteByCode(data, result) {
-    var user = await userModel.deleteByCode(data);
+Task.deleteUserByCode = async function deleteUserByCode(data, result) {
+    var user = await userModel.deleteUserByCode(data);
     result(user);
 }
 
@@ -35,9 +35,10 @@ Task.getUserByCode = async function getUserByCode(data, result) {
     var user = await userModel.getUserByCode(data);
     result(user);
 }
-Task.getUserLoginBy = async function getUserLoginBy(data, result) {
-    var user = await userModel.getUserLoginBy(data);
-    result(user);
-}
+
+// Task.getUserLoginBy = async function getUserLoginBy(data, result) {
+//     var user = await userModel.getUserLoginBy(data);
+//     result(user);
+// }
 
 module.exports = Task;

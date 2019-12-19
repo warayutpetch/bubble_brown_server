@@ -15,33 +15,40 @@ Task.getMenuByCode = async function getMenuByCode(data, result) {
     result(menu);
 }
 
-// Task.getUserMaxCode = async function getUserMaxCode(data, result) {
-//     var user = await userModel.getUserMaxCode(data);
-//     result(user);
-// }
+Task.insertMenu = async function insertMenu(data, result) {
+    var menu = await menuModel.insertMenu(data);
+    result(menu);
+}
 
-// Task.insertUserBy = async function insertUserBy(data, result) {
-//     var user = await userModel.insertUserBy(data);
-//     result(user);
-// }
+Task.getMenuMaxCode = async function getMenuMaxCode(data, result) {
+    var menu = await menuModel.getMenuMaxCode(data);
+    result(menu);
+}
 
-// Task.updateUserBy = async function updateUserBy(data, result) {
-//     var user = await userModel.updateUserBy(data);
-//     result(user);
+Task.deleteMenuByCode = async function deleteMenuByCode(data, result) {
+    var menu = await menuModel.deleteMenuByCode(data);
+    result(menu);
+}
+
+
+
+// Task.updateMenuBy = async function updateMenuBy(data, result) {
+//     var menu = await menuModel.updateMenuBy(data);
+//     result(menu);
 // }
 
 // Task.deleteByCode = async function deleteByCode(data, result) {
-//     var user = await userModel.deleteByCode(data);
-//     result(user);
+//     var menu = await menuModel.deleteByCode(data);
+//     result(menu);
 // }
 
-// Task.getUserByCode = async function getUserByCode(data, result) {
-//     var user = await userModel.getUserByCode(data);
-//     result(user);
+// Task.getMenuByCode = async function getMenuByCode(data, result) {
+//     var menu = await menuModel.getMenuByCode(data);
+//     result(menu);
 // }
-// Task.getUserLoginBy = async function getUserLoginBy(data, result) {
-//     var user = await userModel.getUserLoginBy(data);
-//     result(user);
+// Task.getMenuLoginBy = async function getMenuLoginBy(data, result) {
+//     var menu = await menuModel.getMenuLoginBy(data);
+//     result(menu);
 // }
 
 module.exports = Task;

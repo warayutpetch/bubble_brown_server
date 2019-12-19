@@ -38,6 +38,15 @@ module.exports = function (app) {
             res.send(task);
         });
     })
+    app.post('/promotion/getPromotionByCode', function (req, res) {
+        console.log('/promotion/getPromotionByCode', req.body)
+        promotionController.getPromotionByCode(req.body, function (err, task) {
+            if (err) {
+                res.send(err);
+            }
+            res.send(task);
+        });
+    })
     // app.post('/journal/deleteCoverPage', function (req, res) {
     //     console.log('/journal/deleteCoverPage', req.body)
     //     journalController.deleteCoverPage(req.body, function (err, task) {

@@ -25,9 +25,9 @@ module.exports = function (app) {
         });
     })
 
-//     app.post('/user/getUserLoginBy', function (req, res) {
-//         console.log('/user/getUserLoginBy', req.body)
-//         userController.getUserLoginBy(req.body, function (err, task) {
+//     app.post('/menu/getMenuLoginBy', function (req, res) {
+//         console.log('/menu/getMenuLoginBy', req.body)
+//         menuController.getMenuLoginBy(req.body, function (err, task) {
 
 //             if (err) {
 //                 res.send(err);
@@ -37,9 +37,33 @@ module.exports = function (app) {
 //         });
 //     })
 
-//     app.post('/user/getUserMaxCode', function (req, res) {
-//         console.log('/user/getUserMaxCode', req.body)
-//         userController.getUserMaxCode(req.body, function (err, task) {
+    app.post('/menu/getMenuMaxCode', function (req, res) {
+        console.log('/menu/getMenuMaxCode', req.body)
+        menuController.getMenuMaxCode(req.body, function (err, task) {
+
+            if (err) {
+                res.send(err);
+            }
+            // console.log('res', task);
+            res.send(task);
+        });
+    })
+
+    app.post('/menu/insertMenu', function (req, res) {
+        console.log('/menu/insertMenu', req.body)
+        menuController.insertMenu(req.body, function (err, task) {
+
+            if (err) {
+                res.send(err);
+            }
+            // console.log('res', task);
+            res.send(task);
+        });
+    })
+
+//     app.post('/menu/updateMenuBy', function (req, res) {
+//         console.log('/menu/updateMenuBy', req.body)
+//         menuController.updateMenuBy(req.body, function (err, task) {
 
 //             if (err) {
 //                 res.send(err);
@@ -49,45 +73,21 @@ module.exports = function (app) {
 //         });
 //     })
 
-//     app.post('/user/insertUserBy', function (req, res) {
-//         console.log('/user/insertUserBy', req.body)
-//         userController.insertUserBy(req.body, function (err, task) {
+    app.post('/menu/deleteMenuByCode', function (req, res) {
+        console.log('/menu/deleteMenuByCode', req.body)
+        menuController.deleteMenuByCode(req.body, function (err, task) {
 
-//             if (err) {
-//                 res.send(err);
-//             }
-//             // console.log('res', task);
-//             res.send(task);
-//         });
-//     })
+            if (err) {
+                res.send(err);
+            }
+            // console.log('res', task);
+            res.send(task);
+        });
+    })
 
-//     app.post('/user/updateUserBy', function (req, res) {
-//         console.log('/user/updateUserBy', req.body)
-//         userController.updateUserBy(req.body, function (err, task) {
-
-//             if (err) {
-//                 res.send(err);
-//             }
-//             // console.log('res', task);
-//             res.send(task);
-//         });
-//     })
-
-//     app.post('/user/deleteByCode', function (req, res) {
-//         console.log('/user/deleteByCode', req.body)
-//         userController.deleteByCode(req.body, function (err, task) {
-
-//             if (err) {
-//                 res.send(err);
-//             }
-//             // console.log('res', task);
-//             res.send(task);
-//         });
-//     })
-
-//     app.post('/user/getUserByCode', function (req, res) {
-//         console.log('/user/getUserByCode', req.body)
-//         userController.getUserByCode(req.body, function (err, task) {
+//     app.post('/menu/getMenuByCode', function (req, res) {
+//         console.log('/menu/getMenuByCode', req.body)
+//         menuController.getMenuByCode(req.body, function (err, task) {
 
 //             if (err) {
 //                 res.send(err);
