@@ -12,9 +12,13 @@ var Task = function (task) {
 };
 
 
-Task.getPromotionBy = function getPromotionBy() {
+Task.getPromotionBy = function getPromotionBy(data) {
     return new Promise(function (resolve, reject) {
-        var str = "SELECT * FROM tb_promotion WHERE deleted = 0 ";
+        var str = "SELECT  * FROM tb_promotion as tb1"
+            + " LEFT JOIN tb_menu_type as tb2 ON tb1.menu_type_code = tb2.menu_type_code "
+            + " WHERE deleted = 0";
+        console.log(str);
+
         sql.query(str, function (err, res) {
             if (err) {
                 console.log("error: ", err);
@@ -41,11 +45,10 @@ Task.getPromotionBy = function getPromotionBy() {
 
 Task.getPromotionByCode = function getPromotionByCode(data) {
     return new Promise(function (resolve, reject) {//user list
-        var str = "SELECT  * FROM tb_promotion as tb1"
-            + " LEFT JOIN tb_menu_type as tb2 ON tb1.menu_type_code = tb2.menu_type_code "
-            + " WHERE tb1.menu_type_code = '" + data.menu_type_code + "' ";
+        var str = "SELECT  * FROM tb_promotion "
+            + " WHERE discount_code = '" + data.discount_code + "' ";
 
-        console.log('checkLogin : ', data);
+        console.log('checkLogin : ', str);
 
         sql.query(str, function (err, res) {
 
@@ -61,7 +64,7 @@ Task.getPromotionByCode = function getPromotionByCode(data) {
             }
             else {
                 const require = {
-                    data: res,
+                    data: res[0],
                     error: [],
                     query_result: true,
                     server_result: true
@@ -78,16 +81,28 @@ Task.insertPromotion = function insertPromotion(data) {
             // + "`promotion_code`,"
             + "`promotion_header`,"
             + "`promotion_detail`,"
-            + "`promotion_type_code`, "
+            + "`menu_type_code`, "
+            + "`discount_code`, "
+            + "`promotion_type`, "
+            + "`discount_percent`, "
+            + "`discount_price`, "
+            + "`startdate`, "
+            + "`enddate`, "
             // + "`promotion_image`, "
             + "`addby` "
             + ") VALUES ("
             // + " '" + data[0].order_code + "', "
-            + " '" + data[0].promotion_header + "', "
-            + " '" + data[0].promotion_detail + "', "
-            + " '" + data[0].promotion_type_code + "', "
+            + " '" + data.promotion_header + "', "
+            + " '" + data.promotion_detail + "', "
+            + " '" + data.menu_type_code + "', "
+            + " '" + data.discount_code + "', "
+            + " '" + data.promotion_type + "', "
+            + " '" + data.discount_percent + "', "
+            + " '" + data.discount_price + "', "
+            + " '" + data.startdate + "', "
+            + " '" + data.enddate + "', "
             // + " '" + data[0].promotion_image + "', "
-            + " '" + data[0].addby + "' "
+            + " '" + data.addby + "' "
             + " ) "
 
         // console.log(str);

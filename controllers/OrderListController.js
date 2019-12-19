@@ -21,6 +21,10 @@ Task.getOrderListBy = async function getOrderListBy(data, result) {
     result(order_list);
 }
 
+Task.updateOrderList = async function updateOrderList(data, result) {
+    var order_list = await OrderListModel.updateOrderList(data);
+    result(order_list);
+}
 Task.getOrderListByOrderCode = async function getOrderListByOrderCode(data, result) {
     var order_list = await OrderListModel.getOrderListByOrderCode(data);
     result(order_list);
@@ -31,15 +35,10 @@ Task.deleteOrderListByCode = async function deleteOrderListByCode(data, result) 
     result(order_list);
 }
 
-// Task.updateUserBy = async function updateUserBy(data, result) {
-//     var user = await userModel.updateUserBy(data);
-//     result(user);
-// }
-
-// Task.deleteByCode = async function deleteByCode(data, result) {
-//     var user = await userModel.deleteByCode(data);
-//     result(user);
-// }
+Task.deleteByCode = async function deleteByCode(data, result) {
+    var order_list = await OrderListModel.deleteByCode(data);
+    result(order_list);
+}
 
 // Task.getUserByCode = async function getUserByCode(data, result) {
 //     var user = await userModel.getUserByCode(data);

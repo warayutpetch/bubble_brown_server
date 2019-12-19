@@ -120,6 +120,9 @@ appRouteBooking(app);
 var appRoutePromotion = require('./routes/appRoutePromotion');
 appRoutePromotion(app);
 
+var appRoutePromotionUse = require('./routes/appRoutePromotionUse');
+appRoutePromotionUse(app);
+
 var appRouteTable = require('./routes/appRouteTable');
 appRouteTable(app);
 
@@ -129,8 +132,18 @@ appRouteZone(app);
 var appRouteCustomer = require('./routes/appRouteCustomer');
 appRouteCustomer(app);
 
-var appRouteUser = require('./routes/appRouteUser');
-appRouteUser(app);
+var appRouteGPSCalculate = require('./routes/appRouteGPSCalculate');
+appRouteGPSCalculate(app);
+
+var appRouteRecipe = require('./routes/appRouteRecipe');
+appRouteRecipe(app);
+
+var appRouteProduct = require('./routes/appRouteProduct');
+appRouteProduct(app);
+
+var appRouteStock = require('./routes/appRouteStock');
+appRouteStock(app);
+
 
 // var appRouterOmisePayment = require('./routes/appRouterOmisePayment')
 // appRouterOmisePayment(app)

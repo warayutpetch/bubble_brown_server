@@ -74,29 +74,29 @@ module.exports = function (app) {
 //         });
 //     })
 
-//     app.post('/user/updateUserBy', function (req, res) {
-//         console.log('/user/updateUserBy', req.body)
-//         userController.updateUserBy(req.body, function (err, task) {
+    app.post('/order_list/updateOrderList', function (req, res) {
+        console.log('/order_list/updateOrderList', req.body)
+        OrderListController.updateOrderList(req.body, function (err, task) {
 
-//             if (err) {
-//                 res.send(err);
-//             }
-//             // console.log('res', task);
-//             res.send(task);
-//         });
-//     })
+            if (err) {
+                res.send(err);
+            }
+            // console.log('res', task);
+            res.send(task);
+        });
+    })
 
-//     app.post('/user/deleteByCode', function (req, res) {
-//         console.log('/user/deleteByCode', req.body)
-//         userController.deleteByCode(req.body, function (err, task) {
+    // app.post('/order_list/deleteByCode', function (req, res) {
+    //     console.log('/order_list/deleteByCode', req.body)
+    //     OrderListController.deleteByCode(req.body, function (err, task) {
 
-//             if (err) {
-//                 res.send(err);
-//             }
-//             // console.log('res', task);
-//             res.send(task);
-//         });
-//     })
+    //         if (err) {
+    //             res.send(err);
+    //         }
+    //         // console.log('res', task);
+    //         res.send(task);
+    //     });
+    // })
 
 //     app.post('/user/getUserByCode', function (req, res) {
 //         console.log('/user/getUserByCode', req.body)

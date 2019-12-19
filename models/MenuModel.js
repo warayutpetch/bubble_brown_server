@@ -41,6 +41,37 @@ Task.getMenuBy = function getMenuBy(data) {
         });
     });
 };
+Task.getMenuByRecipe = function getMenuByRecipe(data) {
+    return new Promise(function (resolve, reject) {//user list
+        var str = "SELECT  * FROM tb_menu "
+        // + " LEFT JOIN tb_recipe  ON tb_menu.menu_code = tb_recipe.menu_code "
+        // + " LEFT JOIN tb_product  ON tb_product.product_code = tb_recipe.product_code "
+        console.log('checkLogin : ', str);
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
 Task.getMenuByCode = function getMenuByCode(data) {
     return new Promise(function (resolve, reject) {//menu list
         var str = "SELECT  * FROM tb_menu as tb1"
@@ -74,42 +105,19 @@ Task.getMenuByCode = function getMenuByCode(data) {
     });
 };
 
-Task.insertMenu = function insertMenu(data) {
-    // console.log('str : ', data);
+Task.getManuMaxCode = function getManuMaxCode(data) {
     return new Promise(function (resolve, reject) {
-        var str = "INSERT INTO `tb_menu` ("
-            + "`menu_code`,"
-            // + "`menu_id`,"
-            + "`menu_type_code`,"
-            + "`menu_name`,"
-            // + "`menu_image`,"
-            + "`menu_price`,"
-            // + "`adddate`,"
-            // + "`lastupdate`"
-            // + "`updateby`,"
-            // + "`addby`,"
+        var str = "SELECT  IFNULL(LPAD( SUBSTRING(max(menu_code),3 ,7)+1,6, '0'),'001') AS menu_code_max FROM `tb_menu` "
+            + "WHERE menu_type_code = '" + data.menu_type_code + "'"
 
-            + ") VALUES ("
-            + " '" + data.menu_code + "', "
-            // + " '" + data.menu_id + "', "
-            + " '" + data.menu_type_code + "', "
-            + " '" + data.menu_name + "', "
-            // + " '" + data.menu_image + "', "
-            + " '" + data.menu_price + "' "
-            // + " '" + data.addby + "', "
-            // + " '" + timeController.reformatToSave(new Date()) + "', "
-            + " ) "
-
-
-        // console.log('checkLogin : ', data);
-        console.log('str : ', str);
+        console.log('checkLogin565664646 : ', str);
 
         sql.query(str, function (err, res) {
 
             if (err) {
                 console.log("error: ", err);
                 const require = {
-                    data: false,
+                    data: [],
                     error: err,
                     query_result: false,
                     server_result: true
@@ -118,7 +126,7 @@ Task.insertMenu = function insertMenu(data) {
             }
             else {
                 const require = {
-                    data: true,
+                    data: res[0],
                     error: [],
                     query_result: true,
                     server_result: true
@@ -128,7 +136,6 @@ Task.insertMenu = function insertMenu(data) {
         });
     });
 };
-
 
 Task.getMenuMaxCode = function getMenuMaxCode(data) {
     return new Promise(function (resolve, reject) {

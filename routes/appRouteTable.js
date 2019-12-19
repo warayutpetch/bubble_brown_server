@@ -25,9 +25,34 @@ module.exports = function (app) {
             res.send(task);
         });
     })
+
+    app.post('/table/getTableMaxCode', function (req, res) {
+        console.log('/table/getTableMaxCode', req.body)
+        TableController.getTableMaxCode(req.body, function (err, task) {
+
+            if (err) {
+                res.send(err);
+            }
+            // console.log('res', task);
+            res.send(task);
+        });
+    })
+
     app.post('/table/getTableByCode', function (req, res) {
         console.log('/table/getTableByCode', req.body)
         TableController.getTableByCode(req.body, function (err, task) {
+
+            if (err) {
+                res.send(err);
+            }
+            // console.log('res', task);
+            res.send(task);
+        });
+    })
+
+    app.post('/table/insertTable', function (req, res) {
+        console.log('/table/insertTable', req.body)
+        TableController.insertTable(req.body, function (err, task) {
 
             if (err) {
                 res.send(err);
