@@ -20,15 +20,15 @@ module.exports = function (app) {
             res.send(task);
         });
     })
-    // app.post('/journal/getJournalByCol', function (req, res) {
-    //     console.log('/journal/getJournalByCol', req.body)
-    //     journalController.getCoverPageByCol(req.body, function (err, task) {
-    //         if (err) {
-    //             res.send(err);
-    //         }
-    //         res.send(task);
-    //     });
-    // })
+    app.post('/promotion/getPromotionByCol', function (req, res) {
+        console.log('/promotion/getPromotionByCol', req.body)
+        promotionController.getPromotionByCol(req.body, function (err, task) {
+            if (err) {
+                res.send(err);
+            }
+            res.send(task);
+        });
+    })
     app.post('/promotion/insertPromotion', function (req, res) {
         console.log('/promotion/insertPromotion', req.body)
         promotionController.insertPromotion(req.body, function (err, task) {
@@ -56,13 +56,13 @@ module.exports = function (app) {
             res.send(task);
         });
     })
-    // app.post('/journal/deleteCoverPage', function (req, res) {
-    //     console.log('/journal/deleteCoverPage', req.body)
-    //     journalController.deleteCoverPage(req.body, function (err, task) {
-    //         if (err) {
-    //             res.send(err);
-    //         }
-    //         res.send(task);
-    //     });
-    // })
+    app.post('/promotion/deletePromotion', function (req, res) {
+        console.log('/promotion/deletePromotion', req.body)
+        promotionController.deletePromotion(req.body, function (err, task) {
+            if (err) {
+                res.send(err);
+            }
+            res.send(task);
+        });
+    })
 }

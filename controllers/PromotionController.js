@@ -22,12 +22,13 @@ Task.insertPromotion = async function insertPromotion(data, result) {
     result(promotionList)
 }
 
-// Task.getCoverPageByCol = async function getCoverPageByCol(data, result) {
-//     var coverpageList = await journalModel.getJournalByCol(data);
-//     result(coverpageList)
-// }
+Task.getPromotionByCol = async function getPromotionByCol(data, result) {
+    var promotionList = await promotionModel.getPromotionByCol(data);
+    result(promotionList)
+}
+
 Task.updatePromotion = async function updatePromotion(data, result) {
-    var promotionList = await promotionModel.updatePromotion(data.set, data.where);
+    var promotionList = await promotionModel.updatePromotion(data);
     result(promotionList);
 }
 
@@ -36,17 +37,22 @@ Task.getPromotionByCode = async function getPromotionByCode(data, result) {
     result(promotionList);
 }
 
-// Task.deleteCoverPage = async function deleteCoverPage(data, result) {
+Task.deletePromotion = async function deletePromotion(data, result) {
+    var promotionList = await promotionModel.deletePromotion(data);
+    result(promotionList);
+}
+
+// Task.deletePromotion = async function deletePromotion(data, result) {
 //     var set_data = {
 //         deleted: 1,
-//         deleteby: data.member_code,
-//         deletedate: timeController.reformatToSave(new Date())
+//         // deleteby: data.member_code,
+//         // deletedate: timeController.reformatToSave(new Date())
 //     }
 //     var set_where = {
-//         journal_code: data.journal_code
+//         promotion_code: data.promotion_code
 //     }
-//     var coverpageList = await journalModel.updateJournal(set_data, set_where);
-//     result(coverpageList);
+//     var promotionList = await promotionModel.deletePromotion(set_data, set_where);
+//     result(promotionList);
 // }
 
 module.exports = Task;  
