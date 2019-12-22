@@ -25,23 +25,7 @@ Task.deleteRecipeByCode = async function deleteRecipeByCode(data, result) {
     result(recipe);
 }
 
-// Task.updateUserBy = async function updateUserBy(data, result) {
-//     var user = await userModel.updateUserBy(data);
-//     result(user);
-// }
 
-// Task.deleteByCode = async function deleteByCode(data, result) {
-//     var user = await userModel.deleteByCode(data);
-//     result(user);
-// }
 
-// Task.getUserByCode = async function getUserByCode(data, result) {
-//     var user = await userModel.getUserByCode(data);
-//     result(user);
-// }
-// Task.getUserLoginBy = async function getUserLoginBy(data, result) {
-//     var user = await userModel.getUserLoginBy(data);
-//     result(user);
-// }
 
 module.exports = Task;

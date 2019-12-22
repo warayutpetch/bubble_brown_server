@@ -233,68 +233,6 @@ Task.deleteOrderListByCode = function deleteOrderListByCode(data) {
     });
 };
 
-// Task.getUserByCode = function getUserByCode(data) {
-//     return new Promise(function (resolve, reject) {
-//         var str = "SELECT  * FROM tb_user WHERE user_code = '" + data.user_code + "'";//showdata editview
-
-//         console.log('checkLogin : ', str);
-
-//         sql.query(str, function (err, res) {
-
-//             if (err) {
-//                 console.log("error: ", err);
-//                 const require = {
-//                     data: [],
-//                     error: err,
-//                     query_result: false,
-//                     server_result: true
-//                 };
-//                 resolve(require);
-//             }
-//             else {
-//                 const require = {
-//                     data: res[0],
-//                     error: [],
-//                     query_result: true,
-//                     server_result: true
-//                 };
-//                 resolve(require);
-//             }
-//         });
-//     });
-// };
-
-// Task.getUserLoginBy = function getUserLoginBy(data) {
-//     return new Promise(function (resolve, reject) { //user list
-//         var str = "SELECT  * FROM tb_user WHERE  `user_username`= " + sql.escape(data.user_username) + ""
-//             + " AND `user_password` =" + sql.escape(data.user_password) + "";
-
-//         console.log('checkLogin : ', str);
-
-//         sql.query(str, function (err, res) {
-
-//             if (err) {
-//                 console.log("error: ", err);
-//                 const require = {
-//                     data: [],
-//                     error: err,
-//                     query_result: false,
-//                     server_result: true
-//                 };
-//                 resolve(require);
-//             }
-//             else {
-//                 const require = {
-//                     data: res,
-//                     error: [],
-//                     query_result: true,
-//                     server_result: true
-//                 };
-//                 resolve(require);
-//             }
-//         });
-//     });
-// };
 
 
 

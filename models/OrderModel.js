@@ -199,71 +199,37 @@ Task.updateOrderByCode = function updateOrderByCode(data) {
 };
 
 
+Task.getRecipeByMenu= function getRecipeByMenu(data) {
+    return new Promise(function (resolve, reject) {
+        var str = "SELECT  * FROM `tb_recipe` "
+            + "WHERE menu_code = '" + data.menu_code + "'";
 
-// Task.getUserByCode = function getUserByCode(data) {
-//     return new Promise(function (resolve, reject) {
-//         var str = "SELECT  * FROM tb_user WHERE user_code = '" + data.user_code + "'";//showdata editview
+        console.log('checkLogin565664646 : ', str);
 
-//         console.log('checkLogin : ', str);
+        sql.query(str, function (err, res) {
 
-//         sql.query(str, function (err, res) {
-
-//             if (err) {
-//                 console.log("error: ", err);
-//                 const require = {
-//                     data: [],
-//                     error: err,
-//                     query_result: false,
-//                     server_result: true
-//                 };
-//                 resolve(require);
-//             }
-//             else {
-//                 const require = {
-//                     data: res[0],
-//                     error: [],
-//                     query_result: true,
-//                     server_result: true
-//                 };
-//                 resolve(require);
-//             }
-//         });
-//     });
-// };
-
-// Task.getUserLoginBy = function getUserLoginBy(data) {
-//     return new Promise(function (resolve, reject) { //user list
-//         var str = "SELECT  * FROM tb_user WHERE  `user_username`= " + sql.escape(data.user_username) + ""
-//             + " AND `user_password` =" + sql.escape(data.user_password) + "";
-
-//         console.log('checkLogin : ', str);
-
-//         sql.query(str, function (err, res) {
-
-//             if (err) {
-//                 console.log("error: ", err);
-//                 const require = {
-//                     data: [],
-//                     error: err,
-//                     query_result: false,
-//                     server_result: true
-//                 };
-//                 resolve(require);
-//             }
-//             else {
-//                 const require = {
-//                     data: res,
-//                     error: [],
-//                     query_result: true,
-//                     server_result: true
-//                 };
-//                 resolve(require);
-//             }
-//         });
-//     });
-// };
-
-
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
 
 
 module.exports = Task;

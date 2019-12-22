@@ -147,6 +147,9 @@ appRouteStock(app);
 var appRouteUser = require('./routes/appRouteUser');
 appRouteUser(app);
 
+var appRouteStockOut = require('./routes/appRouteStockOut');
+appRouteStockOut(app);
+
 
 // var appRouterOmisePayment = require('./routes/appRouterOmisePayment')
 // appRouterOmisePayment(app)

@@ -31,23 +31,11 @@ Task.updateOrderByCode = async function updateOrderByCode(data, result) {
     result(order);
 }
 
-// Task.updateUserBy = async function updateUserBy(data, result) {
-//     var user = await userModel.updateUserBy(data);
-//     result(user);
-// }
+Task.getRecipeByMenu = async function getRecipeByMenu(data, result) {
+    var order = await OrderModel.getRecipeByMenu(data);
+    result(order);
+}
 
-// Task.deleteByCode = async function deleteByCode(data, result) {
-//     var user = await userModel.deleteByCode(data);
-//     result(user);
-// }
 
-// Task.getUserByCode = async function getUserByCode(data, result) {
-//     var user = await userModel.getUserByCode(data);
-//     result(user);
-// }
-// Task.getUserLoginBy = async function getUserLoginBy(data, result) {
-//     var user = await userModel.getUserLoginBy(data);
-//     result(user);
-// }
 
 module.exports = Task;
