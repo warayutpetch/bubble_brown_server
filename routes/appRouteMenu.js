@@ -24,6 +24,17 @@ module.exports = function (app) {
             res.send(task);
         });
     })
+    app.post('/menu/getMenuByMenuCode', function (req, res) {
+        console.log('/menu/getMenuByMenuCode', req.body)
+        MenuController.getMenuByMenuCode(req.body, function (err, task) {
+
+            if (err) {
+                res.send(err);
+            }
+            // console.log('res', task);
+            res.send(task);
+        });
+    })
 
 //     app.post('/menu/getMenuLoginBy', function (req, res) {
 //         console.log('/menu/getMenuLoginBy', req.body)
@@ -39,7 +50,7 @@ module.exports = function (app) {
 
     app.post('/menu/getMenuMaxCode', function (req, res) {
         console.log('/menu/getMenuMaxCode', req.body)
-        menuController.getMenuMaxCode(req.body, function (err, task) {
+        MenuController.getMenuMaxCode(req.body, function (err, task) {
 
             if (err) {
                 res.send(err);
@@ -51,7 +62,7 @@ module.exports = function (app) {
 
     app.post('/menu/insertMenu', function (req, res) {
         console.log('/menu/insertMenu', req.body)
-        menuController.insertMenu(req.body, function (err, task) {
+        MenuController.insertMenu(req.body, function (err, task) {
 
             if (err) {
                 res.send(err);
@@ -61,21 +72,21 @@ module.exports = function (app) {
         });
     })
 
-//     app.post('/menu/updateMenuBy', function (req, res) {
-//         console.log('/menu/updateMenuBy', req.body)
-//         menuController.updateMenuBy(req.body, function (err, task) {
+    app.post('/menu/updateMenuByCode', function (req, res) {
+        console.log('/menu/updateMenuByCode', req.body)
+        MenuController.updateMenuByCode(req.body, function (err, task) {
 
-//             if (err) {
-//                 res.send(err);
-//             }
-//             // console.log('res', task);
-//             res.send(task);
-//         });
-//     })
+            if (err) {
+                res.send(err);
+            }
+            // console.log('res', task);
+            res.send(task);
+        });
+    })
 
     app.post('/menu/deleteMenuByCode', function (req, res) {
         console.log('/menu/deleteMenuByCode', req.body)
-        menuController.deleteMenuByCode(req.body, function (err, task) {
+        MenuController.deleteMenuByCode(req.body, function (err, task) {
 
             if (err) {
                 res.send(err);
