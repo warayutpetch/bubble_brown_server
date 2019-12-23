@@ -19,8 +19,8 @@ Task.insertStockOutByOrder = function insertStockOutByOrder(data) {
             + "`menu_code`,"
             + "`product_qty`,"
             + "`menu_qty`,"
-            + "`sell_price`, "
             + "`order_code`, "
+            + "`product_cost`, "
             + "`unit`, "
             + "`stock_out_date` "
             + ") VALUES ("
@@ -28,14 +28,14 @@ Task.insertStockOutByOrder = function insertStockOutByOrder(data) {
             + " '" + data.menu_code + "', "
             + " '" + data.product_qty + "', "
             + " '" + data.menu_qty + "', "
-            + " '" + data.sell_price + "', "
             + " '" + data.order_code + "', "
+            + " '" + data.product_cost + "', "
             + " '" + data.unit + "', "
             + " '" + timeController.reformatTo() + "' "
             + " ) "
 
 
-        console.log('checkLogin : ', str);
+        console.log('checkLogin : ', data);
 
         sql.query(str, function (err, res) {
 

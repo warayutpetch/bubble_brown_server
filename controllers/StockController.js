@@ -10,8 +10,16 @@ Task.getStockBy = async function getStockBy(data, result) {
     result(stock);
 }
 
-Task.getSumStockBy = async function getSumStockBy(data, result) {
-    var stock = await StockModel.getSumStockBy(data);
+Task.getProductBy = async function getProductBy(data, result) {
+    var stock = await StockModel.getProductBy(data);
+    result(stock);
+}
+Task.getSumStockInBy = async function getSumStockInBy(data, result) {
+    var stock = await StockModel.getSumStockInBy(data);
+    result(stock);
+}
+Task.getSumStockOutBy = async function getSumStockOutBy(data, result) {
+    var stock = await StockModel.getSumStockOutBy(data);
     result(stock);
 }
 
@@ -45,6 +53,10 @@ Task.deleteByCode = async function deleteByCode(data, result) {
 }
 Task.getStockByCode = async function getStockByCode(data, result) {
     var stock = await StockModel.getStockByCode(data);
+    result(stock);
+}
+Task.getStockByPriceQty = async function getStockByPriceQty(data, result) {
+    var stock = await StockModel.getStockByPriceQty(data);
     result(stock);
 }
 

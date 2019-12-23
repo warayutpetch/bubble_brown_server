@@ -14,9 +14,31 @@ module.exports = function (app) {
         });
     })
 
-    app.post('/stock/getSumStockBy', function (req, res) {
-        console.log('/stock/getSumStockBy', req.body)
-        StockController.getSumStockBy(req.body, function (err, task) {
+    app.post('/stock/getProductBy', function (req, res) {
+        console.log('/stock/getProductBy', req.body)
+        StockController.getProductBy(req.body, function (err, task) {
+
+            if (err) {
+                res.send(err);
+            }
+            // console.log('res', task);
+            res.send(task);
+        });
+    })
+    app.post('/stock/getSumStockInBy', function (req, res) {
+        console.log('/stock/getSumStockInBy', req.body)
+        StockController.getSumStockInBy(req.body, function (err, task) {
+
+            if (err) {
+                res.send(err);
+            }
+            // console.log('res', task);
+            res.send(task);
+        });
+    })
+    app.post('/stock/getSumStockOutBy', function (req, res) {
+        console.log('/stock/getSumStockOutBy', req.body)
+        StockController.getSumStockOutBy(req.body, function (err, task) {
 
             if (err) {
                 res.send(err);
@@ -100,6 +122,18 @@ module.exports = function (app) {
     app.post('/stock/getStockByCode', function (req, res) {
         console.log('/stock/getStockByCode', req.body)
         StockController.getStockByCode(req.body, function (err, task) {
+
+            if (err) {
+                res.send(err);
+            }
+            // console.log('res', task);
+            res.send(task);
+        });
+    })
+  
+    app.post('/stock/getStockByPriceQty', function (req, res) {
+        console.log('/stock/getStockByPriceQty', req.body)
+        StockController.getStockByPriceQty(req.body, function (err, task) {
 
             if (err) {
                 res.send(err);

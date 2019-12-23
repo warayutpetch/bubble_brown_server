@@ -33,7 +33,7 @@ Task.insertOrder = function insertOrder(data) {
             + " '" + data.order_total_price + "' "
             + " ) "
 
-console.log("strrrrrrrr",str);
+        console.log("strrrrrrrr", str);
 
         console.log('checkLogin : ', str);
 
@@ -198,9 +198,10 @@ Task.updateOrderByCode = function updateOrderByCode(data) {
     });
 };
 
-Task.getRecipeByMenu= function getRecipeByMenu(data) {
+Task.getRecipeByMenu = function getRecipeByMenu(data) {
     return new Promise(function (resolve, reject) {
         var str = "SELECT  * FROM `tb_recipe` "
+            + " LEFT JOIN tb_product  ON tb_product.product_code = tb_recipe.product_code "
             + "WHERE menu_code = '" + data.menu_code + "'";
 
         console.log('checkLogin565664646 : ', str);
