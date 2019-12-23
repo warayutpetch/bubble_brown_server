@@ -13,7 +13,8 @@ var Task = function (task) {
 
 Task.getUserBy = function getUserBy(data) {
     return new Promise(function (resolve, reject) {//user list
-        var str = "SELECT  * FROM tb_user ";
+        var str = "SELECT  * FROM tb_user "
+        + " WHERE deleted = 0";
 
         console.log('checkLogin : ', str);
 
@@ -115,11 +116,11 @@ Task.insertUserBy = function insertUserBy(data) {
             + "`user_email`,"
             + "`user_address`,"
             + "`user_username`,"
-            + "`user_password`"
-            // + "`adddate`,"
+            + "`user_password`,"
+            + "`adddate`,"
             // + "`lastupdate`"
             // + "`updateby`,"
-            // + "`addby`,"
+            + "`addby`"
 
             + ") VALUES ("
             + " '" + data.user_code + "', "
@@ -131,7 +132,11 @@ Task.insertUserBy = function insertUserBy(data) {
             + " '" + data.user_email + "', "
             + " '" + data.user_address + "',"
             + " " + sql.escape(data.user_username) + ", "
-            + " " + sql.escape(data.user_password) + ""
+            + " " + sql.escape(data.user_password) + ", "
+            + " '" + data.adddate + "', "
+            // + " '" + data.lastupdate + "', "
+            // + " '" + data.updateby + "', "
+            + " '" + data.addby + "' "
             // + " '" + data.addby + "', "
             // + " '" + timeController.reformatToSave(new Date()) + "', "
             + " ) "
@@ -177,7 +182,8 @@ Task.updateUserByCode = function updateUserByCode(data) {
             + "`user_email`= '" + data.user_email + "',"
             + "`user_address`= '" + data.user_address + "',"
             + "`user_username`= " + sql.escape(data.user_username) + ","
-            + "`user_password` = " + sql.escape(data.user_password) + ""
+            + "`user_password` = " + sql.escape(data.user_password) + ","
+            + "`updateby`= '" + data.updateby + "'"
             + "WHERE user_code = '" + data.user_code + "'";
 
         // console.log('checkLogin : ', data);
@@ -211,7 +217,9 @@ Task.updateUserByCode = function updateUserByCode(data) {
 
 Task.deleteUserByCode = function deleteUserByCode(data) {
     return new Promise(function (resolve, reject) {//user list
-        var str = "DELETE FROM `tb_user` WHERE `tb_user`.`user_code` ='" + data.user_code + "'";
+        var str = "UPDATE `tb_user` SET"
+        + "`deleted`= '1'"
+        + "WHERE tb_user.user_code = '" + data.user_code + "'";
 
         console.log('str : ', str);
 
