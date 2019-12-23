@@ -18,6 +18,7 @@ Task.insertOrder = function insertOrder(data) {
             + "`order_date`,"
             + "`order_service`,"
             + "`table_code`,"
+            + "`promotion_code`,"
             + "`customer_code`, "
             + "`amount`, "
             + "`order_total_price` "
@@ -26,6 +27,7 @@ Task.insertOrder = function insertOrder(data) {
             + " '" + data.order_date + "', "
             + " '" + data.order_service + "', "
             + " '" + data.table_code + "', "
+            + " '" + data.promotion_code + "', "
             + " '" + data.customer_code + "', "
             + " '" + data.amount + "', "
             + " '" + data.order_total_price + "' "
@@ -155,15 +157,13 @@ Task.getOrderByCode = function getOrderByCode(data) {
     });
 };
 
-
-
 Task.updateOrderByCode = function updateOrderByCode(data) {
     return new Promise(function (resolve, reject) {
         var str = "UPDATE `tb_order` SET "
             + "`order_code` = '" + data.order_code + "',"
             + "`order_date` = '" + data.order_date + "',"
             + "`order_service` = '" + data.order_service + "',"
-            // + "`table_code` = '" + data.table_code + "',"
+            + "`promotion_code` = '" + data.promotion_code + "',"
             + "`customer_code` = '" + data.customer_code + "', "
             + "`amount` = '" + data.amount + "', "
             + "`order_total_price` = '" + data.order_total_price + "' "
@@ -197,7 +197,6 @@ Task.updateOrderByCode = function updateOrderByCode(data) {
         });
     });
 };
-
 
 Task.getRecipeByMenu= function getRecipeByMenu(data) {
     return new Promise(function (resolve, reject) {

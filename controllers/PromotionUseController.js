@@ -12,10 +12,15 @@ Task.getPromotionUseBy = async function getPromotionUseBy(data, result) {
     result(promotion_use_List)
 }
 
-// Task.getPromotionUseByCode = async function getPromotionUseByCode(data, result) {
-//     var promotion_use_List = await promotion_use_Model.getPromotionUseByCode();
-//     result(promotion_use_List)
-// }
+Task.insertPromotionUse = async function insertPromotionUse(data, result) {
+    var promotion_use_List = await promotion_use_Model.insertPromotionUse(data);
+    result(promotion_use_List)
+}
+
+Task.updatePromotionUseByCode = async function updatePromotionUseByCode(data, result) {
+    var promotion_use_List = await promotion_use_Model.updatePromotionUseByCode(data);
+    result(promotion_use_List)
+}
 
 // Task.insertPromotion = async function insertPromotion(data, result) {
 //     var promotionList = await promotionModel.insertPromotion(data);
