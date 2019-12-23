@@ -14,7 +14,8 @@ var Task = function (task) {
 Task.getRecipeByCode = function getRecipeByCode(data) {
     return new Promise(function (resolve, reject) {//user list
         var str = " SELECT  * FROM tb_recipe "
-            + " LEFT JOIN tb_product  ON tb_product.product_code = tb_recipe.product_code"
+            + " LEFT JOIN tb_product  ON tb_product.product_code = tb_recipe.product_code "
+            + " LEFT JOIN tb_unit  ON tb_recipe.unit_id = tb_unit.unit_id "
             + " WHERE menu_code = '" + data.menu_code + "' ";
 
         console.log('checkLogin : ', str);
@@ -81,14 +82,14 @@ Task.insertRecipe = function insertRecipe(data) {
             + "`product_code`,"
             + "`menu_code`,"
             + "`product_qty`,"
-            + "`sell_price`, "
-            + "`unit` "
+            + "`qty_cal`, "
+            + "`unit_id` "
             + ") VALUES ("
             + " '" + data.product_code + "', "
             + " '" + data.menu_code + "', "
             + " '" + data.product_qty + "', "
-            + " '" + data.sell_price + "', "
-            + " '" + data.unit + "' "
+            + " '" + data.qty_cal + "', "
+            + " '" + data.unit_id + "' "
             + " ) "
 
 

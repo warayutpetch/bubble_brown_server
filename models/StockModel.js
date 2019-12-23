@@ -76,13 +76,76 @@ Task.getStockByCode = function getStockByCode(data) {
     });
 };
 
-Task.getSumStockBy = function getSumStockBy(data) {
+Task.getProductBy = function getProductBy(data) {
     return new Promise(function (resolve, reject) {//user list
-        var str = "  SELECT *,(SELECT IFNULL(SUM(stock_qty), 0) FROM tb_stock as tb2 "
-            + " WHERE tb1.product_code = tb2.product_code) AS sum_stock "
-            + " ,(SELECT IFNULL(SUM(product_qty*menu_qty), 0) FROM tb_stock_out as tb3 "
-            + " WHERE tb1.product_code = tb3.product_code) AS sum_stock_out "
-            + " FROM `tb_product`as tb1 WHERE 1 "
+        var str = "  SELECT * FROM `tb_product` "
+
+        console.log('checkLogin : ', str);
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
+
+Task.getSumStockInBy = function getSumStockInBy(data) {
+    return new Promise(function (resolve, reject) {//user list
+        var str = "  SELECT IFNULL(SUM(stock_qty), 0) AS stock_in , unit_id AS unit FROM tb_stock as tb1 "
+        + " WHERE tb1.product_code =  '" + data.product_code + "'"
+        + "GROUP BY unit_id"
+
+        console.log('checkLogin : ', str);
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
+
+Task.getSumStockOutBy = function getSumStockOutBy(data) {
+    return new Promise(function (resolve, reject) {//user list
+        var str = "  SELECT IFNULL(SUM(product_qty), 0) AS stock_out , unit AS unit FROM tb_stock_out as tb1 "
+            + " WHERE tb1.product_code =  '" + data.product_code + "'"
+            + "GROUP BY unit"
+
 
         console.log('checkLogin : ', str);
 
@@ -180,12 +243,18 @@ Task.insertStock = function insertStock(data) {
         var str = "INSERT INTO `tb_stock` ("
             + "`product_code`,"
             + "`stock_qty`,"
-            + "`stock_cost`,"
+            + "`stock_price`,"
+            + "`stock_qty_cal`,"
+            + "`unit_id`,"
+            // + "`stock_cost`,"
             + "`stock_date`"
             + ") VALUES ("
             + " '" + data.product_code + "', "
             + " '" + data.stock_qty + "', "
-            + " '" + data.stock_cost + "', "
+            + " '" + data.stock_price + "', "
+            + " '" + data.stock_qty_cal + "', "
+            + " '" + data.unit_id + "', "
+            // + " '" + data.stock_cost + "', "
             + " '" + timeController.reformatTo() + "' "
             + " ) "
 
@@ -305,6 +374,38 @@ Task.deleteByCode = function deleteByCode(data) {
             else {
                 const require = {
                     data: true,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
+
+Task.getStockByPriceQty = function getStockByPriceQty(data) {
+    return new Promise(function (resolve, reject) {//user list
+        var str = " SELECT* ,SUM(`stock_price`) / SUM(`stock_qty_cal`) AS product_cost FROM `tb_stock` "
+            + "  WHERE product_code = '" + data.product_code + "'"
+
+        console.log('checkLogin : ', str);
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res[0],
                     error: [],
                     query_result: true,
                     server_result: true
