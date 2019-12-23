@@ -11,6 +11,35 @@ var Task = function (task) {
     this.created_at = new Date();
 };
 
+Task.getBookingBy = function getBookingBy(data) {
+    return new Promise(function (resolve, reject) {
+        var str = "SELECT  * FROM tb_booking WHERE deleted = 0";
+        console.log(str);
+
+        sql.query(str, function (err, res) {
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+}
+
 Task.insertBooking = function insertBooking(data) {
     return new Promise(function (resolve, reject) {
         var str = "INSERT INTO `tb_booking` ("
