@@ -2,6 +2,18 @@ var BookingController = require('../controllers/BookingController');
 
 module.exports = function (app) {
 
+    app.post('/booking/getBookingBy', function (req, res) {
+        console.log('/booking/getBookingBy', req.body)
+        BookingController.getBookingBy(req.body, function (err, task) {
+
+            if (err) {
+                res.send(err);
+            }
+            // console.log('res', task);
+            res.send(task);
+        });
+    })
+
     app.post('/booking/getBookingMaxCode', function (req, res) {
         console.log('/booking/getBookingMaxCode', req.body)
         BookingController.getBookingMaxCode(req.body, function (err, task) {

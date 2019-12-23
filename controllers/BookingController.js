@@ -6,6 +6,11 @@ var Task = function (task) {
     this.created_at = new Date();
 };
 
+Task.getBookingBy = async function getBookingBy(data, result) {
+    var booking = await BookingModel.getBookingBy(data);
+    result(booking);
+}
+
 Task.getBookingMaxCode = async function getBookingMaxCode(data, result) {
     var booking = await BookingModel.getBookingMaxCode(data);
     result(booking);
