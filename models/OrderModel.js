@@ -64,8 +64,9 @@ Task.insertOrder = function insertOrder(data) {
 
 Task.getOrderBy = function getOrderBy(data) {
     return new Promise(function (resolve, reject) {//user list
-        var str = "SELECT  * FROM tb_order ";
-
+        var str = "SELECT  * FROM tb_order "
+        + " LEFT JOIN tb_table  ON tb_table.table_code = tb_order.table_code "
+        + " LEFT JOIN tb_zone ON tb_zone.zone_id = tb_table.zone_id "
         console.log('checkLogin : ', str);
 
         sql.query(str, function (err, res) {

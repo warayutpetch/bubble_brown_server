@@ -79,6 +79,7 @@ Task.getStockByCode = function getStockByCode(data) {
 Task.getProductBy = function getProductBy(data) {
     return new Promise(function (resolve, reject) {//user list
         var str = "  SELECT * FROM `tb_product` "
+        + " LEFT JOIN tb_unit  ON tb_unit.unit_id = tb_product.unit_id"
 
         console.log('checkLogin : ', str);
 

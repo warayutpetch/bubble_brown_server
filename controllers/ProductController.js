@@ -16,4 +16,29 @@ Task.updateProductCost = async function updateProductCost(data, result) {
     result(product);
 }
 
+Task.getProductMaxCode = async function getProductMaxCode(data, result) {
+    var product = await ProductModel.getProductMaxCode(data);
+    result(product);
+}
+
+Task.insertProduct = async function insertProduct(data, result) {
+    var product = await ProductModel.insertProduct(data);
+    result(product);
+}
+
+Task.getProductByCode = async function getProductByCode(data, result) {
+    var product = await ProductModel.getProductByCode(data);
+    result(product);
+}
+
+Task.updateProduct = async function updateProduct(data, result) {
+    var product = await ProductModel.updateProduct(data);
+    result(product);
+}
+
+Task.deleteByCode = async function deleteByCode(data, result) {
+    var product = await ProductModel.deleteByCode(data);
+    result(product);
+}
+
 module.exports = Task;

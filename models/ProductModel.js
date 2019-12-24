@@ -11,51 +11,37 @@ var Task = function (task) {
     this.created_at = new Date();
 };
 
-// Task.insertOrder = function insertOrder(data) {
-//     return new Promise(function (resolve, reject) {
-//         var str = "INSERT INTO `tb_order` ("
-//             + "`order_code`,"
-//             + "`order_date`,"
-//             + "`order_service`,"
-//             + "`table_code`,"
-//             + "`customer_code`, "
-//             + "`order_total_price` "
-//             + ") VALUES ("
-//             + " '" + data.order_code + "', "
-//             + " '" + data.order_date + "', "
-//             + " '" + data.order_service + "', "
-//             + " '" + data.table_code + "', "
-//             + " '" + data.customer_code + "', "
-//             + " '" + data.order_total_price + "' "
-//             + " ) "
+Task.getProductMaxCode = function getProductMaxCode(data) {
+    return new Promise(function (resolve, reject) {
+        var str = "SELECT IFNULL(LPAD( SUBSTRING(max(product_code),4,6)+1,3, '0'),'001') AS product_code_max  FROM `tb_product` "
+            + "WHERE product_type_code = '" + data.product_type_code + "'"
 
+        console.log('checkLogin565664646 : ', str);
 
-//         console.log('checkLogin : ', str);
+        sql.query(str, function (err, res) {
 
-//         sql.query(str, function (err, res) {
-
-//             if (err) {
-//                 console.log("error: ", err);
-//                 const require = {
-//                     data: false,
-//                     error: err,
-//                     query_result: false,
-//                     server_result: true
-//                 };
-//                 resolve(require);
-//             }
-//             else {
-//                 const require = {
-//                     data: true,
-//                     error: [],
-//                     query_result: true,
-//                     server_result: true
-//                 };
-//                 resolve(require);
-//             }
-//         });
-//     });
-// };
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res[0],
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
 
 Task.getProductBy = function getProductBy(data) {
     return new Promise(function (resolve, reject) {//user list
@@ -79,6 +65,37 @@ Task.getProductBy = function getProductBy(data) {
             else {
                 const require = {
                     data: res,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
+Task.getProductByCode = function getProductByCode(data) {
+    return new Promise(function (resolve, reject) {//user list
+        var str = "SELECT  * FROM tb_product "
+            + "WHERE product_code = '" + data.product_code + "'"
+
+        console.log('checkLogin : ', str);
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res[0],
                     error: [],
                     query_result: true,
                     server_result: true
@@ -124,139 +141,117 @@ Task.updateProductCost = function updateProductCost(data) {
     });
 };
 
-
-// Task.getOrderMaxCode = function getOrderMaxCode(data) {
-//     return new Promise(function (resolve, reject) {
-//         var str = "SELECT  IFNULL(LPAD( SUBSTRING(max(order_code),3 ,7)+1,6, '0'),'000001') AS order_code_max FROM `tb_order` "
-
-
-//         console.log('checkLogin565664646 : ', str);
-
-//         sql.query(str, function (err, res) {
-
-//             if (err) {
-//                 console.log("error: ", err);
-//                 const require = {
-//                     data: [],
-//                     error: err,
-//                     query_result: false,
-//                     server_result: true
-//                 };
-//                 resolve(require);
-//             }
-//             else {
-//                 const require = {
-//                     data: res[0],
-//                     error: [],
-//                     query_result: true,
-//                     server_result: true
-//                 };
-//                 resolve(require);
-//             }
-//         });
-//     });
-// };
-
-// Task.getOrderByCode = function getOrderByCode(data) {
-//     return new Promise(function (resolve, reject) {
-//         var str = "SELECT  * FROM `tb_order` "
-//             + "WHERE order_code = '" + data.order_code + "'";
-
-//         console.log('checkLogin565664646 : ', str);
-
-//         sql.query(str, function (err, res) {
-
-//             if (err) {
-//                 console.log("error: ", err);
-//                 const require = {
-//                     data: [],
-//                     error: err,
-//                     query_result: false,
-//                     server_result: true
-//                 };
-//                 resolve(require);
-//             }
-//             else {
-//                 const require = {
-//                     data: res[0],
-//                     error: [],
-//                     query_result: true,
-//                     server_result: true
-//                 };
-//                 resolve(require);
-//             }
-//         });
-//     });
-// };
+Task.updateProduct = function updateProduct(data) {
+    return new Promise(function (resolve, reject) {
+        var str = "UPDATE `tb_product` SET "
+            + "`product_code` = '" + data.product_code + "',"
+            + "`product_name` = '" + data.product_name + "',"
+            + "`unit_id` = '" + data.unit_id + "',"
+            + "`product_type_code` = '" + data.product_type_code + "'"
+            + "WHERE product_code = '" + data.product_code + "'"
 
 
+        // console.log('checkLogin : ', data);
+        console.log('checkLogin : ', str);
 
+        sql.query(str, function (err, res) {
 
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: false,
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: true,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
 
+Task.insertProduct = function insertProduct(data) {
+    return new Promise(function (resolve, reject) {
+        var str = "INSERT INTO `tb_product` ("
+            + "`product_code`,"
+            + "`product_name`,"
+            + "`unit_id`, "
+            + "`product_type_code`, "
+            + "`product_description` "
 
-// Task.getUserByCode = function getUserByCode(data) {
-//     return new Promise(function (resolve, reject) {
-//         var str = "SELECT  * FROM tb_user WHERE user_code = '" + data.user_code + "'";//showdata editview
+            + ") VALUES ("
+            // + " '" + data[0].order_code + "', "
+            + " '" + data.product_code + "', "
+            + " '" + data.product_name + "', "
+            + " '" + data.unit_id + "', "
+            + " '" + data.product_type_code + "' "
 
-//         console.log('checkLogin : ', str);
+            + " ) "
 
-//         sql.query(str, function (err, res) {
+        sql.query(str, function (err, res) {
 
-//             if (err) {
-//                 console.log("error: ", err);
-//                 const require = {
-//                     data: [],
-//                     error: err,
-//                     query_result: false,
-//                     server_result: true
-//                 };
-//                 resolve(require);
-//             }
-//             else {
-//                 const require = {
-//                     data: res[0],
-//                     error: [],
-//                     query_result: true,
-//                     server_result: true
-//                 };
-//                 resolve(require);
-//             }
-//         });
-//     });
-// };
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: false,
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: true,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
 
-// Task.getUserLoginBy = function getUserLoginBy(data) {
-//     return new Promise(function (resolve, reject) { //user list
-//         var str = "SELECT  * FROM tb_user WHERE  `user_username`= " + sql.escape(data.user_username) + ""
-//             + " AND `user_password` =" + sql.escape(data.user_password) + "";
+Task.deleteByCode = function deleteByCode(data) {
+    return new Promise(function (resolve, reject) {
+        var str = "DELETE FROM tb_product WHERE product_code = '" + data.product_code + "'";//showdata editview
 
-//         console.log('checkLogin : ', str);
+        console.log('checkLogin : ', str);
 
-//         sql.query(str, function (err, res) {
+        sql.query(str, function (err, res) {
 
-//             if (err) {
-//                 console.log("error: ", err);
-//                 const require = {
-//                     data: [],
-//                     error: err,
-//                     query_result: false,
-//                     server_result: true
-//                 };
-//                 resolve(require);
-//             }
-//             else {
-//                 const require = {
-//                     data: res,
-//                     error: [],
-//                     query_result: true,
-//                     server_result: true
-//                 };
-//                 resolve(require);
-//             }
-//         });
-//     });
-// };
-
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: false,
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: true,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
 
 
 
