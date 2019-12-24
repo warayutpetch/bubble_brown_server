@@ -14,7 +14,8 @@ var Task = function (task) {
 Task.getMenuBy = function getMenuBy(data) {
     return new Promise(function (resolve, reject) {//menu list
         var str = "SELECT  * FROM tb_menu as tb1"
-        + " LEFT JOIN tb_menu_type as tb2 ON tb1.menu_type_code = tb2.menu_type_code ";
+        + " LEFT JOIN tb_menu_type as tb2 ON tb1.menu_type_code = tb2.menu_type_code"
+        + " WHERE tb1.deleted = 0";
 
         console.log('checkLogin : ', str);
 
@@ -146,15 +147,14 @@ Task.insertMenu = function insertMenu(data) {
             + "`menu_code`,"
             + "`menu_type_code`,"
             + "`menu_name`,"
-            // + "`menu_image`,"
+            + "`menu_image`,"
             + "`menu_price` "
             // + "`addby` "
             + ") VALUES ("
             + " '" + data.menu_code + "', "
             + " '" + data.menu_type_code + "', "
             + " '" + data.menu_name + "', "
-            // + " '" + data.menu_image + "', "
-            // + " '" + data.menu_phone + "', "
+            + " '" + data.menu_image + "', "
             + " '" + data.menu_price + "' "
             // + " '" + data[0].addby + "' "
             + " ) "
@@ -229,7 +229,7 @@ Task.updateMenuByCode = function updateMenuByCode(data) {
             // + "`menu_id`= '" + data.menu_id + "',"
             + "`menu_type_code`= '" + data.menu_type_code + "',"
             + "`menu_name`= '" + data.menu_name + "',"
-            // + "`menu_image`= '" + data.menu_image + "',"
+            + "`menu_image`= '" + data.menu_image + "',"
             + "`menu_price` = '" + data.menu_price + "'"
             + "WHERE menu_code = '" + data.menu_code + "'";
       

@@ -13,7 +13,9 @@ var Task = function (task) {
 
 Task.getCustomerBy = function getCustomerBy() {
     return new Promise(function (resolve, reject) {
-        var str = "SELECT * FROM tb_customer ";
+        var str = "SELECT * FROM tb_customer"
+        + " WHERE deleted = 0";
+
         sql.query(str, function (err, res) {
             if (err) {
                 console.log("error: ", err);
@@ -100,12 +102,13 @@ Task.getCustomerByCode = function getCustomerByCode(data) {
     });
 };
 
-
 Task.deleteCustomerByCode = function deleteCustomerByCode(data) {
     return new Promise(function (resolve, reject) {//user list
-        var str = "DELETE FROM `tb_customer` WHERE `tb_customer`.`customer_code` ='"+ data.customer_code +"'" ;
+        var str = "UPDATE `tb_customer` SET"
+        + "`deleted`= '1'"
+        + "WHERE tb_customer.customer_code = '" + data.customer_code + "'";
 
-        console.log('customer_codedel : ', str);
+        console.log('str : ', str);
 
         sql.query(str, function (err, res) {
 
@@ -132,6 +135,7 @@ Task.deleteCustomerByCode = function deleteCustomerByCode(data) {
     });
 };
 
+
 Task.insertCustomer = function insertCustomer(data) {
     return new Promise(function (resolve, reject) {
         var str = "INSERT INTO `tb_customer` ("
@@ -139,8 +143,8 @@ Task.insertCustomer = function insertCustomer(data) {
             + "`customer_name`,"
             + "`customer_id`,"
             + "`customer_email`,"
-            + "`customer_phone`,"
-            + "`customer_img` "
+            + "`customer_tel`,"
+            + "`customer_image` "
             // + "`addby` "
             + ") VALUES ("
             // + " '" + data.order_code + "', "
@@ -148,8 +152,8 @@ Task.insertCustomer = function insertCustomer(data) {
             + " '" + data.customer_name + "', "
             + " '" + data.customer_id + "', "
             + " '" + data.customer_email + "', "
-            + " '" + data.customer_phone + "', "
-            + " '" + data.customer_img + "' "
+            + " '" + data.customer_tel + "', "
+            + " '" + data.customer_image + "' "
             // + " '" + data[0].addby + "' "
             + " ) "
 
@@ -264,8 +268,8 @@ Task.updateCustomerByCode = function updateCustomerByCode(data) {
             + "`customer_name`= '" + data.customer_name + "',"
             + "`customer_id`= '" + data.customer_id + "',"
             + "`customer_email`= '" + data.customer_email + "',"
-            + "`customer_phone`= '" + data.customer_phone + "',"
-            + "`customer_img` = '" + data.customer_img + "'"
+            + "`customer_tel`= '" + data.customer_tel + "',"
+            + "`customer_image` = '" + data.customer_image + "'"
             + "WHERE customer_code = '" + data.customer_code + "'";
 
 
