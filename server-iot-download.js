@@ -10,5 +10,5 @@ console.log("publicDir", publicDir);
 app.use(express.static(publicDir));
 
 app.listen(port, () => {
-    console.log('API Start server at port 3003.')
+    console.log('API Start server at port 3006.')
 })
