@@ -14,6 +14,18 @@ module.exports = function (app) {
         });
     })
 
+    app.post('/booking/getBookingByCode', function (req, res) {
+        console.log('/booking/getBookingByCode', req.body)
+        BookingController.getBookingByCode(req.body, function (err, task) {
+
+            if (err) {
+                res.send(err);
+            }
+            // console.log('res', task);
+            res.send(task);
+        });
+    })
+
     app.post('/booking/getBookingMaxCode', function (req, res) {
         console.log('/booking/getBookingMaxCode', req.body)
         BookingController.getBookingMaxCode(req.body, function (err, task) {
@@ -62,4 +74,14 @@ module.exports = function (app) {
         });
     })
    
+    app.post('/booking/deleteBooking', function (req, res) {
+        console.log('/booking/deleteBooking', req.body)
+        BookingController.deleteBooking(req.body, function (err, task) {
+            if (err) {
+                res.send(err);
+            }
+            res.send(task);
+        });
+    })
+
 }

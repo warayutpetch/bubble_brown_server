@@ -11,6 +11,11 @@ Task.getBookingBy = async function getBookingBy(data, result) {
     result(booking);
 }
 
+Task.getBookingByCode = async function getBookingByCode(data, result) {
+    var booking = await BookingModel.getBookingByCode(data);
+    result(booking);
+}
+
 Task.getBookingMaxCode = async function getBookingMaxCode(data, result) {
     var booking = await BookingModel.getBookingMaxCode(data);
     result(booking);
@@ -31,5 +36,9 @@ Task.checkTable = async function checkTable(data, result) {
     result(booking);
 }
 
+Task.deleteBooking = async function deleteBooking(data, result) {
+    var booking = await BookingModel.deleteBooking(data);
+    result(booking);
+}
 
 module.exports = Task;
