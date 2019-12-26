@@ -15,7 +15,7 @@ Task.getMenuBy = function getMenuBy(data) {
     return new Promise(function (resolve, reject) {//menu list
         var str = "SELECT  * FROM tb_menu as tb1"
         + " LEFT JOIN tb_menu_type as tb2 ON tb1.menu_type_code = tb2.menu_type_code"
-        + " WHERE tb1.deleted = 0";
+       
 
         console.log('checkLogin : ', str);
 

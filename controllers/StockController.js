@@ -55,8 +55,14 @@ Task.getStockByCode = async function getStockByCode(data, result) {
     var stock = await StockModel.getStockByCode(data);
     result(stock);
 }
+
 Task.getStockByPriceQty = async function getStockByPriceQty(data, result) {
     var stock = await StockModel.getStockByPriceQty(data);
+    result(stock);
+}
+
+Task.deleteStockBy = async function deleteStockBy(data, result) {
+    var stock = await StockModel.deleteStockBy(data);
     result(stock);
 }
 

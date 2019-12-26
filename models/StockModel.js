@@ -114,7 +114,7 @@ Task.getSumStockInBy = function getSumStockInBy(data) {
         + " WHERE tb1.product_code =  '" + data.product_code + "'"
         + "GROUP BY unit_id"
 
-        console.log('checkLogin : ', str);
+        // console.log('checkLogin : ', str);
 
         sql.query(str, function (err, res) {
 
@@ -148,7 +148,7 @@ Task.getSumStockOutBy = function getSumStockOutBy(data) {
             + "GROUP BY unit"
 
 
-        console.log('checkLogin : ', str);
+        // console.log('checkLogin : ', str);
 
         sql.query(str, function (err, res) {
 
@@ -179,6 +179,7 @@ Task.getStockByProduct = function getStockByProduct(data) {
     return new Promise(function (resolve, reject) {//user list
         var str = " SELECT * ,DATE_FORMAT(stock_date, '%d-%m-%Y') as stock_date,  DATE_FORMAT(stock_date, '%H:%i:%s') as stock_time  FROM tb_stock "
             + " LEFT JOIN tb_product  ON tb_product.product_code = tb_stock.product_code"
+            + " LEFT JOIN tb_unit ON tb_unit.unit_id = tb_stock.unit_id"
             + " WHERE tb_stock.product_code = '" + data.product_code + "' ";
 
         console.log('checkLogin : ', str);
@@ -387,7 +388,7 @@ Task.deleteByCode = function deleteByCode(data) {
 
 Task.getStockByPriceQty = function getStockByPriceQty(data) {
     return new Promise(function (resolve, reject) {//user list
-        var str = " SELECT* ,SUM(`stock_price`) / SUM(`stock_qty_cal`) AS product_cost FROM `tb_stock` "
+        var str = " SELECT* ,IFNULL(SUM(`stock_price`) / SUM(`stock_qty_cal`),0) AS product_cost FROM `tb_stock` "
             + "  WHERE product_code = '" + data.product_code + "'"
 
         console.log('checkLogin : ', str);
@@ -416,6 +417,38 @@ Task.getStockByPriceQty = function getStockByPriceQty(data) {
         });
     });
 };
+
+Task.deleteStockBy = function deleteStockBy(data) {
+    return new Promise(function (resolve, reject) {//user list
+        var str = "DELETE FROM tb_stock WHERE stock_id = '" + data.stock_id + "'";
+        console.log('checkLogin : ', str);
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res[0],
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
+
+
 
 
 module.exports = Task;

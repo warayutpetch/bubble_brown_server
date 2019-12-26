@@ -36,6 +36,16 @@ Task.getRecipeByMenu = async function getRecipeByMenu(data, result) {
     result(order);
 }
 
+Task.Payment = async function Payment(data, result) {
+    var order = await OrderModel.Payment(data);
+    result(order);
+}
+
+Task.updateConfirmOrder = async function updateConfirmOrder(data, result) {
+    var order = await OrderModel.updateConfirmOrder(data);
+    result(order);
+}
+
 
 
 module.exports = Task;

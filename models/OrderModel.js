@@ -65,9 +65,10 @@ Task.insertOrder = function insertOrder(data) {
 Task.getOrderBy = function getOrderBy(data) {
     return new Promise(function (resolve, reject) {//user list
         var str = "SELECT  * FROM tb_order "
-        + " LEFT JOIN tb_table  ON tb_table.table_code = tb_order.table_code "
-        + " LEFT JOIN tb_zone ON tb_zone.zone_id = tb_table.zone_id "
-        console.log('checkLogin : ', str);
+            + " LEFT JOIN tb_table  ON tb_table.table_code = tb_order.table_code "
+            + " LEFT JOIN tb_zone ON tb_zone.zone_id = tb_table.zone_id "
+            + " WHERE tb_order.order_status != 2 AND order_status !=3"
+        console.log('order_statuscheckLogin : ', str);
 
         sql.query(str, function (err, res) {
 
@@ -232,5 +233,66 @@ Task.getRecipeByMenu = function getRecipeByMenu(data) {
     });
 };
 
+Task.Payment = function Payment(data) {
+    return new Promise(function (resolve, reject) {
+        var str = "UPDATE `tb_order` SET"
+            + "`order_status`= '2'"
+            + "WHERE tb_order.order_code = '" + data.order_code + "'";
+        console.log("order_status:", data);
+
+        sql.query(str, function (err, res) {
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: false,
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: true,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+}
+
+Task.updateConfirmOrder = function updateConfirmOrder(data) {
+    return new Promise(function (resolve, reject) {
+        var str = "UPDATE `tb_order` SET"
+            + "`order_status`= '1'"
+            + "WHERE tb_order.order_code = '" + data.order_code + "'";
+        console.log("order_status:", data);
+
+        sql.query(str, function (err, res) {
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: false,
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: true,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+}
 
 module.exports = Task;

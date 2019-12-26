@@ -142,5 +142,17 @@ module.exports = function (app) {
             res.send(task);
         });
     })
+
+    app.post('/stock/deleteStockBy', function (req, res) {
+        console.log('/stock/deleteStockBy', req.body)
+        StockController.deleteStockBy(req.body, function (err, task) {
+
+            if (err) {
+                res.send(err);
+            }
+            // console.log('res', task);
+            res.send(task);
+        });
+    })
   
 }

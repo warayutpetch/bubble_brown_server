@@ -96,5 +96,29 @@ module.exports = function (app) {
         });
     })
 
+    app.post('/order/Payment', function (req, res) {
+        console.log('/order/Payment', req.body)
+        OrderController.Payment(req.body, function (err, task) {
+
+            if (err) {
+                res.send(err);
+            }
+            // console.log('res', task);
+            res.send(task);
+        });
+    })
+
+    app.post('/order/updateConfirmOrder', function (req, res) {
+        console.log('/order/updateConfirmOrder', req.body)
+        OrderController.updateConfirmOrder(req.body, function (err, task) {
+
+            if (err) {
+                res.send(err);
+            }
+            // console.log('res', task);
+            res.send(task);
+        });
+    })
+
 
 }
