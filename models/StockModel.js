@@ -79,7 +79,7 @@ Task.getStockByCode = function getStockByCode(data) {
 Task.getProductBy = function getProductBy(data) {
     return new Promise(function (resolve, reject) {//user list
         var str = "  SELECT * FROM `tb_product` "
-        + " LEFT JOIN tb_unit  ON tb_unit.unit_id = tb_product.unit_id"
+            + " LEFT JOIN tb_unit  ON tb_unit.unit_id = tb_product.unit_id"
 
         console.log('checkLogin : ', str);
 
@@ -111,8 +111,8 @@ Task.getProductBy = function getProductBy(data) {
 Task.getSumStockInBy = function getSumStockInBy(data) {
     return new Promise(function (resolve, reject) {//user list
         var str = "  SELECT IFNULL(SUM(stock_qty), 0) AS stock_in , unit_id AS unit FROM tb_stock as tb1 "
-        + " WHERE tb1.product_code =  '" + data.product_code + "'"
-        + "GROUP BY unit_id"
+            + " WHERE tb1.product_code =  '" + data.product_code + "'"
+            + "GROUP BY unit_id"
 
         // console.log('checkLogin : ', str);
 
@@ -148,7 +148,7 @@ Task.getSumStockOutBy = function getSumStockOutBy(data) {
             + "GROUP BY unit"
 
 
-        // console.log('checkLogin : ', str);
+  
 
         sql.query(str, function (err, res) {
 
@@ -388,10 +388,12 @@ Task.deleteByCode = function deleteByCode(data) {
 
 Task.getStockByPriceQty = function getStockByPriceQty(data) {
     return new Promise(function (resolve, reject) {//user list
-        var str = " SELECT* ,IFNULL(SUM(`stock_price`) / SUM(`stock_qty_cal`),0) AS product_cost FROM `tb_stock` "
-            + "  WHERE product_code = '" + data.product_code + "'"
-
+        var str = " SELECT* ,  IFNULL(SUM(`stock_price`),0) - (SELECT IFNULL(SUM((product_qty * menu_qty ) * product_cost),0) FROM  `tb_stock_out` "
+            + " WHERE product_code = '" + data.product_code + "' ) / IFNULL((SUM(`stock_qty_cal`) -IFNULL((SELECT SUM(product_qty * menu_qty) FROM  `tb_stock_out`"
+            + " WHERE product_code = '" + data.product_code + "' ),0)),0) AS product_cost FROM `tb_stock`"
+            + " WHERE product_code = '" + data.product_code + "'"
         console.log('checkLogin : ', str);
+
 
         sql.query(str, function (err, res) {
 

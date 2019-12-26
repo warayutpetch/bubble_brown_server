@@ -156,6 +156,6 @@ appRouteUnit(app);
 var appRouteProductType= require('./routes/appRouteProductType');
 appRouteProductType(app);
 
+var appRouterPayment= require('./routes/appRouterPayment');
+appRouterPayment(app);
 
-// var appRouterOmisePayment = require('./routes/appRouterOmisePayment')
-// appRouterOmisePayment(app)
