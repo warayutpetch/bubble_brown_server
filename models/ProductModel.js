@@ -147,8 +147,9 @@ Task.updateProduct = function updateProduct(data) {
             + "`product_code` = '" + data.product_code + "',"
             + "`product_name` = '" + data.product_name + "',"
             + "`unit_id` = '" + data.unit_id + "',"
+            + "`product_minimum` = '" + data.product_minimum + "',"
             + "`product_type_code` = '" + data.product_type_code + "'"
-            + "WHERE product_code = '" + data.product_code + "'"
+            + "WHERE tb_product.product_code = '" + data.product_code + "'"
 
 
         // console.log('checkLogin : ', data);
@@ -186,14 +187,15 @@ Task.insertProduct = function insertProduct(data) {
             + "`product_name`,"
             + "`unit_id`, "
             + "`product_type_code`, "
-            + "`product_description` "
+            + "`product_minimum` "
 
             + ") VALUES ("
             // + " '" + data[0].order_code + "', "
             + " '" + data.product_code + "', "
             + " '" + data.product_name + "', "
             + " '" + data.unit_id + "', "
-            + " '" + data.product_type_code + "' "
+            + " '" + data.product_type_code + "', "
+            + " '" + data.product_minimum + "' "
 
             + " ) "
 

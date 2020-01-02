@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 16, 2019 at 12:44 PM
+-- Generation Time: Jan 02, 2020 at 07:26 AM
 -- Server version: 5.7.17-log
 -- PHP Version: 5.6.30
 
@@ -69,18 +69,21 @@ CREATE TABLE `tb_booking` (
   `booking_amount` int(10) NOT NULL,
   `booking_email` varchar(100) NOT NULL,
   `booking_date` varchar(50) NOT NULL,
-  `booking_time` time NOT NULL
+  `booking_time` time NOT NULL,
+  `deleted` int(10) NOT NULL,
+  `booking_status` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tb_booking`
 --
 
-INSERT INTO `tb_booking` (`booking_code`, `table_code`, `booking_firstname`, `booking_lastname`, `booking_tel`, `booking_amount`, `booking_email`, `booking_date`, `booking_time`) VALUES
-('BK000001', 'T02', 'inthawa', 'chandharakrob', '0981013056', 2, 'revelsoft@co.th', '2019-12-13', '00:00:00'),
-('BK000002', 'T02', 'inthawa', 'chandharakrob', '0981013056', 2, 'revelsoft@co.th', '2019-12-13', '00:00:00'),
-('BK000003', 'T04', 'inthawa', 'chandharakrob', '0981013056', 2, 'revelsoft@co.th', '2019-12-13', '00:00:00'),
-('BK000004', 'T02', 'inthawa', 'chandharakrob', '0981013056', 2, 'Adler@gmail.com', '2019-12-15', '00:00:00');
+INSERT INTO `tb_booking` (`booking_code`, `table_code`, `booking_firstname`, `booking_lastname`, `booking_tel`, `booking_amount`, `booking_email`, `booking_date`, `booking_time`, `deleted`, `booking_status`) VALUES
+('BK000001', 'T02', 'inthawa', 'chandharakrob', '0981013056', 2, 'revelsoft@co.th', '2019-12-13', '00:00:00', 0, 0),
+('BK000002', 'T02', 'inthawa', 'chandharakrob', '0981013056', 2, 'revelsoft@co.th', '2019-12-13', '00:00:00', 0, 0),
+('BK000003', 'T04', 'inthawa', 'chandharakrob', '0981013056', 2, 'revelsoft@co.th', '2019-12-13', '00:00:00', 0, 0),
+('BK000004', 'T02', 'inthawa', 'chandharakrob', '0981013056', 2, 'Adler@gmail.com', '2019-12-15', '00:00:00', 1, 0),
+('BK000005', 'T08', 'จิดาภา', 'สุวรรณจันทร์', '0849583359', 3, 'jidapa_pook2@hotmail.com', '2019-12-15', '00:00:00', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -89,7 +92,7 @@ INSERT INTO `tb_booking` (`booking_code`, `table_code`, `booking_firstname`, `bo
 --
 
 CREATE TABLE `tb_cancel_list` (
-  `cencel_list_code` varchar(10) NOT NULL,
+  `cencel_list_id` int(11) NOT NULL,
   `cencel_list_name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -97,11 +100,10 @@ CREATE TABLE `tb_cancel_list` (
 -- Dumping data for table `tb_cancel_list`
 --
 
-INSERT INTO `tb_cancel_list` (`cencel_list_code`, `cencel_list_name`) VALUES
-('', ''),
-('CN01', 'ออเดอร์ช้า'),
-('CN02', 'ออเดอร์ผิด'),
-('CN3', 'สินค้าหมด');
+INSERT INTO `tb_cancel_list` (`cencel_list_id`, `cencel_list_name`) VALUES
+(1, 'ออเดอร์ช้า'),
+(2, 'ออเดอร์ผิด'),
+(3, 'สินค้าหมด');
 
 -- --------------------------------------------------------
 
@@ -114,17 +116,19 @@ CREATE TABLE `tb_customer` (
   `customer_name` varchar(100) NOT NULL,
   `customer_id` varchar(100) NOT NULL,
   `customer_email` varchar(100) NOT NULL,
-  `customer_phone` varchar(10) NOT NULL,
-  `customer_img` varchar(150) NOT NULL
+  `customer_tel` varchar(10) NOT NULL,
+  `customer_image` varchar(150) NOT NULL,
+  `deleted` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tb_customer`
 --
 
-INSERT INTO `tb_customer` (`customer_code`, `customer_name`, `customer_id`, `customer_email`, `customer_phone`, `customer_img`) VALUES
-('', '', 'undefined', 'undefined', '', 'undefined'),
-('CM001', '', '', '', '', '');
+INSERT INTO `tb_customer` (`customer_code`, `customer_name`, `customer_id`, `customer_email`, `customer_tel`, `customer_image`, `deleted`) VALUES
+('CM001', 'นายมนศักดิ์  กางมุ้งคอย', 'monsakza', 'monsakza@hotmail.com', '0924594785', '0be6eed8-9d5a-4a83-80ea-50761e4174d9.png', 0),
+('CM002', 'นางนารัตน์  พัดลม', 'narattt', 'naratfan@gmail.com', '0902593586', 'a2c771af-60f7-40c0-98e2-0387ab5d7113.png', 0),
+('CM003', 'นายนนนที ปล้ำกะโทก', 'nonnonnn', 'nonnonzaza@gmail.com', '0841235896', 'c647d419-b587-4a66-985e-6534b0d18fbe.png', 0);
 
 -- --------------------------------------------------------
 
@@ -153,7 +157,6 @@ INSERT INTO `tb_menu` (`menu_code`, `menu_id`, `menu_type_code`, `menu_name`, `m
 ('MN01001', 1, 'MNT01', 'เอสเปรสโซ่ (ร้อน)', '', '45', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '1'),
 ('MN01002', 2, 'MNT01', 'เอสเปรสโซ่ (เย็น)', '', '55', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '1'),
 ('MN01003', 3, 'MNT01', 'เอสเปรสโซ่ (ปั่น)', '', '65', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '1'),
-('MN010038', 38, 'MNT01', 'ดาร์คช็อกโกแลต (เย็น)', '', '70', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', ''),
 ('MN01004', 4, 'MNT01', 'คาปูชิโน (ร้อน)', '', '45', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '1'),
 ('MN01005', 5, 'MNT01', 'คาปูชิโน (เย็น)', '', '55', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '1'),
 ('MN01006', 6, 'MNT01', 'คาปูชิโน (ปั่น)', '', '65', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '1'),
@@ -234,8 +237,10 @@ CREATE TABLE `tb_order` (
   `table_code` varchar(10) NOT NULL,
   `order_date` varchar(50) DEFAULT NULL,
   `order_due_date` varchar(50) DEFAULT NULL,
-  `order_total_price` double NOT NULL,
+  `order_total_price` varchar(20) NOT NULL,
   `order_vat` int(11) NOT NULL,
+  `amount` varchar(10) NOT NULL,
+  `promotion_code` varchar(10) NOT NULL,
   `order_vat_type` int(11) NOT NULL,
   `order_vat_price` double NOT NULL,
   `order_net_price` double NOT NULL,
@@ -252,13 +257,9 @@ CREATE TABLE `tb_order` (
 -- Dumping data for table `tb_order`
 --
 
-INSERT INTO `tb_order` (`order_code`, `customer_code`, `table_code`, `order_date`, `order_due_date`, `order_total_price`, `order_vat`, `order_vat_type`, `order_vat_price`, `order_net_price`, `order_remark`, `order_status`, `addby`, `adddate`, `updateby`, `lastupdate`, `order_service`) VALUES
-('OD000001', 'CM001', '01', '201912131576218780394', NULL, 220, 0, 0, 0, 0, '', '', '', NULL, '', NULL, ''),
-('OD000002', 'CM001', 'undefined', '201912131576178016438', NULL, 495, 0, 0, 0, 0, '', '', '', NULL, '', NULL, ''),
-('OD000003', 'CM001', 'undefined', '201912131576178108184', NULL, 270, 0, 0, 0, 0, '', '', '', NULL, '', NULL, ''),
-('OD000004', 'CM001', '01', '201912131576178297008', NULL, 520, 0, 0, 0, 0, '', '', '', NULL, '', NULL, ''),
-('OD000005', 'CM001', '01', '201912131576220922243', NULL, 420, 0, 0, 0, 0, '', '', '', NULL, '', NULL, 'ทานที่ร้าน'),
-('OD000006', 'CM001', '01', '201912131576222308840', NULL, 455, 0, 0, 0, 0, '', '', '', NULL, '', NULL, 'ทานที่ร้าน');
+INSERT INTO `tb_order` (`order_code`, `customer_code`, `table_code`, `order_date`, `order_due_date`, `order_total_price`, `order_vat`, `amount`, `promotion_code`, `order_vat_type`, `order_vat_price`, `order_net_price`, `order_remark`, `order_status`, `addby`, `adddate`, `updateby`, `lastupdate`, `order_service`) VALUES
+('OD000001', 'CM001', 'T02', '201912261577374575752', NULL, '45', 0, '2', 'undefined', 0, 0, 0, '', '2', '', NULL, '', NULL, 'ทานที่ร้าน'),
+('OD000002', 'CM001', 'เลือกโต๊ะ', '201912271577427980655', NULL, '45', 0, '2', 'undefined', 0, 0, 0, '', '2', '', NULL, '', NULL, 'ทานที่ร้าน');
 
 -- --------------------------------------------------------
 
@@ -267,7 +268,7 @@ INSERT INTO `tb_order` (`order_code`, `customer_code`, `table_code`, `order_date
 --
 
 CREATE TABLE `tb_order_cencel` (
-  `order_cencel_code` varchar(20) NOT NULL COMMENT 'รหัสยกเลิกออเดอร์',
+  `order_cencel_id` int(11) NOT NULL COMMENT 'รหัสยกเลิกออเดอร์',
   `cencel_list_code` varchar(20) NOT NULL COMMENT 'เหตุผลยกเลิก',
   `order_code` varchar(20) NOT NULL,
   `addby` varchar(50) NOT NULL,
@@ -275,13 +276,6 @@ CREATE TABLE `tb_order_cencel` (
   `updateby` varchar(50) NOT NULL,
   `lastupdate` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `tb_order_cencel`
---
-
-INSERT INTO `tb_order_cencel` (`order_cencel_code`, `cencel_list_code`, `order_code`, `addby`, `adddate`, `updateby`, `lastupdate`) VALUES
-('', '', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -294,10 +288,10 @@ CREATE TABLE `tb_order_list` (
   `order_code` varchar(50) NOT NULL,
   `menu_code` varchar(20) NOT NULL,
   `order_list_name` varchar(200) NOT NULL,
-  `order_list_qty` int(11) NOT NULL,
-  `order_list_price_qty` double NOT NULL,
-  `order_list_price_sum_qty` double NOT NULL,
-  `order_list_price_sum` double NOT NULL,
+  `order_list_qty` varchar(20) NOT NULL,
+  `order_list_price_qty` varchar(20) NOT NULL,
+  `order_list_price_sum_qty` varchar(20) NOT NULL,
+  `order_list_price_sum` varchar(20) NOT NULL,
   `order_list_remark` text NOT NULL,
   `addby` varchar(50) NOT NULL,
   `adddate` datetime NOT NULL,
@@ -310,21 +304,35 @@ CREATE TABLE `tb_order_list` (
 --
 
 INSERT INTO `tb_order_list` (`order_list_code`, `order_code`, `menu_code`, `order_list_name`, `order_list_qty`, `order_list_price_qty`, `order_list_price_sum_qty`, `order_list_price_sum`, `order_list_remark`, `addby`, `adddate`, `updateby`, `lastupdate`) VALUES
-(110, 'OD000002', 'MN01001', 'กาแฟ', 2, 100, 200, 495, '', '', '0000-00-00 00:00:00', '', NULL),
-(111, 'OD000002', 'MN01002', 'ลาเต้', 2, 120, 240, 495, '', '', '0000-00-00 00:00:00', '', NULL),
-(112, 'OD000002', 'MN03002', 'เค๊กส้ม', 1, 55, 55, 495, '', '', '0000-00-00 00:00:00', '', NULL),
-(113, 'OD000003', 'MN02001', 'ข้าวผัด', 1, 70, 70, 270, '', '', '0000-00-00 00:00:00', '', NULL),
-(114, 'OD000003', 'MN02002', 'กุ้งชุบแป้งทอด', 1, 200, 200, 270, '', '', '0000-00-00 00:00:00', '', NULL),
-(122, 'OD000004', 'MN02001', 'ข้าวผัด', 3, 70, 210, 520, '', '', '0000-00-00 00:00:00', '', NULL),
-(123, 'OD000004', 'MN03002', 'เค๊กส้ม', 2, 55, 110, 520, '', '', '0000-00-00 00:00:00', '', NULL),
-(124, 'OD000004', 'MN02002', 'กุ้งชุบแป้งทอด', 1, 200, 200, 520, '', '', '0000-00-00 00:00:00', '', NULL),
-(128, 'OD000001', 'MN01001', 'กาแฟ', 1, 100, 100, 220, '', '', '0000-00-00 00:00:00', '', NULL),
-(129, 'OD000001', 'MN01002', 'ลาเต้', 1, 120, 120, 220, '', '', '0000-00-00 00:00:00', '', NULL),
-(130, 'OD000005', 'MN01001', 'กาแฟ', 3, 100, 300, 420, '', '', '0000-00-00 00:00:00', '', NULL),
-(131, 'OD000005', 'MN01002', 'ลาเต้', 1, 120, 120, 420, '', '', '0000-00-00 00:00:00', '', NULL),
-(134, 'OD000006', 'MN03002', 'เค๊กส้ม', 5, 55, 275, 455, '', '', '0000-00-00 00:00:00', '', NULL),
-(135, 'OD000006', 'MN03001', 'เค๊กหน้านิ่ม', 1, 60, 60, 455, '', '', '0000-00-00 00:00:00', '', NULL),
-(136, 'OD000006', 'MN01002', 'ลาเต้', 1, 120, 120, 455, '', '', '0000-00-00 00:00:00', '', NULL);
+(45, 'OD000001', 'MN01001', 'เอสเปรสโซ่ (ร้อน)', '1', '45', '45', '45', '', '', '0000-00-00 00:00:00', '', NULL),
+(50, 'OD000002', 'MN01001', 'เอสเปรสโซ่ (ร้อน)', '1', '45', '45', '45', '', '', '0000-00-00 00:00:00', '', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_payment`
+--
+
+CREATE TABLE `tb_payment` (
+  `payment_id` int(11) NOT NULL,
+  `order_code` varchar(20) NOT NULL,
+  `promotion_code` varchar(20) NOT NULL,
+  `customer_code` varchar(20) NOT NULL,
+  `payment_discount` varchar(20) NOT NULL COMMENT 'ส่วนลดที่ได้รับ',
+  `payment_sum` varchar(20) NOT NULL COMMENT 'รวมทั้งหมดรวมส่วนลดแล้ว',
+  `payment_money_received` varchar(20) NOT NULL COMMENT 'เงินที่ได้รับ',
+  `payment_change` varchar(20) NOT NULL COMMENT 'เงินทอน'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tb_payment`
+--
+
+INSERT INTO `tb_payment` (`payment_id`, `order_code`, `promotion_code`, `customer_code`, `payment_discount`, `payment_sum`, `payment_money_received`, `payment_change`) VALUES
+(7, 'OD000001', '', '', '', '45', '1000', '955'),
+(8, 'OD000002', '', '', '', '45', '1000', '955'),
+(9, 'OD000001', '', '', '', '45', '1000', '955'),
+(10, 'OD000002', '', '', '', '45', '1000', '955');
 
 -- --------------------------------------------------------
 
@@ -338,9 +346,9 @@ CREATE TABLE `tb_product` (
   `product_name` varchar(100) NOT NULL COMMENT 'ชื่อสินค้า',
   `product_brand_name` varchar(100) NOT NULL,
   `product_minimum` varchar(10) NOT NULL,
-  `product_price` varchar(20) NOT NULL,
   `product_cost` varchar(20) NOT NULL,
   `product_description` varchar(200) NOT NULL COMMENT 'รายละเอียดสินค้า',
+  `unit_id` int(11) NOT NULL,
   `product_image` varchar(200) NOT NULL COMMENT 'รูปสินค้า',
   `addby` varchar(50) NOT NULL,
   `adddate` datetime NOT NULL,
@@ -352,36 +360,37 @@ CREATE TABLE `tb_product` (
 -- Dumping data for table `tb_product`
 --
 
-INSERT INTO `tb_product` (`product_code`, `product_type_code`, `product_name`, `product_brand_name`, `product_minimum`, `product_price`, `product_cost`, `product_description`, `product_image`, `addby`, `adddate`, `updateby`, `lastupdate`) VALUES
-('PT1001', 'PTY01', 'เครื่องบดกาแฟ', '', '', '26500', '', '', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
-('PT1002', 'PTY01', 'เครื่องชงกาแฟ', '', '', '38900', '', '', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
-('PT1003', 'PTY01', 'เครื่องปั่น', '', '', '14900', '', '', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
-('PT2001', 'PTY02', 'เมล็ดกาแฟอาราบิก้า', '', '2', '600', '', '1,000 กรัม', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
-('PT2002', 'PTY02', 'โกโก้', '', '2', '250', '', '500 กรัม', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
-('PT2003', 'PTY02', 'ชาเขียวมัทฉะ', '', '2', '200', '', '100 กรัม', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
-('PT2004', 'PTY02', 'ชาไทย', '', '2', '150', '', '100 กรัม', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
-('PT2005', 'PTY02', 'ชา', '', '2', '260', '', '500 กรัม', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
-('PT2006', 'PTY02', 'ชามะนาว', '', '2', '150', '', '1000 กรัม', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
-('PT2007', 'PTY02', 'น้ำเชื่อมกลิ่นวนิลา', '', '2', '240', '', '', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
-('PT2008', 'PTY02', 'น้ำเชื่อมกลิ่นคาราเมล', '', '2', '240', '', '', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
-('PT2009', 'PTY02', 'ไซรัปกลิ่น วนิลา', '', '2', '425', '', '', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
-('PT2010', 'PTY02', 'ไซรัปกลิ่น คาราเมล', '', '2', '452', '', '', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
-('PT2011', 'PTY02', 'ไวท์ช็อคโกแลต', '', '2', '600', '', '', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
-('PT2012', 'PTY02', 'ทีรามิสุ', '', '2', '950', '', '', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
-('PT2013', 'PTY02', 'คาราเมล', '', '2', '600', '', '', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
-('PT2014', 'PTY02', 'ช้อกโกแลต', '', '2', '250', '', '', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
-('PT2015', 'PTY02', 'น้ำตาล', '', '2', '90', '', '', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
-('PT2016', 'PTY02', 'นมข้นหวาน', '', '2', '112', '', '2 กก. / ถุง', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
-('PT2017', 'PTY02', 'คาร์เนชัน', '', '5', '23', '', '', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
-('PT2018', 'PTY02', 'น้ำเปล่าถัง', '', '5', '30', '', '', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
-('PT2019', 'PTY02', 'นมสดพาสเจอร์ไรส์ รสจืด', '', '5', '154', '', '2 ลิตร /1 แกรอน', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
-('PT3001', 'PTY03', 'แก้ว 22 ออนซ์', '', '', '95', '', '', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
-('PT3002', 'PTY03', 'แก้ว 16 ออนซ์', '', '', '85', '', '', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
-('PT3003', 'PTY03', 'แก้วกาแฟร้อน', '', '', '', '', '', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
-('PT3004', 'PTY03', 'หลอด', '', '', '30', '', '', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
-('PT3005', 'PTY03', 'หลอดปลายช้อน', '', '', '30', '', '', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
-('PT3006', 'PTY03', 'หลอดกาแฟ', '', '', '45', '', '', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
-('PT3007', 'PTY03', 'ฝาโดม', '', '', '70', '', '', '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00');
+INSERT INTO `tb_product` (`product_code`, `product_type_code`, `product_name`, `product_brand_name`, `product_minimum`, `product_cost`, `product_description`, `unit_id`, `product_image`, `addby`, `adddate`, `updateby`, `lastupdate`) VALUES
+('PT1001', 'PTY01', 'เครื่องบดกาแฟ', '', '', '', '', 0, '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
+('PT1002', 'PTY01', 'เครื่องชงกาแฟ', '', '', '', '', 0, '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
+('PT1003', 'PTY01', 'เครื่องปั่น', '', '', '', '', 0, '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
+('PT2001', 'PTY02', 'เมล็ดกาแฟอาราบิก้า', '', '1000', '0.65', '1,000 กรัม', 2, '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
+('PT2002', 'PTY02', 'โกโก้', '', '2', '970', '500 กรัม', 2, '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
+('PT2003', 'PTY02', 'ชาเขียวมัทฉะ', '', '2', '', '100 กรัม', 3, '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
+('PT2004', 'PTY02', 'ชาไทย', '', '2', '', '100 กรัม', 3, '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
+('PT2005', 'PTY02', 'ชา', '', '2', '0', '500 กรัม', 3, '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
+('PT2006', 'PTY02', 'ชามะนาว', '', '2', '', '1000 กรัม', 3, '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
+('PT2007', 'PTY02', 'น้ำเชื่อมกลิ่นวนิลา', '', '2', '', '', 4, '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
+('PT2008', 'PTY02', 'น้ำเชื่อมกลิ่นคาราเมล', '', '2', '0.75', '', 4, '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
+('PT2009', 'PTY02', 'ไซรัปกลิ่น วนิลา', '', '2', '0.65', '', 0, '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
+('PT2010', 'PTY02', 'ไซรัปกลิ่น คาราเมล', '', '2', '', '', 0, '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
+('PT2011', 'PTY02', 'ไวท์ช็อคโกแลต', '', '2', '', '', 4, '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
+('PT2012', 'PTY02', 'ทีรามิสุ', '', '2', '', '', 4, '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
+('PT2013', 'PTY02', 'คาราเมล', '', '2', '', '', 4, '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
+('PT2014', 'PTY02', 'ผงช้อกโกแลต', '', '2', '0.65', '', 2, '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
+('PT2015', 'PTY02', 'น้ำตาล', '', '2', '', '', 3, '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
+('PT2016', 'PTY02', 'นมข้นหวาน', '', '1000', '0.175', '2 กก. / ถุง', 2, '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
+('PT2017', 'PTY02', 'คาร์เนชัน', '', '5', '', '', 4, '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
+('PT2018', 'PTY02', 'น้ำเปล่าถัง', '', '5', '0.12', '', 5, '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
+('PT2019', 'PTY02', 'นมสดพาสเจอร์ไรส์ รสจืด', '', '5', '', '2 ลิตร /1 แกรอน', 5, '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
+('PT2020', 'PTY02', 'โอวันติน', '', '', '', 'undefined', 2, '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
+('PT3001', 'PTY03', 'แก้ว 22 ออนซ์', '', '', '', '', 0, '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
+('PT3002', 'PTY03', 'แก้ว 16 ออนซ์', '', '', '', '', 0, '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
+('PT3003', 'PTY03', 'แก้วกาแฟร้อน', '', '', '', '', 0, '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
+('PT3004', 'PTY03', 'หลอด', '', '', '', '', 0, '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
+('PT3005', 'PTY03', 'หลอดปลายช้อน', '', '', '', '', 0, '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
+('PT3006', 'PTY03', 'หลอดกาแฟ', '', '', '', '', 0, '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00'),
+('PT3007', 'PTY03', 'ฝาโดม', '', '', '', '', 0, '', '', '0000-00-00 00:00:00', '', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -427,11 +436,15 @@ INSERT INTO `tb_product_type` (`product_type_code`, `product_type_name`) VALUES
 --
 
 CREATE TABLE `tb_promotion` (
-  `promotion_code` varchar(100) NOT NULL,
+  `promotion_code` int(100) NOT NULL,
   `menu_type_code` varchar(100) NOT NULL,
   `promotion_header` varchar(100) NOT NULL,
   `promotion_detail` varchar(1000) NOT NULL,
   `promotion_image` varchar(100) NOT NULL,
+  `promotion_type` varchar(100) NOT NULL,
+  `discount_code` varchar(100) NOT NULL,
+  `discount_percent` varchar(50) NOT NULL,
+  `discount_price` varchar(50) NOT NULL,
   `startdate` varchar(50) NOT NULL,
   `enddate` varchar(50) NOT NULL,
   `adddate` datetime NOT NULL,
@@ -445,11 +458,12 @@ CREATE TABLE `tb_promotion` (
 -- Dumping data for table `tb_promotion`
 --
 
-INSERT INTO `tb_promotion` (`promotion_code`, `menu_type_code`, `promotion_header`, `promotion_detail`, `promotion_image`, `startdate`, `enddate`, `adddate`, `lastupdate`, `updateby`, `addby`, `deleted`) VALUES
-('PMT001', 'MNT01', 'ลดแหลกแจกแถม', 'ซื้อ1แถม1 ซื้อ2แถม5', '', '2019-12-10 ', '2019-12-28 ', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '1', 0),
-('PMT002', 'MNT02', 'ลด ลด ลด', 'เช็คอิน ลด 10%', '', '2019-12-10 ', '2019-12-28 ', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '', 0),
-('PMT003', 'MNT01', 'ลด 5 บาท', 'นำแก้วมาเอง ลด 5 บาท', '', '2019-12-12', '2020-12-12', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '1', 0),
-('PMT004', 'MNT03', '2 แถม 1', 'ซื้อเค้ก 2 แถม 1 ชิ้น (เฉพาะทานที่ร้าน)', '', '2019-12-12', '2019-12-31', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '', 0);
+INSERT INTO `tb_promotion` (`promotion_code`, `menu_type_code`, `promotion_header`, `promotion_detail`, `promotion_image`, `promotion_type`, `discount_code`, `discount_percent`, `discount_price`, `startdate`, `enddate`, `adddate`, `lastupdate`, `updateby`, `addby`, `deleted`) VALUES
+(15, 'MNT01', 'ลดราคาวันแม่ 50 บาท', 'พาแม่มา ลดทันที 50 บาท', 'bf3f6e87-d4d9-4586-b0cf-ae28c172cc26.png', 'ส่วนลด', 'lovemom', '', '50', '2019-12-23', '2019-12-23', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', '1', 0),
+(16, 'MNT02', 'พาพ่อมา รับส่วนลด 15%', 'พาคุณพ่อมาทานอาหาร รับส่วนลด 15%', 'a8ce349c-9c8c-489c-9617-2d07e4eaf393.png', 'เปอร์เซ็น', 'daddy15', '15', '', '2019-12-23', '2019-12-23', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', '1', 0),
+(17, 'MNT01', 'ปีใหม่ 2020', 'ลด 20 บาท ทุกบิล', 'f3b3659d-7f1a-4703-9426-757b67b8febb.png', 'ส่วนลด', 'newyear2020', '', '20', '2019-12-23', '2019-12-23', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', '1', 0),
+(18, 'MNT01', 'เช็คอิน รับ30', 'เมื่อเช็คอินที่ร้าน รับส่วนลดทันที 30 บาททุกรายการ', '7e593034-1e72-4418-8432-1df3a83295d7.jpg', 'ส่วนลด', 'checkin30', '', '30', '2019-12-24', '2019-12-24', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '1', 1),
+(19, 'MNT03', 'เช็คอิน รับ30', 'เมื่อเช็คอินที่ร้าน รับส่วนลดทันที 30 บาททุกรายการ', '1d254b63-b7de-4572-9408-5c227e34b1d9.png', 'ส่วนลด', 'checkin30', '', '30', '2019-12-24', '2019-12-24', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '1', '1', 0);
 
 -- --------------------------------------------------------
 
@@ -465,26 +479,52 @@ CREATE TABLE `tb_promotion_type` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tb_promotion_use`
+--
+
+CREATE TABLE `tb_promotion_use` (
+  `promotion_use_code` int(11) NOT NULL,
+  `customer_code` varchar(50) NOT NULL,
+  `promotion_code` varchar(50) NOT NULL,
+  `discount_code` varchar(50) NOT NULL,
+  `order_code` varchar(50) NOT NULL,
+  `order_total_price` varchar(50) NOT NULL,
+  `amount` varchar(50) NOT NULL,
+  `adddate` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tb_promotion_use`
+--
+
+INSERT INTO `tb_promotion_use` (`promotion_use_code`, `customer_code`, `promotion_code`, `discount_code`, `order_code`, `order_total_price`, `amount`, `adddate`) VALUES
+(14, 'CUS0001', '17', 'newyear2020', 'OD000001', '265', '245', '');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tb_recipe`
 --
 
 CREATE TABLE `tb_recipe` (
-  `recipe_code` varchar(10) NOT NULL,
+  `recipe_id` int(11) NOT NULL,
   `menu_code` varchar(10) NOT NULL,
   `product_code` varchar(10) NOT NULL,
   `product_qty` varchar(10) NOT NULL,
-  `sell_price` varchar(10) NOT NULL,
-  `unit` varchar(10) NOT NULL
+  `qty_cal` varchar(10) NOT NULL,
+  `unit_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tb_recipe`
 --
 
-INSERT INTO `tb_recipe` (`recipe_code`, `menu_code`, `product_code`, `product_qty`, `sell_price`, `unit`) VALUES
-('R001', 'MN01001', 'PT2001', '', '', ''),
-('R002', 'MN01001', 'PT2016', '', '', ''),
-('R003', 'MN01002', 'PT2016', '', '', '');
+INSERT INTO `tb_recipe` (`recipe_id`, `menu_code`, `product_code`, `product_qty`, `qty_cal`, `unit_id`) VALUES
+(122, 'MN01001', 'PT2001', '5', '5', 2),
+(123, 'MN01001', 'PT2016', '5', '5', 2),
+(124, 'MN01001', 'PT2014', '5', '5', 2),
+(125, 'MN01005', 'PT2001', '5', '5', 2),
+(126, 'MN01005', 'PT2012', '5', '5', 4);
 
 -- --------------------------------------------------------
 
@@ -493,14 +533,64 @@ INSERT INTO `tb_recipe` (`recipe_code`, `menu_code`, `product_code`, `product_qt
 --
 
 CREATE TABLE `tb_stock` (
-  `stock_code` varchar(50) NOT NULL COMMENT 'รหัสอ้างอิงคลังสินค้า',
+  `stock_id` int(11) NOT NULL COMMENT 'รหัสอ้างอิงคลังสินค้า',
+  `unit_id` int(11) NOT NULL,
   `product_code` varchar(50) NOT NULL COMMENT 'รหัสอ้างอิงสินค้า',
+  `stock_price` varchar(10) NOT NULL,
   `stock_qty` int(11) NOT NULL COMMENT 'จำนวนสินค้าในคลังสินค้า',
+  `stock_qty_cal` varchar(10) NOT NULL,
   `stock_minimum_qty` int(11) NOT NULL DEFAULT '0' COMMENT 'จำนวนสินค้าต่ำสุด',
   `stock_safty_qty` int(11) NOT NULL DEFAULT '0' COMMENT 'จำนวนสินค้าต่ำสุดอันตราย',
-  `stock_cost_avg` double NOT NULL COMMENT 'ต้นทุน',
-  `stock_cost_avg_total` double NOT NULL COMMENT 'ต้นทุนรวม'
+  `stock_cost_avg` varchar(10) NOT NULL COMMENT 'ต้นทุน',
+  `stock_cost` varchar(10) NOT NULL,
+  `stock_cost_avg_total` varchar(10) NOT NULL COMMENT 'ต้นทุนรวม',
+  `stock_date` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tb_stock`
+--
+
+INSERT INTO `tb_stock` (`stock_id`, `unit_id`, `product_code`, `stock_price`, `stock_qty`, `stock_qty_cal`, `stock_minimum_qty`, `stock_safty_qty`, `stock_cost_avg`, `stock_cost`, `stock_cost_avg_total`, `stock_date`) VALUES
+(22, 3, 'PT2001', '650', 1, '1000', 0, 0, '', '', '', '2019-12-24'),
+(23, 3, 'PT2016', '175', 1, '1000', 0, 0, '', '', '', '2019-12-24'),
+(24, 2, 'PT2014', '650', 1000, '1000', 0, 0, '', '', '', '2019-12-24'),
+(25, 3, 'PT2002', '120', 1, '1000', 0, 0, '', '', '', '2019-12-24'),
+(26, 5, 'PT2018', '120', 1, '1000', 0, 0, '', '', '', '2019-12-24'),
+(28, 5, 'PT2009', '650', 1, '1000', 0, 0, '', '', '', '2019-12-24'),
+(29, 5, 'PT2008', '750', 1, '1000', 0, 0, '', '', '', '2019-12-24'),
+(36, 2, 'PT2002', '350', 1000, '1000', 0, 0, '', '', '', '2019-12-27'),
+(37, 2, 'PT2002', '500', 1000, '1000', 0, 0, '', '', '', '2019-12-27');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_stock_out`
+--
+
+CREATE TABLE `tb_stock_out` (
+  `stock_out_id` int(11) NOT NULL,
+  `order_code` varchar(10) NOT NULL,
+  `product_code` varchar(10) NOT NULL,
+  `menu_code` varchar(10) NOT NULL,
+  `product_qty` varchar(10) NOT NULL,
+  `product_cost` varchar(10) NOT NULL,
+  `menu_qty` varchar(10) NOT NULL,
+  `unit` varchar(10) NOT NULL,
+  `stock_out_date` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tb_stock_out`
+--
+
+INSERT INTO `tb_stock_out` (`stock_out_id`, `order_code`, `product_code`, `menu_code`, `product_qty`, `product_cost`, `menu_qty`, `unit`, `stock_out_date`) VALUES
+(133, 'OD000001', 'PT2001', 'MN01001', '5', '0.65', '1', '2', '2019-12-27'),
+(134, 'OD000001', 'PT2016', 'MN01001', '5', '0.175', '1', '2', '2019-12-27'),
+(135, 'OD000001', 'PT2014', 'MN01001', '5', '0.65', '1', '2', '2019-12-27'),
+(136, 'OD000002', 'PT2001', 'MN01001', '5', '0.65', '1', '2', '2019-12-27'),
+(137, 'OD000002', 'PT2016', 'MN01001', '5', '0.175', '1', '2', '2019-12-27'),
+(138, 'OD000002', 'PT2014', 'MN01001', '5', '0.65', '1', '2', '2019-12-27');
 
 -- --------------------------------------------------------
 
@@ -582,7 +672,31 @@ INSERT INTO `tb_table` (`table_code`, `zone_id`, `table_name`, `table_amount`, `
 ('T04', 1, 'โต๊ะ 4', '2', ''),
 ('T05', 2, 'โต๊ะ 5', '2', ''),
 ('T06', 2, 'โต๊ะ 6', '6', ''),
-('T07', 2, 'โต๊ะ 7', '6', '');
+('T07', 2, 'โต๊ะ 7', '6', ''),
+('T08', 1, 'โต๊ะ 8', '10', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_unit`
+--
+
+CREATE TABLE `tb_unit` (
+  `unit_id` int(10) NOT NULL,
+  `unit_name` varchar(50) NOT NULL,
+  `unit_delete` int(11) NOT NULL,
+  `adddate` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tb_unit`
+--
+
+INSERT INTO `tb_unit` (`unit_id`, `unit_name`, `unit_delete`, `adddate`) VALUES
+(2, 'กรัม', 0, ''),
+(3, 'กิโลกรัม', 0, ''),
+(4, 'มิลลิลิตร', 0, ''),
+(5, 'ลิตร', 0, '');
 
 -- --------------------------------------------------------
 
@@ -592,8 +706,7 @@ INSERT INTO `tb_table` (`table_code`, `zone_id`, `table_name`, `table_amount`, `
 
 CREATE TABLE `tb_user` (
   `user_code` varchar(10) NOT NULL,
-  `user_status_id` int(10) NOT NULL,
-  `user_position_id` int(10) NOT NULL,
+  `user_position` varchar(100) NOT NULL,
   `user_firstname` varchar(100) NOT NULL,
   `user_lastname` varchar(100) NOT NULL,
   `user_image` varchar(100) NOT NULL,
@@ -605,8 +718,18 @@ CREATE TABLE `tb_user` (
   `adddate` datetime NOT NULL,
   `lastupdate` datetime NOT NULL,
   `updateby` varchar(100) NOT NULL,
-  `addby` varchar(100) NOT NULL
+  `addby` varchar(100) NOT NULL,
+  `deleted` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tb_user`
+--
+
+INSERT INTO `tb_user` (`user_code`, `user_position`, `user_firstname`, `user_lastname`, `user_image`, `user_tel`, `user_email`, `user_address`, `user_username`, `user_password`, `adddate`, `lastupdate`, `updateby`, `addby`, `deleted`) VALUES
+('US001', 'แอดมิน', 'แพรวไพลิน', 'สาโรชวิมลสินธ์', '45dc5a1a-f52f-4bc5-862e-96cb923d8ea7.png', '0902593586', 'praewpailin.qw@gmail.com', 'SUT', 'praewpailin', '12345678', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'undefined', '', 0),
+('US002', 'พนักงานเสิร์ฟ', 'จิดาภา', 'สุวรรณจันทร์', '27e037c1-e3d2-4ac6-8a5a-c5b32da41b24.png', '0849583359', 'jidapa_pook@gmail.com', 'Suranaree University of Technology', 'pookie', '12345678', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'undefined', '', 0),
+('US003', 'แคชเชียร์', 'อินทวา', 'จันทรครอบ', 'ae276df0-bfba-4d19-99b7-94c4319c501b.png', '0846161879', 'pimmm@gmail,con', 'SUT', 'pimpimpimm', '123456', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'undefined', '', 0);
 
 -- --------------------------------------------------------
 
@@ -669,7 +792,7 @@ ALTER TABLE `tb_booking`
 -- Indexes for table `tb_cancel_list`
 --
 ALTER TABLE `tb_cancel_list`
-  ADD PRIMARY KEY (`cencel_list_code`);
+  ADD PRIMARY KEY (`cencel_list_id`);
 
 --
 -- Indexes for table `tb_customer`
@@ -699,13 +822,19 @@ ALTER TABLE `tb_order`
 -- Indexes for table `tb_order_cencel`
 --
 ALTER TABLE `tb_order_cencel`
-  ADD PRIMARY KEY (`order_cencel_code`);
+  ADD PRIMARY KEY (`order_cencel_id`);
 
 --
 -- Indexes for table `tb_order_list`
 --
 ALTER TABLE `tb_order_list`
   ADD PRIMARY KEY (`order_list_code`);
+
+--
+-- Indexes for table `tb_payment`
+--
+ALTER TABLE `tb_payment`
+  ADD PRIMARY KEY (`payment_id`);
 
 --
 -- Indexes for table `tb_product`
@@ -732,16 +861,28 @@ ALTER TABLE `tb_promotion_type`
   ADD PRIMARY KEY (`promotion_type_id`);
 
 --
+-- Indexes for table `tb_promotion_use`
+--
+ALTER TABLE `tb_promotion_use`
+  ADD PRIMARY KEY (`promotion_use_code`);
+
+--
 -- Indexes for table `tb_recipe`
 --
 ALTER TABLE `tb_recipe`
-  ADD PRIMARY KEY (`recipe_code`);
+  ADD PRIMARY KEY (`recipe_id`);
 
 --
 -- Indexes for table `tb_stock`
 --
 ALTER TABLE `tb_stock`
-  ADD PRIMARY KEY (`stock_code`);
+  ADD PRIMARY KEY (`stock_id`);
+
+--
+-- Indexes for table `tb_stock_out`
+--
+ALTER TABLE `tb_stock_out`
+  ADD PRIMARY KEY (`stock_out_id`);
 
 --
 -- Indexes for table `tb_sub_menu`
@@ -760,6 +901,12 @@ ALTER TABLE `tb_supplier`
 --
 ALTER TABLE `tb_table`
   ADD PRIMARY KEY (`table_code`);
+
+--
+-- Indexes for table `tb_unit`
+--
+ALTER TABLE `tb_unit`
+  ADD PRIMARY KEY (`unit_id`);
 
 --
 -- Indexes for table `tb_user`
@@ -790,10 +937,55 @@ ALTER TABLE `tb_zone`
 --
 
 --
+-- AUTO_INCREMENT for table `tb_cancel_list`
+--
+ALTER TABLE `tb_cancel_list`
+  MODIFY `cencel_list_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `tb_order_cencel`
+--
+ALTER TABLE `tb_order_cencel`
+  MODIFY `order_cencel_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสยกเลิกออเดอร์';
+--
 -- AUTO_INCREMENT for table `tb_order_list`
 --
 ALTER TABLE `tb_order_list`
-  MODIFY `order_list_code` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
+  MODIFY `order_list_code` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+--
+-- AUTO_INCREMENT for table `tb_payment`
+--
+ALTER TABLE `tb_payment`
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT for table `tb_promotion`
+--
+ALTER TABLE `tb_promotion`
+  MODIFY `promotion_code` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+--
+-- AUTO_INCREMENT for table `tb_promotion_use`
+--
+ALTER TABLE `tb_promotion_use`
+  MODIFY `promotion_use_code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+--
+-- AUTO_INCREMENT for table `tb_recipe`
+--
+ALTER TABLE `tb_recipe`
+  MODIFY `recipe_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
+--
+-- AUTO_INCREMENT for table `tb_stock`
+--
+ALTER TABLE `tb_stock`
+  MODIFY `stock_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'รหัสอ้างอิงคลังสินค้า', AUTO_INCREMENT=38;
+--
+-- AUTO_INCREMENT for table `tb_stock_out`
+--
+ALTER TABLE `tb_stock_out`
+  MODIFY `stock_out_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=139;
+--
+-- AUTO_INCREMENT for table `tb_unit`
+--
+ALTER TABLE `tb_unit`
+  MODIFY `unit_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
