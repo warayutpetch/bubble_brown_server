@@ -130,8 +130,8 @@ Task.getOrderMaxCode = function getOrderMaxCode(data) {
 Task.getOrderByCode = function getOrderByCode(data) {
     return new Promise(function (resolve, reject) {
         var str = "SELECT  * FROM `tb_order` "
-        + " LEFT JOIN tb_table  ON tb_table.table_code = tb_order.table_code "
-        + " LEFT JOIN tb_zone ON tb_zone.zone_id = tb_table.zone_id "
+            + " LEFT JOIN tb_table  ON tb_table.table_code = tb_order.table_code "
+            + " LEFT JOIN tb_zone ON tb_zone.zone_id = tb_table.zone_id "
             + "WHERE order_code = '" + data.order_code + "'";
 
         console.log('checkLogin565664646 : ', str);
@@ -297,4 +297,36 @@ Task.updateConfirmOrder = function updateConfirmOrder(data) {
     });
 }
 
+Task.updateCencelOrder = function updateCencelOrder(data) {
+    return new Promise(function (resolve, reject) {
+
+        var str = "UPDATE `tb_order` SET "
+            + "`order_status`= '3' ,"
+            + "`order_cencel_id` = '" + data.order_cencel_id + "' "
+            + "WHERE order_code = '" + data.order_code + "'";
+        console.log("data55555555555555: ", data);
+
+        sql.query(str, function (err, res) {
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: false,
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: true,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+}
 module.exports = Task;

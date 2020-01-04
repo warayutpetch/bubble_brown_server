@@ -46,6 +46,11 @@ Task.updateConfirmOrder = async function updateConfirmOrder(data, result) {
     result(order);
 }
 
+Task.updateCencelOrder = async function updateCencelOrder(data, result) {
+    var order = await OrderModel.updateCencelOrder(data);
+    result(order);
+}
+
 
 
 module.exports = Task;

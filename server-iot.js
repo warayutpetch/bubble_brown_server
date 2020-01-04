@@ -159,3 +159,6 @@ appRouteProductType(app);
 var appRouterPayment= require('./routes/appRouterPayment');
 appRouterPayment(app);
 
+var appRouteOrderCencel= require('./routes/appRouteOrderCencel');
+appRouteOrderCencel(app);
+

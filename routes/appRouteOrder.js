@@ -120,5 +120,17 @@ module.exports = function (app) {
         });
     })
 
+    app.post('/order/updateCencelOrder', function (req, res) {
+        console.log('/order/updateCencelOrder', req.body)
+        OrderController.updateCencelOrder(req.body, function (err, task) {
+
+            if (err) {
+                res.send(err);
+            }
+            // console.log('res', task);
+            res.send(task);
+        });
+    })
+
 
 }
