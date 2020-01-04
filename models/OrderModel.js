@@ -134,6 +134,7 @@ Task.getOrderByCode = function getOrderByCode(data) {
         var str = "SELECT  * FROM `tb_order` "
             + " LEFT JOIN tb_table  ON tb_table.table_code = tb_order.table_code "
             + " LEFT JOIN tb_zone ON tb_zone.zone_id = tb_table.zone_id "
+            + " LEFT JOIN tb_promotion  ON tb_promotion.promotion_code = tb_order.promotion_code "
             + "WHERE order_code = '" + data.order_code + "'";
 
         console.log('checkLogin565664646 : ', str);
