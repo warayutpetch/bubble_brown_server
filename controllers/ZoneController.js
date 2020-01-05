@@ -23,10 +23,10 @@ Task.getZoneByCol = async function getZoneByCol(data, result) {
     result(zone)
 }
 
-// Task.updateUserBy = async function updateUserBy(data, result) {
-//     var user = await userModel.updateUserBy(data);
-//     result(user);
-// }
+Task.updateZone = async function updateZone(data, result) {
+    var zone = await ZoneModel.updateZone(data.set, data.where);
+    result(zone)
+}
 
 Task.deleteZoneByCode = async function deleteZoneByCode(data, result) {
     var zone = await ZoneModel.deleteZoneByCode(data);

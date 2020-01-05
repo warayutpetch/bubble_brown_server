@@ -11,6 +11,25 @@ Task.getMenuTypeBy = async function getMenuTypeBy(data, result) {
     result(menutype);
 }
 
+Task.getMenuTypeByCol = async function getMenuTypeByCol(data, result) {
+    var menutype = await MenuTypeModel.getMenuTypeByCol(data);
+    result(menutype)
+}
+
+Task.insertMenuType = async function insertMenuType(data, result) {
+    var menutype = await MenuTypeModel.insertMenuType(data);
+    result(menutype);
+}
+
+Task.updateMenuType = async function updateMenuType(data, result) {
+    var menutype = await MenuTypeModel.updateMenuType(data.set, data.where);
+    result(menutype)
+}
+
+Task.deleteMenuTypeByCode = async function deleteMenuTypeByCode(data, result) {
+    var menutype = await MenuTypeModel.deleteMenuTypeByCode(data);
+    result(menutype);
+}
 // Task.getUserMaxCode = async function getUserMaxCode(data, result) {
 //     var user = await userModel.getUserMaxCode(data);
 //     result(user);

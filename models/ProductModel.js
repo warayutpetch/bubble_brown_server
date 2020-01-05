@@ -14,7 +14,7 @@ var Task = function (task) {
 Task.getProductMaxCode = function getProductMaxCode(data) {
     return new Promise(function (resolve, reject) {
         var str = "SELECT IFNULL(LPAD( SUBSTRING(max(product_code),4,6)+1,3, '0'),'001') AS product_code_max  FROM `tb_product` "
-            + "WHERE product_type_code = '" + data.product_type_code + "'"
+            + "WHERE product_type_id = '" + data.product_type_id + "'"
 
         console.log('checkLogin565664646 : ', str);
 
@@ -46,7 +46,7 @@ Task.getProductMaxCode = function getProductMaxCode(data) {
 Task.getProductBy = function getProductBy(data) {
     return new Promise(function (resolve, reject) {//user list
         var str = "SELECT  * FROM tb_product "
-            + " LEFT JOIN tb_product_type  ON tb_product.product_type_code = tb_product_type.product_type_code"
+            + " LEFT JOIN tb_product_type  ON tb_product.product_type_id = tb_product_type.product_type_id"
 
         console.log('checkLogin : ', str);
 
@@ -148,7 +148,7 @@ Task.updateProduct = function updateProduct(data) {
             + "`product_name` = '" + data.product_name + "',"
             + "`unit_id` = '" + data.unit_id + "',"
             + "`product_minimum` = '" + data.product_minimum + "',"
-            + "`product_type_code` = '" + data.product_type_code + "'"
+            + "`product_type_id` = '" + data.product_type_id + "'"
             + "WHERE tb_product.product_code = '" + data.product_code + "'"
 
 
@@ -186,7 +186,7 @@ Task.insertProduct = function insertProduct(data) {
             + "`product_code`,"
             + "`product_name`,"
             + "`unit_id`, "
-            + "`product_type_code`, "
+            + "`product_type_id`, "
             + "`product_minimum` "
 
             + ") VALUES ("
@@ -194,7 +194,7 @@ Task.insertProduct = function insertProduct(data) {
             + " '" + data.product_code + "', "
             + " '" + data.product_name + "', "
             + " '" + data.unit_id + "', "
-            + " '" + data.product_type_code + "', "
+            + " '" + data.product_type_id + "', "
             + " '" + data.product_minimum + "' "
 
             + " ) "

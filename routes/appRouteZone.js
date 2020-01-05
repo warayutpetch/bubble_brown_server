@@ -36,17 +36,15 @@ module.exports = function (app) {
         });
     })
 
-//     app.post('/user/updateUserBy', function (req, res) {
-//         console.log('/user/updateUserBy', req.body)
-//         userController.updateUserBy(req.body, function (err, task) {
-
-//             if (err) {
-//                 res.send(err);
-//             }
-//             // console.log('res', task);
-//             res.send(task);
-//         });
-//     })
+    app.post('/Zone/updateZone', function (req, res) {
+        console.log('/Zone/updateZone', req.body)
+        ZoneController.updateZone(req.body, function (err, task) {
+            if (err) {
+                res.send(err);
+            }
+            res.send(task);
+        });
+    })
 
     app.post('/zone/deleteZoneByCode', function (req, res) {
         console.log('/zone/deleteZoneByCode', req.body)
