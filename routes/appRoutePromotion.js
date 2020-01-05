@@ -56,6 +56,15 @@ module.exports = function (app) {
             res.send(task);
         });
     })
+    app.post('/promotion/getPromotionByDiscountCode', function (req, res) {
+        console.log('/promotion/getPromotionByDiscountCode', req.body)
+        promotionController.getPromotionByDiscountCode(req.body, function (err, task) {
+            if (err) {
+                res.send(err);
+            }
+            res.send(task);
+        });
+    })
     app.post('/promotion/deletePromotion', function (req, res) {
         console.log('/promotion/deletePromotion', req.body)
         promotionController.deletePromotion(req.body, function (err, task) {

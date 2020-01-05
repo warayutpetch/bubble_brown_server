@@ -43,7 +43,7 @@ Task.getPromotionBy = function getPromotionBy(data) {
     });
 }
 
-Task.getPromotionByCode = function getPromotionByCode(data) {
+Task.getPromotionByDiscountCode = function getPromotionByDiscountCode(data) {
     return new Promise(function (resolve, reject) {//user list
         var str = "SELECT  * FROM tb_promotion "
             + " WHERE discount_code = '" + data.discount_code + "' ";
@@ -65,6 +65,38 @@ Task.getPromotionByCode = function getPromotionByCode(data) {
             else {
                 const require = {
                     data: res[0],
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
+
+Task.getPromotionByCode = function getPromotionByCode(data) {
+    return new Promise(function (resolve, reject) {//user list
+        var str = "SELECT  * FROM tb_promotion "
+            + " WHERE menu_type_id = '" + data.menu_type_id + "' ";
+
+        console.log('checkLogin : ', str);
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res,
                     error: [],
                     query_result: true,
                     server_result: true

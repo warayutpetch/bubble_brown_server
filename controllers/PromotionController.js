@@ -32,6 +32,11 @@ Task.updatePromotion = async function updatePromotion(data, result) {
     result(promotionList);
 }
 
+Task.getPromotionByDiscountCode = async function getPromotionByDiscountCode(data, result) {
+    var promotionList = await promotionModel.getPromotionByDiscountCode(data);
+    result(promotionList);
+}
+
 Task.getPromotionByCode = async function getPromotionByCode(data, result) {
     var promotionList = await promotionModel.getPromotionByCode(data);
     result(promotionList);
