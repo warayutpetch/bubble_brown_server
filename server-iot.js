@@ -99,9 +99,6 @@ appRouteWashingMachineProgram(app);
 var appRouterMailer = require('./routes/appRouterMailer');
 appRouterMailer(app);
 
-var appRouteReport = require('./routes/appRouteReport');
-appRouteReport(app);
-
 var appRouteMenuType = require('./routes/appRouteMenuType');
 appRouteMenuType(app);
 
@@ -161,4 +158,7 @@ appRouterPayment(app);
 
 var appRouteOrderCencel= require('./routes/appRouteOrderCencel');
 appRouteOrderCencel(app);
+
+var appRouteReport= require('./routes/appRouteReport');
+appRouteReport(app);
 
