@@ -42,8 +42,8 @@ Task.getPromotionUseBy = function getPromotionUseBy() {
 // Task.getPromotionByCode = function getPromotionByCode(data) {
 //     return new Promise(function (resolve, reject) {//user list
 //         var str = "SELECT  * FROM tb_promotion as tb1"
-//             + " LEFT JOIN tb_menu_type as tb2 ON tb1.menu_type_code = tb2.menu_type_code "
-//             + " WHERE tb1.menu_type_code = '" + data.menu_type_code + "' ";
+//             + " LEFT JOIN tb_menu_type as tb2 ON tb1.menu_type_id = tb2.menu_type_id "
+//             + " WHERE tb1.menu_type_id = '" + data.menu_type_id + "' ";
 
 //         console.log('checkLogin : ', data);
 

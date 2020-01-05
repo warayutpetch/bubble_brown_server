@@ -14,7 +14,7 @@ var Task = function (task) {
 Task.getMenuBy = function getMenuBy(data) {
     return new Promise(function (resolve, reject) {//menu list
         var str = "SELECT  * FROM tb_menu as tb1"
-        + " LEFT JOIN tb_menu_type as tb2 ON tb1.menu_type_code = tb2.menu_type_code"
+        + " LEFT JOIN tb_menu_type as tb2 ON tb1.menu_type_id = tb2.menu_type_id"
        
 
         console.log('checkLogin : ', str);
@@ -80,8 +80,8 @@ Task.getMenuByRecipe = function getMenuByRecipe(data) {
 Task.getMenuByCode = function getMenuByCode(data) {
     return new Promise(function (resolve, reject) {//menu list
         var str = "SELECT  * FROM tb_menu as tb1"
-            + " LEFT JOIN tb_menu_type as tb2 ON tb1.menu_type_code = tb2.menu_type_code "
-            + " WHERE tb1.menu_type_code = '" + data.menu_type_code + "' ";
+            + " LEFT JOIN tb_menu_type as tb2 ON tb1.menu_type_id = tb2.menu_type_id "
+            + " WHERE tb1.menu_type_id = '" + data.menu_type_id + "' ";
 
         console.log('checkLogin : ', str);
 
@@ -145,14 +145,14 @@ Task.insertMenu = function insertMenu(data) {
     return new Promise(function (resolve, reject) {
         var str = "INSERT INTO `tb_menu` ("
             + "`menu_code`,"
-            + "`menu_type_code`,"
+            + "`menu_type_id`,"
             + "`menu_name`,"
             + "`menu_image`,"
             + "`menu_price` "
             // + "`addby` "
             + ") VALUES ("
             + " '" + data.menu_code + "', "
-            + " '" + data.menu_type_code + "', "
+            + " '" + data.menu_type_id + "', "
             + " '" + data.menu_name + "', "
             + " '" + data.menu_image + "', "
             + " '" + data.menu_price + "' "
@@ -189,7 +189,7 @@ Task.insertMenu = function insertMenu(data) {
 Task.getMenuMaxCode = function getMenuMaxCode(data) {
     return new Promise(function (resolve, reject) {
         var str = "SELECT  IFNULL(LPAD( SUBSTRING(max(menu_code),5,7)+1,3, '0'),'001') AS menu_code_max  FROM `tb_menu` "
-            + "WHERE menu_type_code = '" + data.menu_type_code + "'"
+            + "WHERE menu_type_id = '" + data.menu_type_id + "'"
 
         console.log('checkLogin565664646 : ', str);
 
@@ -227,7 +227,7 @@ Task.updateMenuByCode = function updateMenuByCode(data) {
         var str = "UPDATE `tb_menu` SET "
             + "`menu_code` = '" + data.menu_code + "',"
             // + "`menu_id`= '" + data.menu_id + "',"
-            + "`menu_type_code`= '" + data.menu_type_code + "',"
+            + "`menu_type_id`= '" + data.menu_type_id + "',"
             + "`menu_name`= '" + data.menu_name + "',"
             + "`menu_image`= '" + data.menu_image + "',"
             + "`menu_price` = '" + data.menu_price + "'"

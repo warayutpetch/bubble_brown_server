@@ -15,7 +15,7 @@ var Task = function (task) {
 Task.getPromotionBy = function getPromotionBy(data) {
     return new Promise(function (resolve, reject) {
         var str = "SELECT  * FROM tb_promotion as tb1"
-            + " LEFT JOIN tb_menu_type as tb2 ON tb1.menu_type_code = tb2.menu_type_code "
+            + " LEFT JOIN tb_menu_type as tb2 ON tb1.menu_type_id = tb2.menu_type_id "
             + " WHERE deleted = 0";
         console.log(str);
 
@@ -81,7 +81,7 @@ Task.insertPromotion = function insertPromotion(data) {
             // + "`promotion_code`,"
             + "`promotion_header`,"
             + "`promotion_detail`,"
-            + "`menu_type_code`, "
+            + "`menu_type_id`, "
             + "`discount_code`, "
             + "`promotion_type`, "
             + "`discount_percent`, "
@@ -94,7 +94,7 @@ Task.insertPromotion = function insertPromotion(data) {
             // + " '" + data[0].order_code + "', "
             + " '" + data.promotion_header + "', "
             + " '" + data.promotion_detail + "', "
-            + " '" + data.menu_type_code + "', "
+            + " '" + data.menu_type_id + "', "
             + " '" + data.discount_code + "', "
             + " '" + data.promotion_type + "', "
             + " '" + data.discount_percent + "', "
@@ -167,7 +167,7 @@ Task.updatePromotion = function updatePromotion(data) {
             + "`promotion_header`= '" + data.promotion_header + "',"
             + "`promotion_detail`= '" + data.promotion_detail + "',"
             + "`promotion_image`= '" + data.promotion_image + "',"
-            + "`menu_type_code`= '" + data.menu_type_code + "',"
+            + "`menu_type_id`= '" + data.menu_type_id + "',"
             + "`discount_code`= '" + data.discount_code + "',"
             + "`promotion_type`= '" + data.promotion_type + "',"
             + "`discount_percent`= '" + data.discount_percent + "',"

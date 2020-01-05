@@ -27,7 +27,7 @@ Task.insertOrder = function insertOrder(data) {
             + " '" + data.order_code + "', "
             + " '" + data.order_date + "', "
             + " '" + data.order_service + "', "
-            + " '" + data.order_status + "', "
+            + " '0', "
             + " '" + data.table_code + "', "
             + " '" + data.promotion_code + "', "
             + " '" + data.customer_code + "', "
