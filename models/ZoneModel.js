@@ -43,51 +43,72 @@ Task.getZoneBy = function getZoneBy(data) {
 };
 
 
-// Task.insertOrder = function insertOrder(data) {
-//     return new Promise(function (resolve, reject) {
-//         var str = "INSERT INTO `tb_order` ("
-//             + "`order_code`,"
-//             + "`order_date`,"
-//             + "`table_id`,"
-//             + "`customer_code`, "
-//             + "`order_total_price` "
-//             + ") VALUES ("
-//             + " '" + data[0].order_code + "', "
-//             + " '" + data[0].order_date + "', "
-//             + " '" + data[0].table_id + "', "
-//             + " '" + data[0].customer_code + "', "
-//             + " '" + data[0].order_total_price + "' "
-//             + " ) "
+Task.insertZone = function insertZone(data) {
+    return new Promise(function (resolve, reject) {
+        var str = "INSERT INTO `tb_zone` ("
+            + "`zone_name` "
+            + ") VALUES ("
+            + " '" + data.zone_name + "' "
+            + " ) "
 
 
-//         console.log('checkLogin : ', data[0].order_date);
-//         // console.log('checkLogin : ', str);
+        // console.log('checkLogin : ', data[0].order_date);
+        // console.log('checkLogin : ', str);
 
-//         sql.query(str, function (err, res) {
+        sql.query(str, function (err, res) {
 
-//             if (err) {
-//                 console.log("error: ", err);
-//                 const require = {
-//                     data: false,
-//                     error: err,
-//                     query_result: false,
-//                     server_result: true
-//                 };
-//                 resolve(require);
-//             }
-//             else {
-//                 const require = {
-//                     data: true,
-//                     error: [],
-//                     query_result: true,
-//                     server_result: true
-//                 };
-//                 resolve(require);
-//             }
-//         });
-//     });
-// };
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: false,
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: true,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
 
+Task.getZoneByCol = function getZoneByCol(data) {
+    return new Promise(function (resolve, reject) {
+        var str = "SELECT * FROM tb_zone WHERE ";
+        for (var key in data) {
+            str += key + " = '" + data[key] + "' ";
+        }
+        sql.query(str, function (err, res) {
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+}
 
 // Task.getOrderMaxCode = function getOrderMaxCode(data) {
 //     return new Promise(function (resolve, reject) {
@@ -173,36 +194,36 @@ Task.getZoneBy = function getZoneBy(data) {
 //     });
 // };
 
-// Task.deleteByCode = function deleteByCode(data) {
-//     return new Promise(function (resolve, reject) {
-//         var str = "DELETE FROM tb_user WHERE user_code = '" + data.user_code + "'";//showdata editview
+Task.deleteZoneByCode = function deleteZoneByCode(data) {
+    return new Promise(function (resolve, reject) {
+        var str = "DELETE FROM tb_zone WHERE zone_id = '" + data.zone_id + "'";//showdata editview
 
-//         console.log('checkLogin : ', str);
+        console.log('checkLogin : ', str);
 
-//         sql.query(str, function (err, res) {
+        sql.query(str, function (err, res) {
 
-//             if (err) {
-//                 console.log("error: ", err);
-//                 const require = {
-//                     data: false,
-//                     error: err,
-//                     query_result: false,
-//                     server_result: true
-//                 };
-//                 resolve(require);
-//             }
-//             else {
-//                 const require = {
-//                     data: true,
-//                     error: [],
-//                     query_result: true,
-//                     server_result: true
-//                 };
-//                 resolve(require);
-//             }
-//         });
-//     });
-// };
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: false,
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: true,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
 
 // Task.getUserByCode = function getUserByCode(data) {
 //     return new Promise(function (resolve, reject) {
