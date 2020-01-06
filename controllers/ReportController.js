@@ -19,8 +19,19 @@ Task.getReportSalesByYear = async function getReportSalesByYear(data, result) {
     var report = await reportModel.getReportSalesByYear(data);
     result(report);
 }
+
 Task.getReportBestSalesByDay = async function getReportBestSalesByDay(data, result) {
     var report = await reportModel.getReportBestSalesByDay(data);
+    result(report);
+}
+
+Task.getReportBestSalesByMonth = async function getReportBestSalesByMonth(data, result) {
+    var report = await reportModel.getReportBestSalesByMonth(data);
+    result(report);
+}
+
+Task.getReportBestSalesByYear = async function getReportBestSalesByYear(data, result) {
+    var report = await reportModel.getReportBestSalesByYear(data);
     result(report);
 }
 

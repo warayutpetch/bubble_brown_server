@@ -14,7 +14,7 @@ var Task = function (task) {
 
 Task.getReportSalesByDay = function getReportSalesByDay(data) {
     return new Promise(function (resolve, reject) {
-        var str = "SELECT  TIME_FORMAT(payment_time, '%H:00') AS payment_time, payment_date, SUM(payment_sum) AS total_payment "
+        var str = "SELECT  TIME_FORMAT(payment_time, '%H:00') AS payment_time, DATE_FORMAT(STR_TO_DATE(payment_date,'%Y-%m-%d'),'%d/%m/%Y') AS payment_date, SUM(payment_sum) AS total_payment"
             + " FROM tb_payment "
             + " LEFT JOIN tb_order ON tb_payment.order_code = tb_order.order_code "
             + " LEFT JOIN tb_promotion ON tb_payment.promotion_code =  tb_promotion.promotion_code"
@@ -52,9 +52,10 @@ Task.getReportSalesByDay = function getReportSalesByDay(data) {
 
 Task.getReportSalesByMonth = function getReportSalesByMonth(data) {
     return new Promise(function (resolve, reject) {
-        var str = "SELECT payment_date AS month , payment_time, SUM(payment_sum) AS total_payment  FROM tb_payment "
-        + " WHERE DATE_FORMAT(STR_TO_DATE(payment_date,'%Y-%m-%d'),'%Y-%m') = DATE_FORMAT(STR_TO_DATE('" + timeController.reformatTo(data.payment_date) + "','%Y-%m-%d'),'%Y-%m') "
-        + " GROUP BY DATE_FORMAT(STR_TO_DATE(payment_date, '%Y-%m-%d'),'%Y-%m-%d') "
+        var str = "SELECT  DATE_FORMAT(STR_TO_DATE(payment_date,'%Y-%m-%d'),'%d/%m/%Y') AS month , payment_time, SUM(payment_sum) AS total_payment  FROM tb_payment "
+        + " WHERE DATE_FORMAT(STR_TO_DATE(payment_date,'%Y-%m-%d'),'%d/%m/%Y') >= DATE_FORMAT(STR_TO_DATE('" + timeController.reformatTo(data.start_month) + "','%Y-%m-%d'),'%d/%m/%Y') "
+        + " AND DATE_FORMAT(STR_TO_DATE(payment_date,'%Y-%m-%d'),'%d/%m/%Y') <= DATE_FORMAT(STR_TO_DATE('" + timeController.reformatTo(data.end_month) + "','%Y-%m-%d'),'%d/%m/%Y') "
+        + " GROUP BY DATE_FORMAT(STR_TO_DATE(payment_date, '%Y-%m-%d'),'%d/%m/%Y') "
 
         console.log("str::", str);
 
@@ -86,9 +87,10 @@ Task.getReportSalesByMonth = function getReportSalesByMonth(data) {
 
 Task.getReportSalesByYear = function getReportSalesByYear(data) {
     return new Promise(function (resolve, reject) {
-        var str = "SELECT DATE_FORMAT(STR_TO_DATE(payment_date, '%Y-%m-%d'), '%M') AS year, SUM(payment_sum)  AS total_payment "
+        var str = "SELECT DATE_FORMAT(STR_TO_DATE(payment_date, '%Y-%m-%d'), '%M') AS year, SUM(payment_sum)  AS total_payment"
             + " FROM tb_payment "
-            + " WHERE DATE_FORMAT(STR_TO_DATE(payment_date,'%Y-%m-%d'),'%Y') = DATE_FORMAT(STR_TO_DATE('" + timeController.reformatTo(data.payment_date) + "','%Y-%m-%d'),'%Y') "            
+            + " WHERE DATE_FORMAT(STR_TO_DATE(payment_date,'%Y-%m-%d'),'%Y-%m') >= DATE_FORMAT(STR_TO_DATE('" + timeController.reformatTo(data.start_year) + "','%Y-%m-%d'),'%Y-%m') "            
+            + " AND DATE_FORMAT(STR_TO_DATE(payment_date,'%Y-%m-%d'),'%Y-%m') <= DATE_FORMAT(STR_TO_DATE('" + timeController.reformatTo(data.end_year) + "','%Y-%m-%d'),'%Y-%m') "            
             + " GROUP BY DATE_FORMAT(STR_TO_DATE(payment_date, '%Y-%m-%d'),'%Y-%m') "
 
         console.log("str::", str);
@@ -121,14 +123,13 @@ Task.getReportSalesByYear = function getReportSalesByYear(data) {
 
 Task.getReportBestSalesByDay = function getReportBestSalesByDay(data) {
     return new Promise(function (resolve, reject) {
-        var str = "SELECT SUM(order_list_qty) as total_order, order_list_name "
-            + " FROM tb_order_list "
-            // + " LEFT JOIN tb_order ON tb_payment.order_code = tb_order.order_code "
-            // + " LEFT JOIN tb_promotion ON tb_payment.promotion_code =  tb_promotion.promotion_code"
-            // + " LEFT JOIN tb_customer ON tb_payment.customer_code = tb_customer.customer_code"
-            // + " WHERE payment_date = '" + timeController.reformatTo(data.payment_date) + "'"
-            + " GROUP BY order_list_name"
-            + " ORDER BY SUM(order_list_qty) DESC LIMIT 5"
+        var str = "SELECT SUM(tb_order_list.order_list_qty) as total_order, tb_order_list.order_list_name, TIME_FORMAT(tb_payment.payment_time, '%H:00') AS payment_time, DATE_FORMAT(STR_TO_DATE(tb_payment.payment_date,'%Y-%m-%d'),'%d/%m/%Y') AS payment_date "
+            + " FROM tb_payment "
+            + " LEFT JOIN tb_order ON tb_payment.order_code = tb_order.order_code "
+            + " LEFT JOIN tb_order_list ON tb_order.order_code = tb_order_list.order_code "
+            + " WHERE tb_payment.payment_date = '" + timeController.reformatTo(data.payment_date) + "'"
+            + " GROUP BY tb_order_list.order_list_name"
+            + " ORDER BY SUM(tb_order_list.order_list_qty) DESC LIMIT 5"
         console.log("str:", str);
 
 

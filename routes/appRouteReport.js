@@ -49,6 +49,29 @@ module.exports = function (app) {
         });
     })
 
+    app.post('/report/getReportBestSalesByMonth', function (req, res) {
+        console.log('/report/getReportBestSalesByMonth')
+        ReportController.getReportBestSalesByMonth(req.body, function (err, task) {
+
+            if (err) {
+                res.send(err);
+            }
+            // console.log('res', task);
+            res.send(task);
+        });
+    })
+    app.post('/report/getReportBestSalesByYear', function (req, res) {
+        console.log('/report/getReportBestSalesByYear')
+        ReportController.getReportBestSalesByYear(req.body, function (err, task) {
+
+            if (err) {
+                res.send(err);
+            }
+            // console.log('res', task);
+            res.send(task);
+        });
+    })
+
     // app.post('/report/getReportLaundryByEntrepreneur', function (req, res) {
     //     console.log('/report/getReportLaundryByEntrepreneur')
     //     ReportController.getReportLaundryByEntrepreneur(req.body, function (err, task) {
