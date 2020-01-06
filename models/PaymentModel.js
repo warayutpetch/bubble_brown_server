@@ -17,12 +17,16 @@ Task.insertPayment = function insertPayment(data) {
             + "`order_code`,"
             + "`payment_sum`,"
             + "`payment_money_received`,"
-            + "`payment_change`"
+            + "`payment_change`,"
+            + "`payment_time`,"
+            + "`payment_date`"
             + ") VALUES ("
             + " '" + data.order_code + "', "
             + " '" + data.payment_sum + "', "
             + " '" + data.payment_money_received + "', "
-            + " '" + data.payment_change + "' "
+            + " '" + data.payment_change + "', "
+            + " '" + timeController.reformatTo(data.payment_time) + "', "
+            + " '" + timeController.reformatTo(data.payment_date) + "' "
             + " ) "
 
         console.log("strrrrrrrr", str);

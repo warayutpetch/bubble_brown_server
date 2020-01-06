@@ -158,6 +158,81 @@ Task.getReportBestSalesByDay = function getReportBestSalesByDay(data) {
     });
 };
 
+Task.getReportBestSalesByMonth = function getReportBestSalesByMonth(data) {
+    return new Promise(function (resolve, reject) {
+        var str = "SELECT SUM(tb_order_list.order_list_qty) as total_order, tb_order_list.order_list_name, DATE_FORMAT(STR_TO_DATE(tb_payment.payment_date,'%Y-%m-%d'),'%d/%m/%Y') AS month "
+            + " FROM tb_payment "
+            + " LEFT JOIN tb_order ON tb_payment.order_code = tb_order.order_code "
+            + " LEFT JOIN tb_order_list ON tb_order.order_code = tb_order_list.order_code "
+            + " WHERE DATE_FORMAT(STR_TO_DATE(tb_payment.payment_date,'%Y-%m-%d'),'%d/%m/%Y') >= DATE_FORMAT(STR_TO_DATE('" + timeController.reformatTo(data.start_month) + "','%Y-%m-%d'),'%d/%m/%Y') "
+            + " AND DATE_FORMAT(STR_TO_DATE(tb_payment.payment_date,'%Y-%m-%d'),'%d/%m/%Y') <= DATE_FORMAT(STR_TO_DATE('" + timeController.reformatTo(data.end_month) + "','%Y-%m-%d'),'%d/%m/%Y') "
+            + " GROUP BY DATE_FORMAT(STR_TO_DATE(tb_payment.payment_date, '%Y-%m-%d'),'%m/%Y'), tb_order_list.order_list_name "
+            + " ORDER BY SUM(tb_order_list.order_list_qty) DESC LIMIT 5"
+        console.log("str:", str);
+
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
+Task.getReportBestSalesByYear = function getReportBestSalesByYear(data) {
+    return new Promise(function (resolve, reject) {
+        var str = "SELECT SUM(tb_order_list.order_list_qty) as total_order, tb_order_list.order_list_name, DATE_FORMAT(STR_TO_DATE(tb_payment.payment_date,'%Y-%m-%d'),'%M') AS year "
+            + " FROM tb_payment "
+            + " LEFT JOIN tb_order ON tb_payment.order_code = tb_order.order_code "
+            + " LEFT JOIN tb_order_list ON tb_order.order_code = tb_order_list.order_code "
+            + " WHERE DATE_FORMAT(STR_TO_DATE(tb_payment.payment_date,'%Y-%m-%d'),'%Y-%m') >= DATE_FORMAT(STR_TO_DATE('" + timeController.reformatTo(data.start_year) + "','%Y-%m-%d'),'%Y-%m') "
+            + " AND DATE_FORMAT(STR_TO_DATE(tb_payment.payment_date,'%Y-%m-%d'),'%Y-%m') <= DATE_FORMAT(STR_TO_DATE('" + timeController.reformatTo(data.end_year) + "','%Y-%m-%d'),'%Y-%m') "
+            + " GROUP BY DATE_FORMAT(STR_TO_DATE(tb_payment.payment_date, '%Y-%m-%d'),'%Y-%m'), tb_order_list.order_list_name "
+            + " ORDER BY SUM(tb_order_list.order_list_qty) DESC LIMIT 5"
+        console.log("str:", str);
+
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
+
 // Task.getReportLaundryByEntrepreneur = function getReportLaundryByEntrepreneur(data) {
 //     return new Promise(function (resolve, reject) {
 
