@@ -64,6 +64,16 @@ module.exports = function (app) {
         });
     })
 
+    app.post('/customer/getCustomerByEmail', function (req, res) {
+        console.log('/customer/getCustomerByEmail', req.body)
+        customerController.getCustomerByEmail(req.body, function (err, task) {
+            if (err) {
+                res.send(err);
+            }
+            res.send(task);
+        });
+    })
+
 
     // app.post('/journal/deleteCoverPage', function (req, res) {
     //     console.log('/journal/deleteCoverPage', req.body)

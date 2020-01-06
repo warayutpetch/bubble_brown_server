@@ -388,10 +388,11 @@ Task.deleteByCode = function deleteByCode(data) {
 
 Task.getStockByPriceQty = function getStockByPriceQty(data) {
     return new Promise(function (resolve, reject) {//user list
-        var str = " SELECT* ,  IFNULL(SUM(`stock_price`),0) - (SELECT IFNULL(SUM((product_qty * menu_qty ) * product_cost),0) FROM  `tb_stock_out` "
-            + " WHERE product_code = '" + data.product_code + "' ) / IFNULL((SUM(`stock_qty_cal`) -IFNULL((SELECT SUM(product_qty * menu_qty) FROM  `tb_stock_out`"
-            + " WHERE product_code = '" + data.product_code + "' ),0)),0) AS product_cost FROM `tb_stock`"
-            + " WHERE product_code = '" + data.product_code + "'"
+        var str = "SELECT ( IFNULL(SUM(`stock_price`),0) - "
+        +" (SELECT IFNULL(SUM((product_qty * menu_qty  * product_cost)),0) FROM  `tb_stock_out`  WHERE product_code = '"+data.product_code+"' )) "
+        +" / (IFNULL(SUM(`stock_qty_cal`),0) - "
+        +" (SELECT IFNULL(SUM((product_qty * menu_qty  )),0) FROM  `tb_stock_out` WHERE product_code = '"+data.product_code+"' )) AS product_cost"
+        +" FROM `tb_stock` WHERE product_code = '"+data.product_code+"'";
         console.log('checkLogin : ', str);
 
 

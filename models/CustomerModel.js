@@ -102,6 +102,37 @@ Task.getCustomerByCode = function getCustomerByCode(data) {
     });
 };
 
+Task.getCustomerByEmail = function getCustomerByEmail(data) {
+    return new Promise(function (resolve, reject) {//user list
+        var str = "SELECT * FROM `tb_customer` WHERE customer_email ='"+ data.email +"'" ;
+
+        console.log('str : ', str);
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res[0],
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
+
 Task.deleteCustomerByCode = function deleteCustomerByCode(data) {
     return new Promise(function (resolve, reject) {//user list
         var str = "UPDATE `tb_customer` SET"
@@ -264,17 +295,17 @@ Task.updateCustomerByCode = function updateCustomerByCode(data) {
     return new Promise(function (resolve, reject) {  
         console.log('update : ', data);
         var str = "UPDATE `tb_customer` SET "
-            // + "`customer_code` = '" + data.customer_code + "',"
+            + "`customer_code` = '" + data.customer_code + "',"
             + "`customer_name`= '" + data.customer_name + "',"
             + "`customer_id`= '" + data.customer_id + "',"
             + "`customer_email`= '" + data.customer_email + "',"
             + "`customer_tel`= '" + data.customer_tel + "',"
             + "`customer_image` = '" + data.customer_image + "'"
-            + "WHERE customer_code = '" + data.customer_code + "'";
+            + " WHERE customer_code = '" + data.customer_code + "'";
 
 
       
-        // console.log('str111111111 : ', str);
+        console.log('str111111111 : ', str);
 
         sql.query(str, function (err, res) {
 

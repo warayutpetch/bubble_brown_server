@@ -41,6 +41,11 @@ Task.deleteCustomerByCode = async function deleteCustomerByCode(data, result) {
     result(customerList);
 }
 
+Task.getCustomerByEmail = async function getCustomerByEmail(data, result) {
+    var customerList = await customerModel.getCustomerByEmail(data);
+    result(customerList);
+}
+
 // Task.deleteCustomerByCode = async function deleteCustomerByCode(data, result) {
 //     var set_data = {
 //         deleted: 1,

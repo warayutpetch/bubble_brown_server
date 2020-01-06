@@ -26,7 +26,7 @@ module.exports = function (app) {
         });
     })
     app.post('/stock/getSumStockInBy', function (req, res) {
-        console.log('/stock/getSumStockInBy', req.body)
+        // console.log('/stock/getSumStockInBy', req.body)
         StockController.getSumStockInBy(req.body, function (err, task) {
 
             if (err) {
@@ -37,7 +37,7 @@ module.exports = function (app) {
         });
     })
     app.post('/stock/getSumStockOutBy', function (req, res) {
-        console.log('/stock/getSumStockOutBy', req.body)
+        // console.log('/stock/getSumStockOutBy', req.body)
         StockController.getSumStockOutBy(req.body, function (err, task) {
 
             if (err) {
