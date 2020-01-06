@@ -44,6 +44,9 @@ app.listen(3004, () => {
   console.log('API Start server at port 3004.')
 })
 
+var appRouteAbout = require('./routes/appRouteAbout');
+appRouteAbout(app); //Admin the route
+
 var appRouteAdmin = require('./routes/appRouteAdmin');
 appRouteAdmin(app); //Admin the route
 
@@ -52,9 +55,6 @@ appRouteAddress(app); //Address the route
 
 var appRouteUser = require('./routes/appRouteUser');
 appRouteUser(app); //User the route
-
-var appRouteEntrepreneur = require('./routes/appRouteEntrepreneur');
-appRouteEntrepreneur(app); //Entrepreneur the route
 
 var appRouteLaundry = require('./routes/appRouteLaundry');
 appRouteLaundry(app); //Laundry the route
