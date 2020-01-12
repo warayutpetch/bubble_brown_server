@@ -154,5 +154,17 @@ module.exports = function (app) {
             res.send(task);
         });
     })
-  
+    
+    app.post('/stock/getProductByKey', function (req, res) {
+        console.log('/stock/getProductByKey', req.body)
+        StockController.getProductByKey(req.body, function (err, task) {
+
+            if (err) {
+                res.send(err);
+            }
+            // console.log('res', task);
+            res.send(task);
+        });
+    })
+
 }

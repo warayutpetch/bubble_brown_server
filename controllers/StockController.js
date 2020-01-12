@@ -66,6 +66,11 @@ Task.deleteStockBy = async function deleteStockBy(data, result) {
     result(stock);
 }
 
+Task.getProductByKey = async function getProductByKey(data, result) {
+    var stock = await StockModel.getProductByKey(data);
+    result(stock);
+}
+
 
 
 module.exports = Task;

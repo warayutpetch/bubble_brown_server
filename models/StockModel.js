@@ -148,7 +148,7 @@ Task.getSumStockOutBy = function getSumStockOutBy(data) {
             + "GROUP BY unit"
 
 
-  
+
 
         sql.query(str, function (err, res) {
 
@@ -389,10 +389,10 @@ Task.deleteByCode = function deleteByCode(data) {
 Task.getStockByPriceQty = function getStockByPriceQty(data) {
     return new Promise(function (resolve, reject) {//user list
         var str = "SELECT ( IFNULL(SUM(`stock_price`),0) - "
-        +" (SELECT IFNULL(SUM((product_qty * menu_qty  * product_cost)),0) FROM  `tb_stock_out`  WHERE product_code = '"+data.product_code+"' )) "
-        +" / (IFNULL(SUM(`stock_qty_cal`),0) - "
-        +" (SELECT IFNULL(SUM((product_qty * menu_qty  )),0) FROM  `tb_stock_out` WHERE product_code = '"+data.product_code+"' )) AS product_cost"
-        +" FROM `tb_stock` WHERE product_code = '"+data.product_code+"'";
+            + " (SELECT IFNULL(SUM((product_qty * menu_qty  * product_cost)),0) FROM  `tb_stock_out`  WHERE product_code = '" + data.product_code + "' )) "
+            + " / (IFNULL(SUM(`stock_qty_cal`),0) - "
+            + " (SELECT IFNULL(SUM((product_qty * menu_qty  )),0) FROM  `tb_stock_out` WHERE product_code = '" + data.product_code + "' )) AS product_cost"
+            + " FROM `tb_stock` WHERE product_code = '" + data.product_code + "'";
         console.log('checkLogin : ', str);
 
 
@@ -451,7 +451,39 @@ Task.deleteStockBy = function deleteStockBy(data) {
     });
 };
 
+Task.getProductByKey = function getProductByKey(data) {
+    return new Promise(function (resolve, reject) {//user list
+        var str = "  SELECT * FROM `tb_product` "
+            + " LEFT JOIN tb_unit  ON tb_unit.unit_id = tb_product.unit_id"
+            + " WHERE (product_code LIKE '%" + data.keyword + "%' OR product_name LIKE '%" + data.keyword + "%')"
+            + " ORDER BY product_code asc"
 
+        console.log('checkLogin : ', str);
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
 
 
 module.exports = Task;

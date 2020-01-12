@@ -296,6 +296,38 @@ Task.updateAboutBy = function updateAboutBy(data) {
     });
 };
 
+Task.updateAboutMainBranceByCode = function updateAboutMainBranceByCode(data) {
+    return new Promise(function (resolve, reject) {
+        var str = "UPDATE `tb_about` SET about_main_brance = '" + data.about_code + "'";
+
+        // console.log('checkLogin : ', data);
+        console.log('checkLogin : ', str);
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: false,
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: true,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
+
 Task.deleteAbout = function deleteAbout(data) {
     return new Promise(function (resolve, reject) {
         var str = "UPDATE `tb_about` SET"

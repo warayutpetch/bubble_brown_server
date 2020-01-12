@@ -13,8 +13,10 @@ var Task = function (task) {
 
 Task.checkAdminModelLogin = function checkAdminModelLogin(data) {
     return new Promise(function (resolve, reject) {
-        var str = "SELECT  * FROM tb_admin WHERE admin_username = " + sql.escape(data.member_email) + ""
-            + " AND admin_password = " + sql.escape(data.member_password) + "";
+        var str = "SELECT  * FROM tb_user "
+            + " LEFT JOIN tb_about ON tb_user.about_code = tb_about.about_code"
+            + " WHERE user_username = " + sql.escape(data.user_username) + ""
+            + " AND user_password = " + sql.escape(data.user_password) + "";
 
         console.log('checkLogin : ', str);
 

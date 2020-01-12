@@ -14,7 +14,9 @@ var Task = function (task) {
 Task.getMenuTypeBy = function getMenuTypeBy(data) {
     return new Promise(function (resolve, reject) {//user list
         var str = "SELECT  * FROM tb_menu_type ";
-
+        if (data.about_menu_data == 1) {
+            str += " WHERE about_code = '" + data.about_code + "' "
+        }
         console.log('checkLogin : ', str);
 
         sql.query(str, function (err, res) {

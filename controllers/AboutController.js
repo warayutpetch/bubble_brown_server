@@ -41,6 +41,11 @@ Task.updateAboutBy = async function updateAboutBy(data, result) {
     result(about);
 }
 
+Task.updateAboutMainBranceByCode = async function updateAboutMainBranceByCode(data, result) {
+    var about = await aboutModel.updateAboutMainBranceByCode(data);
+    result(about);
+}
+
 Task.deleteByCode = async function deleteByCode(data, result) {
     var about = await aboutModel.deleteByCode(data);
     result(about);
