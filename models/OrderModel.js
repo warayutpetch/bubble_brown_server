@@ -14,8 +14,10 @@ var Task = function (task) {
 Task.insertOrder = function insertOrder(data) {
     return new Promise(function (resolve, reject) {
         var str = "INSERT INTO `tb_order` ("
+          
             + "`order_code`,"
             + "`order_date`,"
+            + "`order_time`,"
             + "`order_service`,"
             + "`order_status`,"
             + "`table_code`,"
@@ -26,6 +28,7 @@ Task.insertOrder = function insertOrder(data) {
             + ") VALUES ("
             + " '" + data.order_code + "', "
             + " '" + data.order_date + "', "
+            + " '" + data.order_time + "', "
             + " '" + data.order_service + "', "
             + " '0', "
             + " '" + data.table_code + "', "

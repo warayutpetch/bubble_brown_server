@@ -102,6 +102,7 @@ Task.getCustomerByCode = function getCustomerByCode(data) {
     });
 };
 
+
 Task.getCustomerByEmail = function getCustomerByEmail(data) {
     return new Promise(function (resolve, reject) {//user list
         var str = "SELECT * FROM `tb_customer` WHERE customer_email ='"+ data.email +"'" ;
