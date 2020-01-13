@@ -32,7 +32,7 @@ Task.insertPayment = function insertPayment(data) {
             + " '" + data.payment_money_received + "', "
             + " '" + data.payment_change + "', "
             + " '" + data.payment_time + "', "
-            + " '" + timeController.reformatTo(data.payment_date) + "' "
+            + " '" + data.payment_date + "' "
             + " ) "
 
         console.log("strrrrrrrr", str);
