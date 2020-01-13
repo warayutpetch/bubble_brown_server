@@ -74,6 +74,16 @@ module.exports = function (app) {
         });
     })
 
+    app.post('/customer/getCustomerById', function (req, res) {
+        console.log('/customer/getCustomerById', req.body)
+        customerController.getCustomerById(req.body, function (err, task) {
+            if (err) {
+                res.send(err);
+            }
+            res.send(task);
+        });
+    })
+
 
     // app.post('/journal/deleteCoverPage', function (req, res) {
     //     console.log('/journal/deleteCoverPage', req.body)

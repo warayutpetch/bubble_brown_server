@@ -46,6 +46,10 @@ Task.getCustomerByEmail = async function getCustomerByEmail(data, result) {
     result(customerList);
 }
 
+Task.getCustomerById = async function getCustomerById(data, result) {
+    var customerList = await customerModel.getCustomerById(data);
+    result(customerList);
+}
 
 
 // Task.deleteCustomerByCode = async function deleteCustomerByCode(data, result) {

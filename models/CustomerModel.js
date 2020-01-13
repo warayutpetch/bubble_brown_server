@@ -217,7 +217,36 @@ Task.insertCustomer = function insertCustomer(data) {
         });
     });
 };
+Task.getCustomerById = function getCustomerById(data) {
+    return new Promise(function (resolve, reject) {//user list
+        var str = "SELECT * FROM `tb_customer` WHERE customer_id ='"+ data.userId +"'" ;
 
+        console.log('str : ', str);
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res[0],
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
 
 // Task.getJournalByCol = function getJournalByCol(data) {
 //     return new Promise(function (resolve, reject) {
