@@ -46,9 +46,11 @@ Task.getZoneBy = function getZoneBy(data) {
 Task.insertZone = function insertZone(data) {
     return new Promise(function (resolve, reject) {
         var str = "INSERT INTO `tb_zone` ("
-            + "`zone_name` "
+            + "`zone_name`, "
+            + "`about_code` "
             + ") VALUES ("
-            + " '" + data.zone_name + "' "
+            + " '" + data.zone_name + "', "
+            + " '" + data.about_code + "' "
             + " ) "
 
 

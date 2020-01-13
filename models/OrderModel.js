@@ -21,6 +21,7 @@ Task.insertOrder = function insertOrder(data) {
             + "`table_code`,"
             + "`promotion_code`,"
             + "`customer_code`, "
+            + "`about_code`, "
             + "`amount`, "
             + "`order_total_price` "
             + ") VALUES ("
@@ -31,6 +32,7 @@ Task.insertOrder = function insertOrder(data) {
             + " '" + data.table_code + "', "
             + " '" + data.promotion_code + "', "
             + " '" + data.customer_code + "', "
+            + " '" + data.about_code + "', "
             + " '" + data.amount + "', "
             + " '" + data.order_total_price + "' "
             + " ) "
@@ -69,7 +71,7 @@ Task.getOrderBy = function getOrderBy(data) {
         var str = "SELECT  * FROM tb_order "
             + " LEFT JOIN tb_table  ON tb_table.table_code = tb_order.table_code "
             + " LEFT JOIN tb_zone ON tb_zone.zone_id = tb_table.zone_id "
-            + " WHERE tb_order.order_status != 2 AND order_status !=3"
+            + " WHERE tb_order.order_status != 2 AND order_status !=3 AND tb_order.about_code = '" + data.about_code + "'"
         console.log('order_statuscheckLogin : ', str);
 
         sql.query(str, function (err, res) {
@@ -173,6 +175,7 @@ Task.updateOrderByCode = function updateOrderByCode(data) {
             + "`order_status` = '0',"
             + "`promotion_code` = '" + data.promotion_code + "',"
             + "`customer_code` = '" + data.customer_code + "', "
+            + "`about_code` = '" + data.about_code + "', "
             + "`amount` = '" + data.amount + "', "
             + "`order_total_price` = '" + data.order_total_price + "' "
             + "WHERE order_code = '" + data.order_code + "'";

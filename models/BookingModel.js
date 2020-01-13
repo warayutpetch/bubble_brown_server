@@ -13,7 +13,7 @@ var Task = function (task) {
 
 Task.getBookingBy = function getBookingBy(data) {
     return new Promise(function (resolve, reject) {
-        var str = "SELECT  * FROM tb_booking WHERE deleted = 0";
+        var str = "SELECT  * FROM tb_booking WHERE deleted = 0 AND about_code = '" + data.about_code + "'";
         console.log(str);
 
         sql.query(str, function (err, res) {
@@ -77,6 +77,7 @@ Task.insertBooking = function insertBooking(data) {
         var str = "INSERT INTO `tb_booking` ("
             + "`booking_code`,"
             + "`table_code`,"
+            + "`about_code`,"
             + "`booking_firstname`,"
             + "`booking_lastname`,"
             + "`booking_tel`, "
@@ -86,6 +87,7 @@ Task.insertBooking = function insertBooking(data) {
             + ") VALUES ("
             + " '" + data.booking_code + "', "
             + " '" + data.table_code + "', "
+            + " '" + data.about_code + "', "
             + " '" + data.booking_firstname + "', "
             + " '" + data.booking_lastname + "', "
             + " '" + data.booking_tel + "', "
@@ -95,7 +97,7 @@ Task.insertBooking = function insertBooking(data) {
             + " ) "
 
 
-        
+
         // console.log('checkLogin : ', str);
 
         sql.query(str, function (err, res) {
@@ -128,7 +130,7 @@ Task.insertBooking = function insertBooking(data) {
 Task.getBookingMaxCode = function getBookingMaxCode(data) {
     return new Promise(function (resolve, reject) {
         var str = "SELECT  IFNULL(LPAD( SUBSTRING(max(booking_code),3 ,7)+1,6, '0'),'000001') AS booking_max FROM `tb_booking` "
-         
+
 
         console.log('checkLogin565664646 : ', str);
 
@@ -162,10 +164,10 @@ Task.getBookingMaxCode = function getBookingMaxCode(data) {
 Task.checkBook = function checkBook(data) {
     return new Promise(function (resolve, reject) {
         var str = "SELECT  * FROM `tb_table` "
-        + " LEFT JOIN tb_booking ON `tb_table`.`table_code` = tb_booking.table_code "
-        + " WHERE table_amount = '" + data.table_amount + "'"
-        + " AND tb_booking.booking_date = '" + timeController.reformatTo(data.booking_date) + "'"
-       
+            + " LEFT JOIN tb_booking ON `tb_table`.`table_code` = tb_booking.table_code "
+            + " WHERE table_amount = '" + data.table_amount + "'"
+            + " AND tb_booking.booking_date = '" + timeController.reformatTo(data.booking_date) + "'"
+
         console.log('checkLogin565664646 : ', str);
 
         sql.query(str, function (err, res) {
@@ -195,11 +197,11 @@ Task.checkBook = function checkBook(data) {
 
 Task.checkTable = function checkTable(data) {
     return new Promise(function (resolve, reject) {
-        var str = "SELECT  * FROM `tb_table` " 
-        + " WHERE table_amount = '" + data.table_amount + "'"
-       
-       
-         
+        var str = "SELECT  * FROM `tb_table` "
+            + " WHERE table_amount = '" + data.table_amount + "'"
+
+
+
         console.log('checkLogin565664646 : ', str);
 
         sql.query(str, function (err, res) {

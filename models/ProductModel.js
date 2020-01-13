@@ -47,11 +47,11 @@ Task.getProductBy = function getProductBy(data) {
     return new Promise(function (resolve, reject) {//user list
         var str = "SELECT  * FROM tb_product "
             + " LEFT JOIN tb_product_type  ON tb_product.product_type_id = tb_product_type.product_type_id"
-            if (data.about_menu_data == 1) {
-                str += " WHERE  tb_product.about_code = '" + data.about_code + "' OR tb_product.about_code = '" + data.about_main_barnch + "' "
-            } else {
-                str += " WHERE tb_product.about_code = '" + data.about_code + "' "
-            }
+        if (data.about_menu_data == 1) {
+            str += " WHERE  tb_product.about_code = '" + data.about_code + "' OR tb_product.about_code = '" + data.about_main_barnch + "' "
+        } else {
+            str += " WHERE tb_product.about_code = '" + data.about_code + "' "
+        }
 
         console.log('checkLogin : ', str);
 
@@ -150,6 +150,7 @@ Task.updateProduct = function updateProduct(data) {
     return new Promise(function (resolve, reject) {
         var str = "UPDATE `tb_product` SET "
             + "`product_code` = '" + data.product_code + "',"
+            + "`about_code` = '" + data.about_code + "',"
             + "`product_name` = '" + data.product_name + "',"
             + "`unit_id` = '" + data.unit_id + "',"
             + "`product_minimum` = '" + data.product_minimum + "',"
@@ -189,6 +190,7 @@ Task.insertProduct = function insertProduct(data) {
     return new Promise(function (resolve, reject) {
         var str = "INSERT INTO `tb_product` ("
             + "`product_code`,"
+            + "`about_code`,"
             + "`product_name`,"
             + "`unit_id`, "
             + "`product_type_id`, "
@@ -197,6 +199,7 @@ Task.insertProduct = function insertProduct(data) {
             + ") VALUES ("
             // + " '" + data[0].order_code + "', "
             + " '" + data.product_code + "', "
+            + " '" + data.about_code + "', "
             + " '" + data.product_name + "', "
             + " '" + data.unit_id + "', "
             + " '" + data.product_type_id + "', "

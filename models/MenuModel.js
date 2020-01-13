@@ -154,6 +154,7 @@ Task.insertMenu = function insertMenu(data) {
     return new Promise(function (resolve, reject) {
         var str = "INSERT INTO `tb_menu` ("
             + "`menu_code`,"
+            + "`about_code`,"
             + "`menu_type_id`,"
             + "`menu_name`,"
             + "`menu_image`,"
@@ -161,6 +162,7 @@ Task.insertMenu = function insertMenu(data) {
             // + "`addby` "
             + ") VALUES ("
             + " '" + data.menu_code + "', "
+            + " '" + data.about_code + "', "
             + " '" + data.menu_type_id + "', "
             + " '" + data.menu_name + "', "
             + " '" + data.menu_image + "', "
@@ -235,6 +237,7 @@ Task.updateMenuByCode = function updateMenuByCode(data) {
         console.log('update : ', data);
         var str = "UPDATE `tb_menu` SET "
             + "`menu_code` = '" + data.menu_code + "',"
+            + "`about_code` = '" + data.about_code + "',"
             // + "`menu_id`= '" + data.menu_id + "',"
             + "`menu_type_id`= '" + data.menu_type_id + "',"
             + "`menu_name`= '" + data.menu_name + "',"

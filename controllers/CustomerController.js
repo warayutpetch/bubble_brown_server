@@ -8,7 +8,7 @@ var Task = function (task) {
 };
 
 Task.getCustomerBy = async function getCustomerBy(data, result) {
-    var customerList = await customerModel.getCustomerBy();
+    var customerList = await customerModel.getCustomerBy(data);
     result(customerList)
 }
 

@@ -80,11 +80,11 @@ Task.getProductBy = function getProductBy(data) {
     return new Promise(function (resolve, reject) {//user list
         var str = "  SELECT * FROM `tb_product` "
             + " LEFT JOIN tb_unit  ON tb_unit.unit_id = tb_product.unit_id"
-            if (data.about_menu_data == 1) {
-                str += " WHERE  tb_product.about_code = '" + data.about_code + "' OR tb_product.about_code = '" + data.about_main_barnch + "' "
-            } else {
-                str += " WHERE tb_product.about_code = '" + data.about_code + "' "
-            }
+        if (data.about_menu_data == 1) {
+            str += " WHERE  tb_product.about_code = '" + data.about_code + "' OR tb_product.about_code = '" + data.about_main_barnch + "' "
+        } else {
+            str += " WHERE tb_product.about_code = '" + data.about_code + "' "
+        }
 
         console.log('checkLogin : ', str);
 
@@ -249,6 +249,7 @@ Task.insertStock = function insertStock(data) {
     return new Promise(function (resolve, reject) {
         var str = "INSERT INTO `tb_stock` ("
             + "`product_code`,"
+            + "`about_code`,"
             + "`stock_qty`,"
             + "`stock_price`,"
             + "`stock_qty_cal`,"
@@ -257,6 +258,7 @@ Task.insertStock = function insertStock(data) {
             + "`stock_date`"
             + ") VALUES ("
             + " '" + data.product_code + "', "
+            + " '" + data.about_code + "', "
             + " '" + data.stock_qty + "', "
             + " '" + data.stock_price + "', "
             + " '" + data.stock_qty_cal + "', "

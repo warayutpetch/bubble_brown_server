@@ -14,7 +14,7 @@ var Task = function (task) {
 
 Task.getProductTypeBy = function getProductTypeBy(data) {
     return new Promise(function (resolve, reject) {//user list
-        var str = "SELECT  * FROM tb_product_type "
+        var str = "SELECT  * FROM tb_product_type WHERE about_code = '" + data.about_code + "'"
 
         console.log('checkLogin : ', str);
 
@@ -46,9 +46,11 @@ Task.getProductTypeBy = function getProductTypeBy(data) {
 Task.insertProductType = function insertProductType(data) {
     return new Promise(function (resolve, reject) {
         var str = "INSERT INTO `tb_product_type` ("
-            + "`product_type_name` "
+            + "`product_type_name` ,"
+            + "`about_code` "
             + ") VALUES ("
-            + " '" + data.product_type_name + "' "
+            + " '" + data.product_type_name + "', "
+            + " '" + data.about_code + "' "
             + " ) "
 
 

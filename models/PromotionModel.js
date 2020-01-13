@@ -123,6 +123,7 @@ Task.insertPromotion = function insertPromotion(data) {
             + "`startdate`, "
             + "`enddate`, "
             + "`promotion_image`, "
+            + "`about_code`, "
             + "`addby` "
             + ") VALUES ("
             // + " '" + data[0].order_code + "', "
@@ -138,6 +139,7 @@ Task.insertPromotion = function insertPromotion(data) {
             + " '" + timeController.reformatTo(data.startdate) + "', "
             + " '" + timeController.reformatTo(data.enddate) + "', "
             + " '" + data.promotion_image + "', "
+            + " '" + data.about_code + "', "
             + " '" + data.addby + "' "
             + " ) "
 

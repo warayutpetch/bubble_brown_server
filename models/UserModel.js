@@ -13,8 +13,7 @@ var Task = function (task) {
 
 Task.getUserBy = function getUserBy(data) {
     return new Promise(function (resolve, reject) {//user list
-        var str = "SELECT  * FROM tb_user "
-        + " WHERE deleted = 0";
+        var str = "SELECT  * FROM tb_user WHERE deleted = 0 AND about_code = '" + data.about_code + "' OR user_position = 'แอดมิน'";
 
         console.log('checkLogin : ', str);
 
@@ -220,8 +219,8 @@ Task.updateUserByCode = function updateUserByCode(data) {
 Task.deleteUserByCode = function deleteUserByCode(data) {
     return new Promise(function (resolve, reject) {//user list
         var str = "UPDATE `tb_user` SET"
-        + "`deleted`= '1'"
-        + "WHERE tb_user.user_code = '" + data.user_code + "'";
+            + "`deleted`= '1'"
+            + "WHERE tb_user.user_code = '" + data.user_code + "'";
 
         console.log('str : ', str);
 

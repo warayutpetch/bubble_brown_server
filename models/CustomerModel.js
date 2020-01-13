@@ -11,10 +11,10 @@ var Task = function (task) {
     this.created_at = new Date();
 };
 
-Task.getCustomerBy = function getCustomerBy() {
+Task.getCustomerBy = function getCustomerBy(data) {
     return new Promise(function (resolve, reject) {
         var str = "SELECT * FROM tb_customer"
-        + " WHERE deleted = 0";
+            + " WHERE deleted = 0 AND about_code = '" + data.about_code + "'";
 
         sql.query(str, function (err, res) {
             if (err) {
@@ -73,7 +73,7 @@ Task.getCustomerMaxCode = function getCustomerMaxCode(data) {
 
 Task.getCustomerByCode = function getCustomerByCode(data) {
     return new Promise(function (resolve, reject) {//user list
-        var str = "SELECT * FROM `tb_customer` WHERE customer_code='"+ data.customer_code +"'" ;
+        var str = "SELECT * FROM `tb_customer` WHERE customer_code='" + data.customer_code + "'";
 
         console.log('customer_code : ', data);
 
@@ -104,7 +104,7 @@ Task.getCustomerByCode = function getCustomerByCode(data) {
 
 Task.getCustomerByEmail = function getCustomerByEmail(data) {
     return new Promise(function (resolve, reject) {//user list
-        var str = "SELECT * FROM `tb_customer` WHERE customer_email ='"+ data.email +"'" ;
+        var str = "SELECT * FROM `tb_customer` WHERE customer_email ='" + data.email + "'";
 
         console.log('str : ', str);
 
@@ -136,8 +136,8 @@ Task.getCustomerByEmail = function getCustomerByEmail(data) {
 Task.deleteCustomerByCode = function deleteCustomerByCode(data) {
     return new Promise(function (resolve, reject) {//user list
         var str = "UPDATE `tb_customer` SET"
-        + "`deleted`= '1'"
-        + "WHERE tb_customer.customer_code = '" + data.customer_code + "'";
+            + "`deleted`= '1'"
+            + "WHERE tb_customer.customer_code = '" + data.customer_code + "'";
 
         console.log('str : ', str);
 
@@ -171,6 +171,7 @@ Task.insertCustomer = function insertCustomer(data) {
     return new Promise(function (resolve, reject) {
         var str = "INSERT INTO `tb_customer` ("
             + "`customer_code`,"
+            + "`about_code`,"
             + "`customer_name`,"
             + "`customer_id`,"
             + "`customer_email`,"
@@ -180,6 +181,7 @@ Task.insertCustomer = function insertCustomer(data) {
             + ") VALUES ("
             // + " '" + data.order_code + "', "
             + " '" + data.customer_code + "', "
+            + " '" + data.about_code + "', "
             + " '" + data.customer_name + "', "
             + " '" + data.customer_id + "', "
             + " '" + data.customer_email + "', "
@@ -291,11 +293,12 @@ Task.insertCustomer = function insertCustomer(data) {
 // }
 
 Task.updateCustomerByCode = function updateCustomerByCode(data) {
-    
-    return new Promise(function (resolve, reject) {  
+
+    return new Promise(function (resolve, reject) {
         console.log('update : ', data);
         var str = "UPDATE `tb_customer` SET "
             + "`customer_code` = '" + data.customer_code + "',"
+            + "`about_code` = '" + data.about_code + "',"
             + "`customer_name`= '" + data.customer_name + "',"
             + "`customer_id`= '" + data.customer_id + "',"
             + "`customer_email`= '" + data.customer_email + "',"
@@ -304,7 +307,7 @@ Task.updateCustomerByCode = function updateCustomerByCode(data) {
             + " WHERE customer_code = '" + data.customer_code + "'";
 
 
-      
+
         console.log('str111111111 : ', str);
 
         sql.query(str, function (err, res) {
