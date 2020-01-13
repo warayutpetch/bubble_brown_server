@@ -122,6 +122,7 @@ Task.insertAboutBy = function insertAboutBy(data) {
             + "`latitude`,"
             + "`longitude`,"
             + "`about_menu_data`,"
+            + "`about_main_branch`,"
             + "`addby`,"
             + "`adddate`,"
             + "`updateby`,"
@@ -143,6 +144,7 @@ Task.insertAboutBy = function insertAboutBy(data) {
             + " '" + data.latitude + "', "
             + " '" + data.longitude + "', "
             + " '" + data.about_menu_data + "', "
+            + " '" + data.about_main_branch + "', "
             + " '" + data.addby + "', "
             + " '" + timeController.reformatToSave(new Date()) + "', "
             + " '', "
@@ -296,9 +298,9 @@ Task.updateAboutBy = function updateAboutBy(data) {
     });
 };
 
-Task.updateAboutMainBranceByCode = function updateAboutMainBranceByCode(data) {
+Task.updateAboutMainBranchByCode = function updateAboutMainBranchByCode(data) {
     return new Promise(function (resolve, reject) {
-        var str = "UPDATE `tb_about` SET about_main_brance = '" + data.about_code + "'";
+        var str = "UPDATE `tb_about` SET about_main_branch = '" + data.about_code + "'";
 
         // console.log('checkLogin : ', data);
         console.log('checkLogin : ', str);

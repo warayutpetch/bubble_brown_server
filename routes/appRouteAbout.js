@@ -87,9 +87,9 @@ module.exports = function (app) {
         });
     })
 
-    app.post('/about/updateAboutMainBranceByCode', function (req, res) {
-        console.log('/about/updateAboutMainBranceByCode', req.body)
-        aboutController.updateAboutMainBranceByCode(req.body, function (err, task) {
+    app.post('/about/updateAboutMainBranchByCode', function (req, res) {
+        console.log('/about/updateAboutMainBranchByCode', req.body)
+        aboutController.updateAboutMainBranchByCode(req.body, function (err, task) {
 
             if (err) {
                 res.send(err);

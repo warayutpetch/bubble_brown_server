@@ -47,6 +47,11 @@ Task.getProductBy = function getProductBy(data) {
     return new Promise(function (resolve, reject) {//user list
         var str = "SELECT  * FROM tb_product "
             + " LEFT JOIN tb_product_type  ON tb_product.product_type_id = tb_product_type.product_type_id"
+            if (data.about_menu_data == 1) {
+                str += " WHERE  tb_product.about_code = '" + data.about_code + "' OR tb_product.about_code = '" + data.about_main_barnch + "' "
+            } else {
+                str += " WHERE tb_product.about_code = '" + data.about_code + "' "
+            }
 
         console.log('checkLogin : ', str);
 

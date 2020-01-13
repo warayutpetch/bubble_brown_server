@@ -14,10 +14,15 @@ var Task = function (task) {
 Task.getMenuBy = function getMenuBy(data) {
     return new Promise(function (resolve, reject) {//menu list
         var str = "SELECT  * FROM tb_menu as tb1"
-        + " LEFT JOIN tb_menu_type as tb2 ON tb1.menu_type_id = tb2.menu_type_id"
-       
+            + " LEFT JOIN tb_menu_type as tb2 ON tb1.menu_type_id = tb2.menu_type_id"
+        if (data.about_menu_data == 1) {
+            str += " WHERE  tb1.about_code = '" + data.about_code + "' OR tb1.about_code = '" + data.about_main_barnch + "' "
+        } else {
+            str += " WHERE tb1.about_code = '" + data.about_code + "' "
+        }
 
-        console.log('checkLogin : ', str);
+        // console.log('checkLogin : ', str);
+        // console.log('dataaaa : ', data);
 
         sql.query(str, function (err, res) {
 
@@ -81,9 +86,13 @@ Task.getMenuByCode = function getMenuByCode(data) {
     return new Promise(function (resolve, reject) {//menu list
         var str = "SELECT  * FROM tb_menu as tb1"
             + " LEFT JOIN tb_menu_type as tb2 ON tb1.menu_type_id = tb2.menu_type_id "
-            + " WHERE tb1.menu_type_id = '" + data.menu_type_id + "' ";
-
+        if (data.about_menu_data == 1) {
+            str += " WHERE tb1.menu_type_id = '" + data.menu_type_id + "' AND (tb1.about_code = '" + data.about_code + "' OR tb1.about_code = '" + data.about_main_branch + "') "
+        } else {
+            str += " WHERE tb1.menu_type_id = '" + data.menu_type_id + "' AND tb1.about_code = '" + data.about_code + "'"
+        }
         console.log('checkLogin : ', str);
+        console.log('dataaaaa : ', data);
 
         sql.query(str, function (err, res) {
 
@@ -221,8 +230,8 @@ Task.getMenuMaxCode = function getMenuMaxCode(data) {
 
 
 Task.updateMenuByCode = function updateMenuByCode(data) {
-    
-    return new Promise(function (resolve, reject) {  
+
+    return new Promise(function (resolve, reject) {
         console.log('update : ', data);
         var str = "UPDATE `tb_menu` SET "
             + "`menu_code` = '" + data.menu_code + "',"
@@ -232,7 +241,7 @@ Task.updateMenuByCode = function updateMenuByCode(data) {
             + "`menu_image`= '" + data.menu_image + "',"
             + "`menu_price` = '" + data.menu_price + "'"
             + "WHERE menu_code = '" + data.menu_code + "'";
-      
+
         // console.log('str111111111 : ', str);
 
         sql.query(str, function (err, res) {
@@ -262,7 +271,7 @@ Task.updateMenuByCode = function updateMenuByCode(data) {
 
 Task.deleteMenuByCode = function deleteMenuByCode(data) {
     return new Promise(function (resolve, reject) {//user list
-        var str = "DELETE FROM `tb_menu` WHERE `tb_menu`.`menu_code` ='"+ data.menu_code +"'" ;
+        var str = "DELETE FROM `tb_menu` WHERE `tb_menu`.`menu_code` ='" + data.menu_code + "'";
 
         console.log('menu_codedel : ', str);
 

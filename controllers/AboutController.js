@@ -41,8 +41,8 @@ Task.updateAboutBy = async function updateAboutBy(data, result) {
     result(about);
 }
 
-Task.updateAboutMainBranceByCode = async function updateAboutMainBranceByCode(data, result) {
-    var about = await aboutModel.updateAboutMainBranceByCode(data);
+Task.updateAboutMainBranchByCode = async function updateAboutMainBranchByCode(data, result) {
+    var about = await aboutModel.updateAboutMainBranchByCode(data);
     result(about);
 }
 

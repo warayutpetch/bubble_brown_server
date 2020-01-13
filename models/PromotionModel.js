@@ -16,7 +16,7 @@ Task.getPromotionBy = function getPromotionBy(data) {
     return new Promise(function (resolve, reject) {
         var str = "SELECT  * FROM tb_promotion as tb1"
             + " LEFT JOIN tb_menu_type as tb2 ON tb1.menu_type_id = tb2.menu_type_id "
-            + " WHERE deleted = 0";
+            + " WHERE deleted = 0 AND tb1.about_code = '" + data.about_code + "'"
         console.log(str);
 
         sql.query(str, function (err, res) {

@@ -13,7 +13,7 @@ var Task = function (task) {
 
 Task.getZoneBy = function getZoneBy(data) {
     return new Promise(function (resolve, reject) {//user list
-        var str = "SELECT  * FROM tb_zone ";
+        var str = "SELECT  * FROM tb_zone WHERE about_code = '" + data.about_code + "'";
 
         console.log('checkLogin : ', str);
 
@@ -141,7 +141,7 @@ Task.deleteZoneByCode = function deleteZoneByCode(data) {
     });
 };
 
-Task.updateZone= function updateZone(set, where) {
+Task.updateZone = function updateZone(set, where) {
     return new Promise(function (resolve, reject) {
         var str_sql = " UPDATE tb_zone ";
         var str_set = " SET ";
