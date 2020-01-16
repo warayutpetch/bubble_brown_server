@@ -15,6 +15,7 @@ var Task = function (task) {
 Task.getProductTypeBy = function getProductTypeBy(data) {
     return new Promise(function (resolve, reject) {//user list
         var str = "SELECT  * FROM tb_product_type WHERE about_code = '" + data.about_code + "'"
+        
 
         console.log('checkLogin : ', str);
 

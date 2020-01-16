@@ -41,6 +41,11 @@ Task.deleteByCode = async function deleteByCode(data, result) {
     result(product);
 }
 
+Task.getProductByType = async function getProductByType(data, result) {
+    var product = await ProductModel.getProductByType(data);
+    result(product);
+}
+
 
 
 module.exports = Task;

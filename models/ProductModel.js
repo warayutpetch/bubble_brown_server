@@ -111,6 +111,39 @@ Task.getProductByCode = function getProductByCode(data) {
     });
 };
 
+Task.getProductByType = function getProductByType(data) {
+    return new Promise(function (resolve, reject) {//user list
+        var str = "SELECT  * FROM tb_product "
+            + " LEFT JOIN tb_product_type  ON tb_product.product_type_id = tb_product_type.product_type_id "
+            + " WHERE tb_product.product_type_id = '" + data.product_type_id + "'"
+
+        console.log('checkLogin : ', str);
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
+
 Task.updateProductCost = function updateProductCost(data) {
     return new Promise(function (resolve, reject) {
         var str = "UPDATE `tb_product` SET "

@@ -86,6 +86,18 @@ module.exports = function (app) {
         });
     })
 
+    app.post('/product/getProductByType', function (req, res) {
+        console.log('/product/getProductByType', req.body)
+        ProductController.getProductByType(req.body, function (err, task) {
+
+            if (err) {
+                res.send(err);
+            }
+            // console.log('res', task);
+            res.send(task);
+        });
+    })
+
 
 
     

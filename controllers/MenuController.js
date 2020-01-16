@@ -40,6 +40,11 @@ Task.updateMenuByCode = async function updateMenuByCode(data, result) {
     result(menu);
 }
 
+Task.getMenuByType = async function getMenuByType(data, result) {
+    var menu = await MenuModel.getMenuByType(data);
+    result(menu);
+}
+
 // Task.deleteByCode = async function deleteByCode(data, result) {
 //     var menu = await menuModel.deleteByCode(data);
 //     result(menu);

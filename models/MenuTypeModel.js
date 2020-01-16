@@ -19,7 +19,7 @@ Task.getMenuTypeBy = function getMenuTypeBy(data) {
         } else {
             str += " WHERE about_code = '" + data.about_code + "' "
         }
-        console.log('checkLogin : ', str);
+        console.log('checkLogin xfgdfyh : ', str);
 
         sql.query(str, function (err, res) {
 

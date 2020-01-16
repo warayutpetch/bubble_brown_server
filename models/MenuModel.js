@@ -49,6 +49,41 @@ Task.getMenuBy = function getMenuBy(data) {
     });
 };
 
+Task.getMenuByType = function getMenuByType(data) {
+    return new Promise(function (resolve, reject) {//menu list
+        var str = "SELECT  * FROM tb_menu as tb1"
+            + " LEFT JOIN tb_menu_type as tb2 ON tb1.menu_type_id = tb2.menu_type_id"
+            + " WHERE  tb1.menu_type_id = '" + data.menu_type_id + "' "
+
+
+        console.log('tb_menutb_menutb_menutb_menutb_menu : ', str);
+        
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
+
 
 Task.getMenuByRecipe = function getMenuByRecipe(data) {
     return new Promise(function (resolve, reject) {//user list

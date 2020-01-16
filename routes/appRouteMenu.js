@@ -96,6 +96,18 @@ module.exports = function (app) {
         });
     })
 
+    app.post('/menu/getMenuByType', function (req, res) {
+        console.log('/menu/getMenuByType', req.body)
+        MenuController.getMenuByType(req.body, function (err, task) {
+
+            if (err) {
+                res.send(err);
+            }
+            // console.log('res', task);
+            res.send(task);
+        });
+    })
+
 //     app.post('/menu/getMenuByCode', function (req, res) {
 //         console.log('/menu/getMenuByCode', req.body)
 //         menuController.getMenuByCode(req.body, function (err, task) {
