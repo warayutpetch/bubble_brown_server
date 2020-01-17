@@ -62,21 +62,33 @@ module.exports = function (app) {
         });
     })
 
-//     app.post('/user/insertUserBy', function (req, res) {
-//         console.log('/user/insertUserBy', req.body)
-//         userController.insertUserBy(req.body, function (err, task) {
+    app.post('/order_list/updateRevisedListByCode', function (req, res) {
+        console.log('/order_list/updateRevisedListByCode', req.body)
+        OrderListController.updateRevisedListByCode(req.body, function (err, task) {
 
-//             if (err) {
-//                 res.send(err);
-//             }
-//             // console.log('res', task);
-//             res.send(task);
-//         });
-//     })
+            if (err) {
+                res.send(err);
+            }
+            // console.log('res', task);
+            res.send(task);
+        });
+    })
+
 
     app.post('/order_list/updateOrderList', function (req, res) {
         console.log('/order_list/updateOrderList', req.body)
         OrderListController.updateOrderList(req.body, function (err, task) {
+
+            if (err) {
+                res.send(err);
+            }
+            // console.log('res', task);
+            res.send(task);
+        });
+    })
+    app.post('/order_list/getOrderListOldBy', function (req, res) {
+        console.log('/order_list/getOrderListOldBy', req.body)
+        OrderListController.getOrderListOldBy(req.body, function (err, task) {
 
             if (err) {
                 res.send(err);

@@ -21,7 +21,8 @@ Task.insertOrderList = function insertOrderList(data) {
             + "`order_list_qty`, "
             + "`order_list_price_qty`, "
             + "`order_list_price_sum_qty`, "
-            + "`order_list_price_sum` "
+            + "`order_list_price_sum`, "
+            + "`revised_num` "
             + ") VALUES ("
             + " '" + data.order_list_code + "', "
             + " '" + data.order_code + "', "
@@ -30,7 +31,8 @@ Task.insertOrderList = function insertOrderList(data) {
             + " '" + data.order_list_qty + "', "
             + " '" + data.order_list_price_qty + "', "
             + " '" + data.order_list_price_sum_qty + "', "
-            + " '" + data.order_list_price_sum + "' "
+            + " '" + data.order_list_price_sum + "', "
+            + " '" + data.revised_num + "' "
             + " ) "
 
 
@@ -103,10 +105,79 @@ Task.updateOrderList = function updateOrderList(data) {
     });
 };
 
+Task.updateRevisedListByCode = function updateRevisedListByCode(data) {
+    return new Promise(function (resolve, reject) {
+        var str = "UPDATE `tb_order_list` SET"
+            + "`revised`= '1'";
+           
+
+
+        // console.log('checkLogin : ', data.order_list_date);
+        // console.log('checkLogin : ', str);
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: false,
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: true,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
+
 Task.getOrderListBy = function getOrderListBy(data) {
     return new Promise(function (resolve, reject) {//user list
         var str = "SELECT  * FROM tb_order_list "
-            + "WHERE order_code = '" + data.order_code + "'";
+            + " WHERE order_code = '" + data.order_code + "'"
+            + " AND revised = '0'";
+
+        console.log('checkLogin : ', str);
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
+
+Task.getOrderListOldBy = function getOrderListOldBy(data) {
+    return new Promise(function (resolve, reject) {//user list
+        var str = "SELECT  * FROM tb_order_list "
+            + "WHERE order_code = '" + data.order_code + "'"
+            + "AND revised_num = '" + (data.revised_num - 1)+ "'"
 
         console.log('checkLogin : ', str);
 

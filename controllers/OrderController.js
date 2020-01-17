@@ -51,6 +51,16 @@ Task.updateCencelOrder = async function updateCencelOrder(data, result) {
     result(order);
 }
 
+Task.updateRevisedByCode = async function updateRevisedByCode(data, result) {
+    var order = await OrderModel.updateRevisedByCode(data);
+    result(order);
+}
+
+Task.getOrderRevisedNum = async function getOrderRevisedNum(data, result) {
+    var order = await OrderModel.getOrderRevisedNum(data);
+    result(order);
+}
+
 
 
 module.exports = Task;

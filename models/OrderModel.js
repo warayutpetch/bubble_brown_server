@@ -14,7 +14,7 @@ var Task = function (task) {
 Task.insertOrder = function insertOrder(data) {
     return new Promise(function (resolve, reject) {
         var str = "INSERT INTO `tb_order` ("
-          
+
             + "`order_code`,"
             + "`order_date`,"
             + "`order_time`,"
@@ -25,6 +25,7 @@ Task.insertOrder = function insertOrder(data) {
             + "`customer_code`, "
             + "`about_code`, "
             + "`amount`, "
+            + "`revised_num`, "
             + "`order_total_price` "
             + ") VALUES ("
             + " '" + data.order_code + "', "
@@ -37,6 +38,7 @@ Task.insertOrder = function insertOrder(data) {
             + " '" + data.customer_code + "', "
             + " '" + data.about_code + "', "
             + " '" + data.amount + "', "
+            + " '" + data.revised_num + "', "
             + " '" + data.order_total_price + "' "
             + " ) "
 
@@ -74,7 +76,7 @@ Task.getOrderBy = function getOrderBy(data) {
         var str = "SELECT  * FROM tb_order "
             + " LEFT JOIN tb_table  ON tb_table.table_code = tb_order.table_code "
             + " LEFT JOIN tb_zone ON tb_zone.zone_id = tb_table.zone_id "
-            + " WHERE tb_order.order_status != 2 AND order_status !=3 AND tb_order.about_code = '" + data.about_code + "'"
+            + " WHERE tb_order.order_status != 2 AND order_status !=3 AND revised = 0 AND tb_order.about_code = '" + data.about_code + "'";
         console.log('order_statuscheckLogin : ', str);
 
         sql.query(str, function (err, res) {
@@ -124,6 +126,75 @@ Task.getOrderMaxCode = function getOrderMaxCode(data) {
             else {
                 const require = {
                     data: res[0],
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
+
+Task.getOrderRevisedNum = function getOrderRevisedNum(data) {
+    return new Promise(function (resolve, reject) {
+        var str = "SELECT  (max(revised_num)+1) AS revised_num_max FROM `tb_order` "
+            + "WHERE order_code = '" + data.order_code + "'";
+
+
+        console.log('checkLogin565664646 : ', str);
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res[0],
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
+
+Task.updateRevisedByCode = function updateRevisedByCode(data) {
+    return new Promise(function (resolve, reject) {
+        var str = "UPDATE `tb_order` SET "
+            + "`revised` = '1'"
+            + " WHERE order_code = '" + data.order_code + "'"
+            + " AND revised = '0'";
+
+
+        // console.log('checkLogin : ', data);
+        console.log('updateRevisedByCode : ', str);
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: false,
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: true,
                     error: [],
                     query_result: true,
                     server_result: true

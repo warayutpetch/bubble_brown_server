@@ -132,5 +132,29 @@ module.exports = function (app) {
         });
     })
 
+    app.post('/order/updateRevisedByCode', function (req, res) {
+        console.log('/order/updateRevisedByCode', req.body)
+        OrderController.updateRevisedByCode(req.body, function (err, task) {
+
+            if (err) {
+                res.send(err);
+            }
+            // console.log('res', task);
+            res.send(task);
+        });
+    })
+
+    app.post('/order/getOrderRevisedNum', function (req, res) {
+        console.log('/order/getOrderRevisedNum', req.body)
+        OrderController.getOrderRevisedNum(req.body, function (err, task) {
+
+            if (err) {
+                res.send(err);
+            }
+            // console.log('res', task);
+            res.send(task);
+        });
+    })
+
 
 }

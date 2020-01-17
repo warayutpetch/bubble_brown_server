@@ -40,6 +40,15 @@ Task.deleteByCode = async function deleteByCode(data, result) {
     result(order_list);
 }
 
+Task.updateRevisedListByCode = async function updateRevisedListByCode(data, result) {
+    var order_list = await OrderListModel.updateRevisedListByCode(data);
+    result(order_list);
+}
+Task.getOrderListOldBy = async function getOrderListOldBy(data, result) {
+    var order_list = await OrderListModel.getOrderListOldBy(data);
+    result(order_list);
+}
+
 // Task.getUserByCode = async function getUserByCode(data, result) {
 //     var user = await userModel.getUserByCode(data);
 //     result(user);
