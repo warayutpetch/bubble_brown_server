@@ -170,10 +170,9 @@ Task.insertPromotion = function insertPromotion(data) {
 
 Task.getPromotionByCol = function getPromotionByCol(data) {
     return new Promise(function (resolve, reject) {
-        var str = "SELECT * FROM tb_promotion WHERE deleted = 0 ";
-        for (var key in data) {
-            str += " AND " + key + " = '" + data[key] + "' ";
-        }
+        var str = "SELECT * FROM tb_promotion as tb1 "
+            + " LEFT JOIN tb_menu_type as tb2 ON tb1.menu_type_id = tb2.menu_type_id"
+            + " WHERE deleted = 0 AND tb1.promotion_code = '" + data.promotion_code + "'"
         sql.query(str, function (err, res) {
             if (err) {
                 console.log("error: ", err);
@@ -187,7 +186,7 @@ Task.getPromotionByCol = function getPromotionByCol(data) {
             }
             else {
                 const require = {
-                    data: res,
+                    data: res[0],
                     error: [],
                     query_result: true,
                     server_result: true
@@ -210,6 +209,8 @@ Task.updatePromotion = function updatePromotion(data) {
             + "`promotion_type`= '" + data.promotion_type + "',"
             + "`discount_percent`= '" + data.discount_percent + "',"
             + "`discount_price`= '" + data.discount_price + "',"
+            + "`discount_giveaway_buy`= '" + data.discount_giveaway_buy + "',"
+            + "`discount_giveaway`= '" + data.discount_giveaway + "',"
             + "`startdate`= '" + data.startdate + "',"
             + "`enddate`= '" + data.enddate + "',"
             + "`updateby`= '" + data.updateby + "'"
