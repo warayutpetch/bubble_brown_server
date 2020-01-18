@@ -90,9 +90,7 @@ Task.insertPromotionUse = function insertPromotionUse(data) {
             + " '" + data.amount + "'"
             + " ) "
 
-        console.log("strrrrrrrr", str);
-
-        console.log('checkLogin : ', str);
+        console.log('insertPromotionUseinsertPromotionUseinsertPromotionUse : ', str);
 
         sql.query(str, function (err, res) {
 
