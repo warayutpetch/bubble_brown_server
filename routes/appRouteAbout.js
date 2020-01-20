@@ -14,6 +14,18 @@ module.exports = function (app) {
         });
     })
 
+    app.post('/about/getAboutByKey', function (req, res) {
+        console.log('/about/getAboutByKey', req.body)
+        aboutController.getAboutByKey(req.body, function (err, task) {
+
+            if (err) {
+                res.send(err);
+            }
+            // console.log('res', task);
+            res.send(task);
+        });
+    })
+
     app.post('/about/getAboutBy', function (req, res) {
         console.log('/about/getAboutBy', req.body)
         aboutController.getAboutBy(req.body, function (err, task) {
