@@ -11,17 +11,259 @@ var Task = function (task) {
     this.created_at = new Date();
 };
 
-
+//DAY
+//ตารางหลัก
 Task.getReportSalesByDay = function getReportSalesByDay(data) {
     return new Promise(function (resolve, reject) {
-        var str = "SELECT TIME_FORMAT(tb_payment.payment_time, '%H:00') AS payment_time, DATE_FORMAT(STR_TO_DATE(tb_payment.payment_date,'%Y-%m-%d'),'%d/%m/%Y') AS payment_date, SUM(tb_payment.payment_sum) AS total_payment, SUM(tb_stock_out.product_cost * tb_stock_out.product_qty * tb_stock_out.menu_qty)AS cost,(SUM(tb_payment.payment_sum) -SUM(tb_stock_out.product_cost *  tb_stock_out.product_qty *  tb_stock_out.menu_qty)) AS profit"
+        var str = "SELECT TIME_FORMAT(tb_payment.payment_time, '%H:00') AS payment_time,"
+            + " DATE_FORMAT(STR_TO_DATE(tb_payment.payment_date,'%Y-%m-%d'),'%d/%m/%Y') AS payment_date,"
+            + " SUM(tb_payment.payment_sum) AS total_payment"
             + " FROM tb_payment "
-            + " LEFT JOIN tb_order ON tb_payment.order_code = tb_order.order_code "
-            + " LEFT JOIN tb_stock_out ON tb_payment.order_code = tb_stock_out.order_code"
-            + " LEFT JOIN tb_promotion ON tb_payment.promotion_code =  tb_promotion.promotion_code"
-            + " LEFT JOIN tb_customer ON tb_payment.customer_code = tb_customer.customer_code"
             + " WHERE payment_date = '" + timeController.reformatTo(data.payment_date) + "'"
-            + " GROUP BY  TIME_FORMAT(payment_time, '%H')"
+            // + " AND about_code = '" + data.about_code + "'"
+            + " GROUP BY TIME_FORMAT(payment_time, '%H')"
+        console.log("str:", str);
+
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
+
+//MONTH
+//ตารางหลัก
+Task.getReportSalesByMonth = function getReportSalesByMonth(data) {
+    return new Promise(function (resolve, reject) {
+        var str = "SELECT tb_payment.payment_time,"
+            + " DATE_FORMAT(STR_TO_DATE(tb_payment.payment_date,'%Y-%m-%d'),'%d/%m/%Y') AS month,"
+            + " DATE_FORMAT(STR_TO_DATE(tb_payment.payment_date,'%Y-%m-%d'),'%Y-%m-%d') AS date,"
+            + " SUM(tb_payment.payment_sum) AS total_payment"
+            + " FROM tb_payment"
+            + " WHERE STR_TO_DATE(tb_payment.payment_date,'%Y-%m-%d') >= STR_TO_DATE('" + timeController.reformatTo(data.start_month) + "','%Y-%m-%d') "
+            + " AND STR_TO_DATE(tb_payment.payment_date,'%Y-%m-%d') <= STR_TO_DATE('" + timeController.reformatTo(data.end_month) + "','%Y-%m-%d') "
+            // + " AND about_code = '" + data.about_code + "'"
+            + " GROUP BY STR_TO_DATE(tb_payment.payment_date, '%Y-%m-%d')"
+
+        console.log("str::", str);
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
+
+//YEAR
+Task.getReportSalesByYear = function getReportSalesByYear(data) {
+    return new Promise(function (resolve, reject) {
+        var str = "SELECT DATE_FORMAT(STR_TO_DATE(tb_payment.payment_date, '%Y-%m-%d'), '%M') AS year,"
+            + " DATE_FORMAT(STR_TO_DATE(tb_payment.payment_date, '%Y-%m-%d'), '%Y-%m-%d') AS month,"
+            + " SUM(tb_payment.payment_sum) AS total_payment"
+            + " FROM tb_payment "
+            + " WHERE STR_TO_DATE(tb_payment.payment_date,'%Y-%m-%d') >= STR_TO_DATE('" + timeController.reformatTo(data.start_year) + "','%Y-%m-%d')"
+            + " AND STR_TO_DATE(tb_payment.payment_date,'%Y-%m-%d') <= STR_TO_DATE('" + timeController.reformatTo(data.end_year) + "','%Y-%m-%d')"
+            // + " AND about_code = '" + data.about_code + "'"           
+            + " GROUP BY STR_TO_DATE(tb_payment.payment_date, '%Y-%m')"
+
+        console.log("str:", str);
+
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
+
+//Cost - DAY
+Task.getCostSalesByDay = function getCostSalesByDay(data) {
+    return new Promise(function (resolve, reject) {
+        var str = "SELECT SUM(tb_stock_out.product_cost * tb_stock_out.product_qty * tb_stock_out.menu_qty) AS cost"
+            + " FROM tb_stock_out "
+            + " LEFT JOIN tb_payment ON tb_payment.order_code = tb_stock_out.order_code"
+            + " WHERE tb_payment.payment_date = '" + timeController.reformatTo(data.payment_date) + "'"
+            + " AND TIME_FORMAT(tb_payment.payment_time , '%H') = TIME_FORMAT('" + data.payment_time + "' , '%H')"
+            // + " AND about_code = '" + data.about_code + "'"
+            + " GROUP BY TIME_FORMAT(payment_time, '%H')"
+        console.log("str:", str);
+
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res[0],
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
+
+//Cost - MONTH
+Task.getCostSalesByMonth = function getCostSalesByMonth(data) {
+    return new Promise(function (resolve, reject) {
+        var str = "SELECT SUM(tb_stock_out.product_cost * tb_stock_out.product_qty * tb_stock_out.menu_qty) AS cost"
+            + " FROM tb_stock_out "
+            + " LEFT JOIN tb_payment ON tb_payment.order_code = tb_stock_out.order_code"
+            + " WHERE STR_TO_DATE(tb_payment.payment_date,'%Y-%m-%d') = STR_TO_DATE('" + data.payment_date + "','%d/%m/%Y') "
+            // + " AND about_code = '" + data.about_code + "'"
+            + " GROUP BY STR_TO_DATE(tb_payment.payment_date, '%Y-%m-%d')"
+
+        console.log("str:", str);
+
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res[0],
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
+
+//Cost - YEAR
+Task.getCostSalesByYear = function getCostSalesByYear(data) {
+    return new Promise(function (resolve, reject) {
+        var str = "SELECT SUM(tb_stock_out.product_cost * tb_stock_out.product_qty * tb_stock_out.menu_qty) AS cost"
+            + " FROM tb_stock_out "
+            + " LEFT JOIN tb_payment ON tb_payment.order_code = tb_stock_out.order_code"
+            + " WHERE DATE_FORMAT(STR_TO_DATE(tb_payment.payment_date,'%Y-%m-%d'), '%Y-%m') = DATE_FORMAT(STR_TO_DATE('" + data.payment_date + "','%Y-%m-%d'),'%Y-%m')"
+            // + " AND about_code = '" + data.about_code + "'"
+            + " GROUP BY STR_TO_DATE(tb_payment.payment_date, '%Y-%m')"
+
+        console.log("str:", str);
+
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res[0],
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
+
+
+//DAY
+//ตารางย่อย
+Task.getTableReportSalesByDay = function getTableReportSalesByDay(data) {
+    return new Promise(function (resolve, reject) {
+        var str = "SELECT tb_order_list.order_list_name,"
+            + " SUM(tb_order_list.order_list_qty) AS qty,"
+            + " tb_order_list.order_list_price_qty AS perunit,"
+            + " tb_payment.payment_time,"
+            + " tb_order_list.menu_code,"
+            + " DATE_FORMAT(STR_TO_DATE(tb_payment.payment_date,'%Y-%m-%d'),'%d/%m/%Y') AS payment_date,"
+            + " SUM(tb_order_list.order_list_price_sum_qty) AS total_payment"
+            + " FROM tb_order_list "
+            + " LEFT JOIN tb_payment ON tb_payment.order_code = tb_order_list.order_code"
+            + " WHERE STR_TO_DATE(tb_payment.payment_date, '%Y-%m-%d ') = STR_TO_DATE('" + data.payment_date + "', '%d/%m/%Y ')"
+            + " AND TIME_FORMAT(tb_payment.payment_time,'%H:%i:%s') >= TIME_FORMAT('" + data.payment_time + "','%H:00:00') "
+            + " AND TIME_FORMAT(tb_payment.payment_time,'%H:%i:%s') <= TIME_FORMAT('" + data.payment_time + "','%H:59:59') "
+            // + " AND about_code = '" + data.about_code + "'"
+            + " GROUP BY tb_order_list.menu_code"
         console.log("str:", str);
 
 
@@ -51,16 +293,23 @@ Task.getReportSalesByDay = function getReportSalesByDay(data) {
 };
 
 
-Task.getReportSalesByMonth = function getReportSalesByMonth(data) {
+//MONTH
+//ตารางย่อย
+Task.getTableReportSalesByMonth = function getTableReportSalesByMonth(data) {
     return new Promise(function (resolve, reject) {
-        var str = "SELECT  DATE_FORMAT(STR_TO_DATE(tb_payment.payment_date,'%Y-%m-%d'),'%d') AS month , tb_payment.payment_time, SUM(tb_payment.payment_sum) AS total_payment, SUM(tb_stock_out.product_cost * tb_stock_out.product_qty * tb_stock_out.menu_qty)AS cost,(SUM(tb_payment.payment_sum) -SUM(tb_stock_out.product_cost *  tb_stock_out.product_qty *  tb_stock_out.menu_qty)) AS profit"
-        + " FROM tb_payment"
-        + " LEFT JOIN tb_stock_out ON tb_payment.order_code = tb_stock_out.order_code"
-        + " WHERE STR_TO_DATE(tb_payment.payment_date,'%Y-%m-%d') >= STR_TO_DATE('" + timeController.reformatTo(data.start_month) + "','%Y-%m-%d') "
-        + " AND STR_TO_DATE(tb_payment.payment_date,'%Y-%m-%d') <= STR_TO_DATE('" + timeController.reformatTo(data.end_month) + "','%Y-%m-%d') "
-        + " GROUP BY STR_TO_DATE(tb_payment.payment_date, '%Y-%m-%d')"
+        var str = "SELECT tb_order_list.order_list_name,"
+            + " SUM(tb_order_list.order_list_qty) AS qty,"
+            + " tb_order_list.order_list_price_qty AS perunit,"
+            + " tb_order_list.menu_code,"
+            + " DATE_FORMAT(STR_TO_DATE(tb_payment.payment_date,'%Y-%m-%d'),'%d/%m/%Y') AS payment_date,"
+            + " SUM(tb_order_list.order_list_price_sum_qty) AS total_payment"
+            + " FROM tb_order_list"
+            + " LEFT JOIN tb_payment ON tb_payment.order_code = tb_order_list.order_code"
+            + " WHERE STR_TO_DATE(tb_payment.payment_date,'%Y-%m-%d') = STR_TO_DATE('" + data.month + "','%d/%m/%Y') "
+            // + " AND about_code = '" + data.about_code + "'"
+            + " GROUP BY tb_order_list.menu_code"
+        console.log("str:", str);
 
-        console.log("str::", str);
 
         sql.query(str, function (err, res) {
 
@@ -87,17 +336,17 @@ Task.getReportSalesByMonth = function getReportSalesByMonth(data) {
     });
 };
 
-
-Task.getReportSalesByYear = function getReportSalesByYear(data) {
+//YEAR
+//ตารางย่อย
+Task.getTableReportSalesByYear = function getTableReportSalesByYear(data) {
     return new Promise(function (resolve, reject) {
-        var str = "SELECT DATE_FORMAT(STR_TO_DATE(tb_payment.payment_date, '%Y-%m-%d'), '%M') AS year, SUM(tb_payment.payment_sum) AS total_payment, SUM(tb_stock_out.product_cost * tb_stock_out.product_qty * tb_stock_out.menu_qty) AS cost, (SUM(tb_payment.payment_sum) - SUM(tb_stock_out.product_cost *  tb_stock_out.product_qty *  tb_stock_out.menu_qty)) AS profit"
+        var str = "SELECT DATE_FORMAT(STR_TO_DATE(tb_payment.payment_date,'%Y-%m-%d'),'%d/%m/%Y') AS month, "
+            + " SUM(tb_payment.payment_sum) AS total_payment"
             + " FROM tb_payment "
-            + " LEFT JOIN tb_stock_out ON tb_payment.order_code = tb_stock_out.order_code"
-            + " WHERE STR_TO_DATE(tb_payment.payment_date,'%Y-%m-%d') >= STR_TO_DATE('" + timeController.reformatTo(data.start_year) + "','%Y-%m-%d')"            
-            + " AND STR_TO_DATE(tb_payment.payment_date,'%Y-%m-%d') <= STR_TO_DATE('" + timeController.reformatTo(data.end_year) + "','%Y-%m-%d')"            
-            + " GROUP BY STR_TO_DATE(tb_payment.payment_date, '%Y-%m')"
-
-        console.log("str::", str);
+            + " WHERE DATE_FORMAT(STR_TO_DATE(tb_payment.payment_date,'%Y-%m-%d'),'%Y-%m') = DATE_FORMAT(STR_TO_DATE('" + data.month + "','%Y-%m-%d'),'%Y-%m') "
+            // + " AND about_code = '" + data.about_code + "'"
+            + " GROUP BY STR_TO_DATE(tb_payment.payment_date, '%Y-%m-%d') "
+        console.log("str:", str);
 
 
         sql.query(str, function (err, res) {
@@ -125,13 +374,140 @@ Task.getReportSalesByYear = function getReportSalesByYear(data) {
     });
 };
 
+//ตารางย่อย
+//Cost - DAY
+Task.getTableCostSalesByDay = function getTableCostSalesByDay(data) {
+    return new Promise(function (resolve, reject) {
+        var str = "SELECT SUM(tb_stock_out.product_cost * tb_stock_out.product_qty * tb_stock_out.menu_qty) AS cost"
+            + " FROM tb_stock_out"
+            + " LEFT JOIN tb_payment ON tb_stock_out.order_code = tb_payment.order_code"
+            + " WHERE tb_stock_out.menu_code = '" + data.menu_code + "'"
+            + " AND STR_TO_DATE(tb_payment.payment_date, '%Y-%m-%d ') = STR_TO_DATE('" + data.payment_date + "', '%d/%m/%Y ')"
+            + " AND TIME_FORMAT(tb_payment.payment_time,'%H:%i:%s') >= TIME_FORMAT('" + data.payment_time + "','%H:00:00') "
+            + " AND TIME_FORMAT(tb_payment.payment_time,'%H:%i:%s') <= TIME_FORMAT('" + data.payment_time + "','%H:59:59') "
+            // + " AND about_code = '" + data.about_code + "'"
+            + " GROUP BY tb_stock_out.menu_code"
+        console.log("str:", str);
+
+
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res[0],
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
+
+//ตารางย่อย
+//Cost - MONTH
+Task.getTableCostSalesByMonth = function getTableCostSalesByMonth(data) {
+    return new Promise(function (resolve, reject) {
+        var str = "SELECT SUM(tb_stock_out.product_cost * tb_stock_out.product_qty * tb_stock_out.menu_qty) AS cost"
+            + " FROM tb_stock_out"
+            + " LEFT JOIN tb_payment ON tb_stock_out.order_code = tb_payment.order_code"
+            + " WHERE  tb_stock_out.menu_code = '" + data.menu_code + "'"
+            + " AND STR_TO_DATE(tb_payment.payment_date,'%Y-%m-%d') >= STR_TO_DATE('" + data.payment_date + "','%Y-%m-%d') "
+            + " AND STR_TO_DATE(tb_payment.payment_date,'%Y-%m-%d') <= STR_TO_DATE('" + data.payment_date + "','%Y-%m-%d') "
+            // + " AND about_code = '" + data.about_code + "'"
+            + " GROUP BY tb_stock_out.menu_code"
+        console.log("str:", str);
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res[0],
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
+
+
+//ตารางย่อย
+//Cost - YEAR
+Task.getTableCostSalesByYear = function getTableCostSalesByYear(data) {
+    return new Promise(function (resolve, reject) {
+        var str = "SELECT SUM(tb_stock_out.product_cost * tb_stock_out.product_qty * tb_stock_out.menu_qty) AS cost"
+            + " FROM tb_stock_out"
+            + " LEFT JOIN tb_payment ON tb_stock_out.order_code = tb_payment.order_code"
+            + " WHERE STR_TO_DATE(tb_payment.payment_date, '%Y-%m-%d ') = STR_TO_DATE('" + data.payment_date + "', '%d/%m/%Y ')"
+            // + " AND about_code = '" + data.about_code + "'"
+            + " GROUP BY STR_TO_DATE(tb_payment.payment_date, '%Y-%m-%d')"
+
+        console.log("str:", str);
+
+
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res[0],
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
+
+//สินค้าขายดี
 Task.getReportBestSalesByDay = function getReportBestSalesByDay(data) {
     return new Promise(function (resolve, reject) {
-        var str = "SELECT SUM(tb_order_list.order_list_qty) as total_order, tb_order_list.order_list_name, TIME_FORMAT(tb_payment.payment_time, '%H:00') AS payment_time, DATE_FORMAT(STR_TO_DATE(tb_payment.payment_date,'%Y-%m-%d'),'%d/%m/%Y') AS payment_date "
+        var str = "SELECT SUM(tb_order_list.order_list_qty) as total_order,"
+            + " tb_order_list.order_list_name,"
+            + " TIME_FORMAT(tb_payment.payment_time, '%H:00') AS payment_time,"
+            + " DATE_FORMAT(STR_TO_DATE(tb_payment.payment_date,'%Y-%m-%d'),'%d/%m/%Y') AS payment_date"
             + " FROM tb_payment "
             + " LEFT JOIN tb_order ON tb_payment.order_code = tb_order.order_code "
             + " LEFT JOIN tb_order_list ON tb_order.order_code = tb_order_list.order_code "
             + " WHERE tb_payment.payment_date = '" + timeController.reformatTo(data.payment_date) + "'"
+            // + " AND about_code = '" + data.about_code + "'"
             + " GROUP BY tb_order_list.order_list_name "
             + " ORDER BY SUM(tb_order_list.order_list_qty) DESC LIMIT 5"
         console.log("str:", str);
@@ -170,6 +546,7 @@ Task.getReportBestSalesByMonth = function getReportBestSalesByMonth(data) {
             + " LEFT JOIN tb_order_list ON tb_order.order_code = tb_order_list.order_code "
             + " WHERE STR_TO_DATE(tb_payment.payment_date,'%Y-%m-%d') >= STR_TO_DATE('" + timeController.reformatTo(data.start_month) + "','%Y-%m-%d') "
             + " AND STR_TO_DATE(tb_payment.payment_date,'%Y-%m-%d') <= STR_TO_DATE('" + timeController.reformatTo(data.end_month) + "','%Y-%m-%d') "
+            // + " AND about_code = '" + data.about_code + "'"
             + " GROUP BY tb_order_list.order_list_name "
             + " ORDER BY SUM(tb_order_list.order_list_qty) DESC LIMIT 5"
         console.log("str:", str);
@@ -207,6 +584,7 @@ Task.getReportBestSalesByYear = function getReportBestSalesByYear(data) {
             + " LEFT JOIN tb_order_list ON tb_order.order_code = tb_order_list.order_code "
             + " WHERE STR_TO_DATE(tb_payment.payment_date,'%Y-%m') >= STR_TO_DATE('" + timeController.reformatTo(data.start_year) + "','%Y-%m') "
             + " AND STR_TO_DATE(tb_payment.payment_date,'%Y-%m') <= STR_TO_DATE('" + timeController.reformatTo(data.end_year) + "','%Y-%m') "
+            // + " AND about_code = '" + data.about_code + "'"
             + " GROUP BY tb_order_list.order_list_name "
             + " ORDER BY SUM(tb_order_list.order_list_qty) DESC LIMIT 5"
         console.log("str:", str);
@@ -236,6 +614,54 @@ Task.getReportBestSalesByYear = function getReportBestSalesByYear(data) {
         });
     });
 };
+
+Task.getReportSalesByType = function getReportSalesByType(data) {
+    return new Promise(function (resolve, reject) {
+        var str = "SELECT tb_order_list.order_list_name,"
+            + " SUM(tb_order_list.order_list_qty) AS qty,"
+            + " tb_order_list.order_list_price_qty AS perunit,"
+            + " tb_payment.payment_time,"
+            + " tb_menu_type.menu_type_name,"
+            + " tb_payment.payment_date"
+            + " FROM tb_order_list "
+            + " LEFT JOIN tb_payment ON tb_payment.order_code = tb_order_list.order_code"
+            + " LEFT JOIN tb_menu ON tb_menu.menu_code = tb_order_list.menu_code"
+            + " LEFT JOIN tb_menu_type ON tb_menu_type.menu_type_id = tb_menu.menu_type_id"
+            + " WHERE tb_menu.menu_type_id "
+            // + " WHERE tb_menu.menu_type_id = '" + data.menu_type_id + "'"
+            + " AND STR_TO_DATE(tb_payment.payment_date,'%Y-%m-%d') >= STR_TO_DATE('" + timeController.reformatTo(data.start_date) + "','%Y-%m-%d')"
+            + " AND STR_TO_DATE(tb_payment.payment_date,'%Y-%m-%d') <= STR_TO_DATE('" + timeController.reformatTo(data.end_date) + "','%Y-%m-%d')"
+            // + " AND about_code = '" + data.about_code + "'"
+            + " GROUP BY tb_order_list.menu_code"
+            + " ORDER BY SUM(tb_order_list.order_list_qty) DESC"
+        console.log("str:", str);
+
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
+
 
 // Task.getReportLaundryByEntrepreneur = function getReportLaundryByEntrepreneur(data) {
 //     return new Promise(function (resolve, reject) {

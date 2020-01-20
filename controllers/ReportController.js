@@ -6,10 +6,57 @@ var Task = function (task) {
     this.created_at = new Date();
 };
 
+
+Task.getCostSalesByDay = async function getCostSalesByDay(data, result) {
+    var report = await reportModel.getCostSalesByDay(data);
+    result(report);
+}
+Task.getCostSalesByMonth = async function getCostSalesByMonth(data, result) {
+    var report = await reportModel.getCostSalesByMonth(data);
+    result(report);
+}
+Task.getCostSalesByYear = async function getCostSalesByYear(data, result) {
+    var report = await reportModel.getCostSalesByYear(data);
+    result(report);
+}
+
+Task.getTableCostSalesByDay = async function getTableCostSalesByDay(data, result) {
+    var report = await reportModel.getTableCostSalesByDay(data);
+    result(report);
+}
+Task.getTableCostSalesByMonth = async function getTableCostSalesByMonth(data, result) {
+    var report = await reportModel.getTableCostSalesByMonth(data);
+    result(report);
+}
+Task.getTableCostSalesByYear = async function getTableCostSalesByYear(data, result) {
+    var report = await reportModel.getTableCostSalesByYear(data);
+    result(report);
+}
+
+Task.getReportSalesByType = async function getReportSalesByType(data, result) {
+    var report = await reportModel.getReportSalesByType(data);
+    result(report);
+}
+
+Task.getTableReportSalesByDay = async function getTableReportSalesByDay(data, result) {
+    var report = await reportModel.getTableReportSalesByDay(data);
+    result(report);
+}
+
+Task.getTableReportSalesByMonth = async function getTableReportSalesByMonth(data, result) {
+    var report = await reportModel.getTableReportSalesByMonth(data);
+    result(report);
+}
+Task.getTableReportSalesByYear = async function getTableReportSalesByYear(data, result) {
+    var report = await reportModel.getTableReportSalesByYear(data);
+    result(report);
+}
+
 Task.getReportSalesByDay = async function getReportSalesByDay(data, result) {
     var report = await reportModel.getReportSalesByDay(data);
     result(report);
 }
+
 Task.getReportSalesByMonth = async function getReportSalesByMonth(data, result) {
     var report = await reportModel.getReportSalesByMonth(data);
     result(report);
