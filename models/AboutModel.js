@@ -43,6 +43,40 @@ Task.checkAboutLogin = function checkAboutLogin(data) {
     });
 };
 
+Task.getAboutByKey = function getAboutByKey(data) {
+    return new Promise(function (resolve, reject) {//user list
+        var str = "  SELECT * FROM `tb_about` "
+            + " WHERE (about_code LIKE '%" + data.value + "%' OR about_name_th LIKE '%" + data.value + "%')"
+            + " ORDER BY about_code asc"
+
+        console.log('checkLogin : ', str);
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
+
+
 Task.getAboutBy = function getAboutBy(data) {
     return new Promise(function (resolve, reject) {
         var str = "SELECT  * FROM tb_about WHERE deleted = 0";

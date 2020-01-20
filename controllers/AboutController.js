@@ -16,6 +16,12 @@ Task.getAboutBy = async function getAboutBy(data, result) {
     result(about);
 }
 
+
+Task.getAboutByKey = async function getAboutByKey(data, result) {
+    var about = await aboutModel.getAboutByKey(data);
+    result(about);
+}
+
 Task.getAboutrMaxCode = async function getAboutrMaxCode(data, result) {
     var about = await aboutModel.getAboutrMaxCode(data);
     result(about);
