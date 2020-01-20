@@ -44,7 +44,7 @@ Task.insertOrder = function insertOrder(data) {
 
         console.log("strrrrrrrr", str);
 
-        console.log('checkLogin : ', str);
+        // console.log('checkLogin : ', str);
 
         sql.query(str, function (err, res) {
 
@@ -211,7 +211,7 @@ Task.getOrderByCode = function getOrderByCode(data) {
             + " LEFT JOIN tb_table  ON tb_table.table_code = tb_order.table_code "
             + " LEFT JOIN tb_zone ON tb_zone.zone_id = tb_table.zone_id "
             + " LEFT JOIN tb_promotion  ON tb_promotion.promotion_code = tb_order.promotion_code "
-            + "WHERE order_code = '" + data.order_code + "'";
+            + "WHERE order_code = '" + data.order_code + "' AND revised = 0 ";
 
         console.log('checkLogin565664646 : ', str);
 
@@ -285,7 +285,7 @@ Task.updateOrderByCode = function updateOrderByCode(data) {
 
 Task.getRecipeByMenu = function getRecipeByMenu(data) {
     return new Promise(function (resolve, reject) {
-        var str = "SELECT  * FROM `tb_recipe` "
+        var str = "SELECT * ,tb_recipe.unit_id AS recipe_unit  FROM `tb_recipe` "
             + " LEFT JOIN tb_product  ON tb_product.product_code = tb_recipe.product_code "
             + "WHERE menu_code = '" + data.menu_code + "'";
 

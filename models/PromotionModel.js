@@ -107,6 +107,38 @@ Task.getPromotionByCode = function getPromotionByCode(data) {
     });
 };
 
+Task.getPromotionByPromotionCode = function getPromotionByPromotionCode(data) {
+    return new Promise(function (resolve, reject) {//user list
+        var str = "SELECT  * FROM tb_promotion "
+            + " WHERE promotion_code = '" + data.promotion_code + "' ";
+
+        console.log('checkLogin : ', str);
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
+
 Task.insertPromotion = function insertPromotion(data) {
     return new Promise(function (resolve, reject) {
         var str = "INSERT INTO `tb_promotion` ("

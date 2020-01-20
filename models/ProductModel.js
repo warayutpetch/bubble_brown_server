@@ -48,7 +48,7 @@ Task.getProductBy = function getProductBy(data) {
         var str = "SELECT  * FROM tb_product "
             + " LEFT JOIN tb_product_type  ON tb_product.product_type_id = tb_product_type.product_type_id"
         if (data.about_menu_data == 1) {
-            str += " WHERE  tb_product.about_code = '" + data.about_code + "' OR tb_product.about_code = '" + data.about_main_barnch + "' "
+            str += " WHERE  tb_product.about_code = '" + data.about_code + "' OR tb_product.about_code = '" + data.about_main_branch + "' "
         } else {
             str += " WHERE tb_product.about_code = '" + data.about_code + "' "
         }
@@ -81,7 +81,8 @@ Task.getProductBy = function getProductBy(data) {
 };
 Task.getProductByCode = function getProductByCode(data) {
     return new Promise(function (resolve, reject) {//user list
-        var str = "SELECT  * FROM tb_product "
+        var str = "SELECT  * FROM tb_product as tb1 "
+            + " LEFT JOIN tb_product_type as tb2 ON tb1.product_type_id = tb2.product_type_id "
             + "WHERE product_code = '" + data.product_code + "'"
 
         console.log('checkLogin : ', str);

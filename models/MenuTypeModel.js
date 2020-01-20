@@ -15,7 +15,7 @@ Task.getMenuTypeBy = function getMenuTypeBy(data) {
     return new Promise(function (resolve, reject) {//user list
         var str = "SELECT  * FROM tb_menu_type ";
         if (data.about_menu_data == 1) {
-            str += " WHERE  about_code = '" + data.about_code + "' OR about_code = '" + data.about_main_barnch + "' "
+            str += " WHERE  about_code = '" + data.about_code + "' OR about_code = '" + data.about_main_branch + "' "
         } else {
             str += " WHERE about_code = '" + data.about_code + "' "
         }
@@ -49,9 +49,11 @@ Task.getMenuTypeBy = function getMenuTypeBy(data) {
 Task.insertMenuType = function insertMenuType(data) {
     return new Promise(function (resolve, reject) {
         var str = "INSERT INTO `tb_menu_type` ("
-            + "`menu_type_name` "
+            + "`menu_type_name`, "
+            + "`about_code` "
             + ") VALUES ("
-            + " '" + data.menu_type_name + "' "
+            + " '" + data.menu_type_name + "', "
+            + " '" + data.about_code + "' "
             + " ) "
 
 
