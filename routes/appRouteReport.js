@@ -3,6 +3,125 @@ var ReportController = require('../controllers/ReportController');
 module.exports = function (app) {
 
 
+    app.post('/report/getTableCostSalesByDay', function (req, res) {
+        console.log('/report/getTableCostSalesByDay')
+        ReportController.getTableCostSalesByDay(req.body, function (err, task) {
+
+            if (err) {
+                res.send(err);
+            }
+            // console.log('res', task);
+            res.send(task);
+        });
+    })
+    app.post('/report/getTableCostSalesByMonth', function (req, res) {
+        console.log('/report/getTableCostSalesByMonth')
+        ReportController.getTableCostSalesByMonth(req.body, function (err, task) {
+
+            if (err) {
+                res.send(err);
+            }
+            // console.log('res', task);
+            res.send(task);
+        });
+    })
+    
+    app.post('/report/getTableCostSalesByYear', function (req, res) {
+        console.log('/report/getTableCostSalesByYear')
+        ReportController.getTableCostSalesByYear(req.body, function (err, task) {
+
+            if (err) {
+                res.send(err);
+            }
+            // console.log('res', task);
+            res.send(task);
+        });
+    })
+
+    app.post('/report/getCostSalesByDay', function (req, res) {
+        console.log('/report/getCostSalesByDay')
+        ReportController.getCostSalesByDay(req.body, function (err, task) {
+
+            if (err) {
+                res.send(err);
+            }
+            // console.log('res', task);
+            res.send(task);
+        });
+    })
+
+    app.post('/report/getCostSalesByMonth', function (req, res) {
+        console.log('/report/getCostSalesByMonth')
+        ReportController.getCostSalesByMonth(req.body, function (err, task) {
+
+            if (err) {
+                res.send(err);
+            }
+            // console.log('res', task);
+            res.send(task);
+        });
+    })
+
+    app.post('/report/getCostSalesByYear', function (req, res) {
+        console.log('/report/getCostSalesByYear')
+        ReportController.getCostSalesByYear(req.body, function (err, task) {
+
+            if (err) {
+                res.send(err);
+            }
+            // console.log('res', task);
+            res.send(task);
+        });
+    })
+
+    app.post('/report/getReportSalesByType', function (req, res) {
+        console.log('/report/getReportSalesByType')
+        ReportController.getReportSalesByType(req.body, function (err, task) {
+
+            if (err) {
+                res.send(err);
+            }
+            // console.log('res', task);
+            res.send(task);
+        });
+    })
+
+    app.post('/report/getTableReportSalesByDay', function (req, res) {
+        console.log('/report/getTableReportSalesByDay')
+        ReportController.getTableReportSalesByDay(req.body, function (err, task) {
+
+            if (err) {
+                res.send(err);
+            }
+            // console.log('res', task);
+            res.send(task);
+        });
+    })
+
+    app.post('/report/getTableReportSalesByMonth', function (req, res) {
+        console.log('/report/getTableReportSalesByMonth')
+        ReportController.getTableReportSalesByMonth(req.body, function (err, task) {
+
+            if (err) {
+                res.send(err);
+            }
+            // console.log('res', task);
+            res.send(task);
+        });
+    })
+
+    app.post('/report/getTableReportSalesByYear', function (req, res) {
+        console.log('/report/getTableReportSalesByYear')
+        ReportController.getTableReportSalesByYear(req.body, function (err, task) {
+
+            if (err) {
+                res.send(err);
+            }
+            // console.log('res', task);
+            res.send(task);
+        });
+    })
+
     app.post('/report/getReportSalesByDay', function (req, res) {
         console.log('/report/getReportSalesByDay')
         ReportController.getReportSalesByDay(req.body, function (err, task) {
