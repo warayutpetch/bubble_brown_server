@@ -56,14 +56,7 @@ appRouteAddress(app); //Address the route
 var appRouteUser = require('./routes/appRouteUser');
 appRouteUser(app); //User the route
 
-var appRouteLaundry = require('./routes/appRouteLaundry');
-appRouteLaundry(app); //Laundry the route
 
-var appRouteRepair = require('./routes/appRouteRepair');
-appRouteRepair(app); //Repair the route
-
-var appRouteNews = require('./routes/appRouteNews');
-appRouteNews(app); //News the route
 
 var appRouteContact = require('./routes/appRouteContact');
 appRouteContact(app); //Contact the route
@@ -71,33 +64,12 @@ appRouteContact(app); //Contact the route
 var appRouteAbout = require('./routes/appRouteAbout');
 appRouteAbout(app); //About the route
 
-var appRouteInstruction = require('./routes/appRouteInstruction');
-appRouteInstruction(app); //Instruction the route
 
-
-var appRouteWashingMachine = require('./routes/appRouteWashingMachine');
-appRouteWashingMachine(app);
 
 var appRouteSetting = require('./routes/appRouteSetting');
 appRouteSetting(app);
 
-var appRouteWashingProgram = require('./routes/appRouteWashingProgram');
-appRouteWashingProgram(app);
 
-var appRouteWashingMachineBrand = require('./routes/appRouteWashingMachineBrand');
-appRouteWashingMachineBrand(app);
-
-var appRouteWashingMachineGeneration = require('./routes/appRouteWashingMachineGeneration');
-appRouteWashingMachineGeneration(app);
-
-var appRouteWashingMachineType = require('./routes/appRouteWashingMachineType');
-appRouteWashingMachineType(app);
-
-var appRouteWashingMachineProgram = require('./routes/appRouteWashingMachineProgram');
-appRouteWashingMachineProgram(app);
-
-var appRouterMailer = require('./routes/appRouterMailer');
-appRouterMailer(app);
 
 var appRouteMenuType = require('./routes/appRouteMenuType');
 appRouteMenuType(app);
