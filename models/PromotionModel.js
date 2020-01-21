@@ -11,6 +11,37 @@ var Task = function (task) {
     this.created_at = new Date();
 };
 
+Task.getProductByFont = function getProductByFont(data) {
+    return new Promise(function (resolve, reject) {//user list
+        var str = "SELECT  * FROM tb_promotion "
+
+
+        console.log('checkLogin : ', str);
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
 
 Task.getPromotionBy = function getPromotionBy(data) {
     return new Promise(function (resolve, reject) {

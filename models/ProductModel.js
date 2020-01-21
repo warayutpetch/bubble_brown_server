@@ -79,6 +79,7 @@ Task.getProductBy = function getProductBy(data) {
         });
     });
 };
+
 Task.getProductByCode = function getProductByCode(data) {
     return new Promise(function (resolve, reject) {//user list
         var str = "SELECT  * FROM tb_product as tb1 "

@@ -83,4 +83,13 @@ module.exports = function (app) {
             res.send(task);
         });
     })
+    app.post('/promotion/getProductByFont', function (req, res) {
+        console.log('/promotion/getProductByFont', req.body)
+        promotionController.getProductByFont(req.body, function (err, task) {
+            if (err) {
+                res.send(err);
+            }
+            res.send(task);
+        });
+    })
 }

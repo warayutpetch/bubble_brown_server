@@ -22,7 +22,8 @@ Task.insertPayment = function insertPayment(data) {
             + "`payment_money_received`,"
             + "`payment_change`,"
             + "`payment_time`,"
-            + "`payment_date`"
+            + "`payment_date`,"
+            + "`about_code` "
             + ") VALUES ("
             + " '" + data.order_code + "', "
             + " '" + data.promotion_code + "', "
@@ -32,7 +33,8 @@ Task.insertPayment = function insertPayment(data) {
             + " '" + data.payment_money_received + "', "
             + " '" + data.payment_change + "', "
             + " '" + data.payment_time + "', "
-            + " '" + data.payment_date + "' "
+            + " '" + data.payment_date + "',"
+            + " '" + data.about_code + "' "
             + " ) "
 
         console.log("strrrrrrrr", str);
