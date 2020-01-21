@@ -21,7 +21,7 @@ Task.getMenuBy = function getMenuBy(data) {
             str += " WHERE tb1.about_code = '" + data.about_code + "' "
         }
 
-        // console.log('checkLogin : ', str);
+        console.log('checkLogin : ', str);
         // console.log('dataaaa : ', data);
 
         sql.query(str, function (err, res) {
@@ -57,7 +57,7 @@ Task.getMenuByType = function getMenuByType(data) {
 
 
         console.log('tb_menutb_menutb_menutb_menutb_menu : ', str);
-        
+
 
         sql.query(str, function (err, res) {
 
@@ -155,7 +155,8 @@ Task.getMenuByCode = function getMenuByCode(data) {
 };
 Task.getMenuByMenuCode = function getMenuByMenuCode(data) {
     return new Promise(function (resolve, reject) {//menu list
-        var str = "SELECT  * FROM tb_menu "
+        var str = "SELECT  * FROM tb_menu as tb1 "
+            + " LEFT JOIN tb_menu_type as tb2 ON tb1.menu_type_id = tb2.menu_type_id"
             + " WHERE menu_code = '" + data.menu_code + "' ";
 
         console.log('checkLogin : ', str);
@@ -193,16 +194,16 @@ Task.insertMenu = function insertMenu(data) {
             + "`menu_type_id`,"
             + "`menu_name`,"
             + "`menu_image`,"
-            + "`menu_price` "
-            // + "`addby` "
+            + "`menu_price`, "
+            + "`addby` "
             + ") VALUES ("
             + " '" + data.menu_code + "', "
             + " '" + data.about_code + "', "
             + " '" + data.menu_type_id + "', "
             + " '" + data.menu_name + "', "
             + " '" + data.menu_image + "', "
-            + " '" + data.menu_price + "' "
-            // + " '" + data[0].addby + "' "
+            + " '" + data.menu_price + "', "
+            + " '" + data.addby + "' "
             + " ) "
 
         // console.log(str);
@@ -273,11 +274,11 @@ Task.updateMenuByCode = function updateMenuByCode(data) {
         var str = "UPDATE `tb_menu` SET "
             + "`menu_code` = '" + data.menu_code + "',"
             + "`about_code` = '" + data.about_code + "',"
-            // + "`menu_id`= '" + data.menu_id + "',"
             + "`menu_type_id`= '" + data.menu_type_id + "',"
             + "`menu_name`= '" + data.menu_name + "',"
             + "`menu_image`= '" + data.menu_image + "',"
-            + "`menu_price` = '" + data.menu_price + "'"
+            + "`menu_price` = '" + data.menu_price + "',"
+            + "`updateby` = '" + data.updateby + "'"
             + "WHERE menu_code = '" + data.menu_code + "'";
 
         // console.log('str111111111 : ', str);

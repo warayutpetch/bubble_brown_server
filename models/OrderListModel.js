@@ -18,6 +18,7 @@ Task.insertOrderList = function insertOrderList(data) {
             + "`order_code`,"
             + "`order_list_name`,"
             + "`menu_code`,"
+            + "`menu_type_id`,"
             + "`order_list_qty`, "
             + "`order_list_price_qty`, "
             + "`order_list_price_sum_qty`, "
@@ -28,6 +29,7 @@ Task.insertOrderList = function insertOrderList(data) {
             + " '" + data.order_code + "', "
             + " '" + data.order_list_name + "', "
             + " '" + data.menu_code + "', "
+            + " '" + data.menu_type_id + "', "
             + " '" + data.order_list_qty + "', "
             + " '" + data.order_list_price_qty + "', "
             + " '" + data.order_list_price_sum_qty + "', "
@@ -109,7 +111,7 @@ Task.updateRevisedListByCode = function updateRevisedListByCode(data) {
     return new Promise(function (resolve, reject) {
         var str = "UPDATE `tb_order_list` SET"
             + "`revised`= '1'";
-           
+
 
 
         // console.log('checkLogin : ', data.order_list_date);
@@ -177,7 +179,7 @@ Task.getOrderListOldBy = function getOrderListOldBy(data) {
     return new Promise(function (resolve, reject) {//user list
         var str = "SELECT  * FROM tb_order_list "
             + "WHERE order_code = '" + data.order_code + "'"
-            + "AND revised_num = '" + (data.revised_num - 1)+ "'"
+            + "AND revised_num = '" + (data.revised_num - 1) + "'"
 
         console.log('checkLogin : ', str);
 
@@ -209,7 +211,7 @@ Task.getOrderListOldBy = function getOrderListOldBy(data) {
 Task.getOrderListByOrderCode = function getOrderListByOrderCode(data) {
     return new Promise(function (resolve, reject) {//user list
         var str = "SELECT  * FROM tb_order_list "
-            + "WHERE order_code = '" + data.order_code + "'";
+            + "WHERE order_code = '" + data.order_code + "' AND revised = 0 ";
 
         console.log('checkLogin : ', str);
 

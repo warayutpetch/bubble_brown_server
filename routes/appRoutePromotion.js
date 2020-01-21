@@ -20,6 +20,15 @@ module.exports = function (app) {
             res.send(task);
         });
     })
+    app.post('/promotion/getPromotionByPromotionCode', function (req, res) {
+        console.log('/promotion/getPromotionByPromotionCode', req.body)
+        promotionController.getPromotionByPromotionCode(req.body, function (err, task) {
+            if (err) {
+                res.send(err);
+            }
+            res.send(task);
+        });
+    })
     app.post('/promotion/getPromotionByCol', function (req, res) {
         console.log('/promotion/getPromotionByCol', req.body)
         promotionController.getPromotionByCol(req.body, function (err, task) {

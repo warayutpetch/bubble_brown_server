@@ -17,6 +17,11 @@ Task.getPromotionByCode = async function getPromotionByCode(data, result) {
     result(promotionList)
 }
 
+Task.getPromotionByPromotionCode = async function getPromotionByPromotionCode(data, result) {
+    var promotionList = await promotionModel.getPromotionByPromotionCode(data);
+    result(promotionList)
+}
+
 Task.insertPromotion = async function insertPromotion(data, result) {
     var promotionList = await promotionModel.insertPromotion(data);
     result(promotionList)

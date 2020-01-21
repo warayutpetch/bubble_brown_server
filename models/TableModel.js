@@ -146,12 +146,14 @@ Task.insertTable = function insertTable(data) {
             + "`table_code`,"
             + "`table_name`,"
             + "`table_amount`,"
+            + "`about_code`,"
             + "`zone_id`"
            
             + ") VALUES ("
             + " '" + data.table_code + "', "
             + " '" + data.table_name + "', "
             + " '" + data.table_amount + "', "
+            + " '" + data.about_code + "', "
             + " '" + data.zone_id + "' "
             + " ) "
 

@@ -148,7 +148,7 @@ Task.getSumStockInBy = function getSumStockInBy(data) {
 
 Task.getSumStockOutBy = function getSumStockOutBy(data) {
     return new Promise(function (resolve, reject) {//user list
-        var str = "  SELECT IFNULL(SUM(product_qty), 0) AS stock_out , unit AS unit FROM tb_stock_out as tb1 "
+        var str = "  SELECT IFNULL(SUM(product_qty*menu_qty), 0) AS stock_out , unit AS unit FROM tb_stock_out as tb1 "
             + " WHERE tb1.product_code =  '" + data.product_code + "'"
             + "GROUP BY unit"
 
@@ -399,7 +399,7 @@ Task.getStockByPriceQty = function getStockByPriceQty(data) {
             + " (SELECT IFNULL(SUM((product_qty * menu_qty  * product_cost)),0) FROM  `tb_stock_out`  WHERE product_code = '" + data.product_code + "' )) "
             + " / (IFNULL(SUM(`stock_qty_cal`),0) - "
             + " (SELECT IFNULL(SUM((product_qty * menu_qty  )),0) FROM  `tb_stock_out` WHERE product_code = '" + data.product_code + "' )) AS product_cost"
-            + " FROM `tb_stock` WHERE product_code = '" + data.product_code + "'";
+            + " , product_code FROM `tb_stock` WHERE product_code = '" + data.product_code + "'";
         console.log('checkLogin : ', str);
 
 
