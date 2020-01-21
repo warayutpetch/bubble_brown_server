@@ -81,7 +81,7 @@ Task.getProductBy = function getProductBy(data) {
         var str = "  SELECT * FROM `tb_product` "
             + " LEFT JOIN tb_unit  ON tb_unit.unit_id = tb_product.unit_id"
         if (data.about_menu_data == 1) {
-            str += " WHERE  tb_product.about_code = '" + data.about_code + "' OR tb_product.about_code = '" + data.about_main_barnch + "' "
+            str += " WHERE  tb_product.about_code = '" + data.about_code + "' OR tb_product.about_code = '" + data.about_main_branch + "' "
         } else {
             str += " WHERE tb_product.about_code = '" + data.about_code + "' "
         }

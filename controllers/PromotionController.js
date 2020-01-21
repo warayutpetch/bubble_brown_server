@@ -47,17 +47,11 @@ Task.deletePromotion = async function deletePromotion(data, result) {
     result(promotionList);
 }
 
-// Task.deletePromotion = async function deletePromotion(data, result) {
-//     var set_data = {
-//         deleted: 1,
-//         // deleteby: data.member_code,
-//         // deletedate: timeController.reformatToSave(new Date())
-//     }
-//     var set_where = {
-//         promotion_code: data.promotion_code
-//     }
-//     var promotionList = await promotionModel.deletePromotion(set_data, set_where);
-//     result(promotionList);
-// }
+Task.getProductByFont = async function getProductByFont(data, result) {
+    var promotionList = await promotionModel.getProductByFont(data);
+    result(promotionList);
+}
+
+
 
 module.exports = Task;  

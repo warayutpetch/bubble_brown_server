@@ -16,7 +16,7 @@ Task.getMenuBy = function getMenuBy(data) {
         var str = "SELECT  * FROM tb_menu as tb1"
             + " LEFT JOIN tb_menu_type as tb2 ON tb1.menu_type_id = tb2.menu_type_id"
         if (data.about_menu_data == 1) {
-            str += " WHERE  tb1.about_code = '" + data.about_code + "' OR tb1.about_code = '" + data.about_main_barnch + "' "
+            str += " WHERE  tb1.about_code = '" + data.about_code + "' OR tb1.about_code = '" + data.about_main_branch + "' "
         } else {
             str += " WHERE tb1.about_code = '" + data.about_code + "' "
         }
