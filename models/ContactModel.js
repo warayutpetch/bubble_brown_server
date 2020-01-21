@@ -1,8 +1,8 @@
 var sql = require('./BaseModel');
-const Config = require('../globals/Config');
+// const Config = require('../globals/Config');
 var timeController = require('../controllers/TimeController');
 
-const _config = new Config();
+// const _config = new Config();
 
 var Task = function (task) {
     this.task = task.task;
