@@ -27,10 +27,10 @@ var mysql = require('mysql');
 // });
 var connection = mysql.createConnection({
     connectionimit: 100,
-    host: 'localhost',
-    user: 'root',
+    host: 'it2.sut.ac.th',
+    user: 'project62_g20',
     port: 3306,
-    password: 'root123456',
+    password: '170664',
     database: 'bubble_brown',
     // charset : 'utf8mb4',
     multipleStatements: true
