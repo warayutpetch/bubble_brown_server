@@ -60,6 +60,30 @@ module.exports = function (app) {
         });
     })
 
+    app.post('/order/getOrderByAboutCode', function (req, res) {
+        console.log('/order/getOrderByAboutCode', req.body)
+        OrderController.getOrderByAboutCode(req.body, function (err, task) {
+
+            if (err) {
+                res.send(err);
+            }
+            // console.log('res', task);
+            res.send(task);
+        });
+    })
+
+    app.post('/order/getOrderByOrderCode', function (req, res) {
+        console.log('/order/getOrderByOrderCode', req.body)
+        OrderController.getOrderByOrderCode(req.body, function (err, task) {
+
+            if (err) {
+                res.send(err);
+            }
+            // console.log('res', task);
+            res.send(task);
+        });
+    })
+
     app.post('/order/updateOrderByCode', function (req, res) {
         console.log('/order/updateOrderByCode', req.body)
         OrderController.updateOrderByCode(req.body, function (err, task) {

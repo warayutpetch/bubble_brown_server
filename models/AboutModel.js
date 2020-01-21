@@ -79,7 +79,12 @@ Task.getAboutByKey = function getAboutByKey(data) {
 
 Task.getAboutBy = function getAboutBy(data) {
     return new Promise(function (resolve, reject) {
-        var str = "SELECT  * FROM tb_about WHERE deleted = 0";
+        var str = "SELECT  * FROM tb_about "
+        if (data.user_position == 'เจ้าของร้าน') {
+            str += " WHERE deleted = 0 AND about_code = '" + data.about_code + "'";
+        } else {
+            str += "WHERE deleted = 0";
+        }
 
         sql.query(str, function (err, res) {
 

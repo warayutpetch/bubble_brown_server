@@ -240,6 +240,77 @@ Task.getOrderByCode = function getOrderByCode(data) {
     });
 };
 
+Task.getOrderByAboutCode = function getOrderByAboutCode(data) {
+    return new Promise(function (resolve, reject) {
+        var str = "SELECT  * FROM `tb_order` "
+            + " LEFT JOIN tb_about  ON tb_order.about_code = tb_about.about_code "
+            + "WHERE order_code = '" + data.order_code + "' AND revised = 0 ";
+
+        console.log('checkLogin565664646 : ', str);
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res[0],
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
+
+Task.getOrderByOrderCode = function getOrderByOrderCode(data) {
+    return new Promise(function (resolve, reject) {
+        var str = "SELECT  * FROM `tb_order` "
+            + " LEFT JOIN tb_about  ON tb_order.about_code = tb_about.about_code "
+            + " LEFT JOIN tb_table  ON tb_order.table_code = tb_table.table_code "
+            + " LEFT JOIN tb_zone  ON tb_table.zone_id = tb_zone.zone_id "
+            + " LEFT JOIN tb_district  ON tb_about.district_id = tb_district.district_id "
+            + " LEFT JOIN tb_amphur  ON tb_about.amphur_id = tb_amphur.amphur_id "
+            + " LEFT JOIN tb_province  ON tb_about.province_id = tb_province.province_id "
+            + "WHERE order_code = '" + data.order_code + "' AND revised = 0 ";
+
+        console.log('checkLogin565664646 : ', str);
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res[0],
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
+
 Task.updateOrderByCode = function updateOrderByCode(data) {
     return new Promise(function (resolve, reject) {
         var str = "UPDATE `tb_order` SET "

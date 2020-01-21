@@ -43,7 +43,9 @@ Task.getUserBy = function getUserBy(data) {
 };
 Task.getUserByCode = function getUserByCode(data) {
     return new Promise(function (resolve, reject) {//user list
-        var str = "SELECT * FROM `tb_user` WHERE user_code='" + data.user_code + "'";
+        var str = "SELECT * FROM `tb_user`"
+            + " LEFT JOIN tb_about  ON tb_user.about_code = tb_about.about_code "
+            + " WHERE user_code='" + data.user_code + "'";
 
         console.log('user_code : ', data);
 
