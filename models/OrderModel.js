@@ -454,7 +454,7 @@ Task.updateCencelOrder = function updateCencelOrder(data) {
 
         var str = "UPDATE `tb_order` SET "
             + "`order_status`= '3' ,"
-            + "`order_cencel_id` = '" + data.order_cencel_id + "' "
+            + "`cencel_list_id` = '" + data.cencel_list_id + "' "
             + "WHERE order_code = '" + data.order_code + "'";
         console.log("data55555555555555: ", data);
 
