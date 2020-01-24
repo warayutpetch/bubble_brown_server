@@ -167,6 +167,108 @@ Task.deleteCustomerByCode = function deleteCustomerByCode(data) {
     });
 };
 
+Task.ChangName = function ChangName(data) {
+    return new Promise(function (resolve, reject) {//user list
+        var str = "UPDATE `tb_customer` SET"
+            + "`customer_name` = '" + data.customer_name + "'"
+            + " WHERE tb_customer.customer_id = '" + data.customer_id + "'";
+
+        console.log('str : ', str);
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: false,
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: true,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
+
+Task.ChangeEmail = function ChangeEmail(data) {
+    return new Promise(function (resolve, reject) {//user list
+        var str = "UPDATE `tb_customer` SET"
+            + "`customer_email` = '" + data.customer_email + "'"
+            + " WHERE tb_customer.customer_id = '" + data.customer_id + "'";
+
+        console.log('str : ', str);
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: false,
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: true,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
+
+Task.ChangeTel = function ChangeTel(data) {
+    return new Promise(function (resolve, reject) {//user list
+        var str = "UPDATE `tb_customer` SET"
+            + "`customer_tel` = '" + data.customer_tel + "'"
+            + " WHERE tb_customer.customer_id = '" + data.customer_id + "'";
+
+        console.log('str : ', str);
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: false,
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: true,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
+
+
+
+
 
 Task.insertCustomer = function insertCustomer(data) {
     return new Promise(function (resolve, reject) {
@@ -219,7 +321,37 @@ Task.insertCustomer = function insertCustomer(data) {
 };
 Task.getCustomerById = function getCustomerById(data) {
     return new Promise(function (resolve, reject) {//user list
-        var str = "SELECT * FROM `tb_customer` WHERE customer_id ='"+ data.userId +"'" ;
+        var str = "SELECT * FROM `tb_customer` WHERE customer_id ='" + data.userId + "'";
+
+        console.log('str : ', str);
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res[0],
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
+Task.getCustomerByCusId = function getCustomerByCusId(data) {
+    return new Promise(function (resolve, reject) {//user list
+        var str = "SELECT * FROM `tb_customer` WHERE customer_id ='" + data.customer_id + "'";
 
         console.log('str : ', str);
 

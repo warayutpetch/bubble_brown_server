@@ -51,6 +51,26 @@ Task.getCustomerById = async function getCustomerById(data, result) {
     result(customerList);
 }
 
+Task.ChangName = async function ChangName(data, result) {
+    var customerList = await customerModel.ChangName(data);
+    result(customerList);
+}
+
+Task.getCustomerByCusId = async function getCustomerByCusId(data, result) {
+    var customerList = await customerModel.getCustomerByCusId(data);
+    result(customerList);
+}
+
+Task.ChangeEmail = async function ChangeEmail(data, result) {
+    var customerList = await customerModel.ChangeEmail(data);
+    result(customerList);
+}
+
+Task.ChangeTel = async function ChangeTel(data, result) {
+    var customerList = await customerModel.ChangeTel(data);
+    result(customerList);
+}
+
 
 // Task.deleteCustomerByCode = async function deleteCustomerByCode(data, result) {
 //     var set_data = {

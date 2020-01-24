@@ -84,6 +84,45 @@ module.exports = function (app) {
         });
     })
 
+    app.post('/customer/ChangName', function (req, res) {
+        console.log('/customer/ChangName', req.body)
+        customerController.ChangName(req.body, function (err, task) {
+            if (err) {
+                res.send(err);
+            }
+            res.send(task);
+        });
+    })
+
+    app.post('/customer/getCustomerByCusId', function (req, res) {
+        console.log('/customer/getCustomerByCusId', req.body)
+        customerController.getCustomerByCusId(req.body, function (err, task) {
+            if (err) {
+                res.send(err);
+            }
+            res.send(task);
+        });
+    })
+
+    app.post('/customer/ChangeTel', function (req, res) {
+        console.log('/customer/ChangeTel', req.body)
+        customerController.ChangeTel(req.body, function (err, task) {
+            if (err) {
+                res.send(err);
+            }
+            res.send(task);
+        });
+    })
+    app.post('/customer/ChangeEmail', function (req, res) {
+        console.log('/customer/ChangeEmail', req.body)
+        customerController.ChangeEmail(req.body, function (err, task) {
+            if (err) {
+                res.send(err);
+            }
+            res.send(task);
+        });
+    })
+
 
     // app.post('/journal/deleteCoverPage', function (req, res) {
     //     console.log('/journal/deleteCoverPage', req.body)
