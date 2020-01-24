@@ -40,6 +40,39 @@ Task.getBookingBy = function getBookingBy(data) {
     });
 }
 
+Task.getBookingByCustomer = function getBookingByCustomer(data) {
+    return new Promise(function (resolve, reject) {
+        var str = "SELECT  * FROM tb_booking "
+            + " LEFT JOIN tb_about ON tb_about.about_code = tb_booking.about_code "
+            + " WHERE tb_booking.deleted = '0' "
+            + " AND tb_booking.about_code = '" + data.about_code + "'"
+            + " AND tb_booking.customer_id = '" + data.customer_id + "'";
+        console.log(str);
+
+        sql.query(str, function (err, res) {
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res,
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+}
+
 Task.getBookingByCode = function getBookingByCode(data) {
     return new Promise(function (resolve, reject) {//user list
         var str = "SELECT  * FROM tb_booking "
@@ -78,21 +111,25 @@ Task.insertBooking = function insertBooking(data) {
             + "`booking_code`,"
             + "`table_code`,"
             + "`about_code`,"
+            + "`customer_id`,"
             + "`booking_firstname`,"
             + "`booking_lastname`,"
             + "`booking_tel`, "
             + "`booking_email`, "
             + "`booking_date`, "
+            + "`booking_time`, "
             + "`booking_amount` "
             + ") VALUES ("
             + " '" + data.booking_code + "', "
             + " '" + data.table_code + "', "
             + " '" + data.about_code + "', "
+            + " '" + data.customer_id + "', "
             + " '" + data.booking_firstname + "', "
             + " '" + data.booking_lastname + "', "
             + " '" + data.booking_tel + "', "
             + " '" + data.booking_email + "', "
             + " '" + timeController.reformatTo(data.booking_date) + "', "
+            + " '" + data.booking_time + "', "
             + " '" + data.booking_amount + "' "
             + " ) "
 

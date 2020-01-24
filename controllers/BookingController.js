@@ -41,4 +41,9 @@ Task.deleteBooking = async function deleteBooking(data, result) {
     result(booking);
 }
 
+Task.getBookingByCustomer = async function getBookingByCustomer(data, result) {
+    var booking = await BookingModel.getBookingByCustomer(data);
+    result(booking);
+}
+
 module.exports = Task;
