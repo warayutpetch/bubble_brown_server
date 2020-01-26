@@ -72,5 +72,8 @@ Task.getOrderRevisedNum = async function getOrderRevisedNum(data, result) {
 }
 
 
-
+Task.getOrderByCusOld = async function getOrderByCusOld(data, result) {
+    var order = await OrderModel.getOrderByCusOld(data);
+    result(order);
+}
 module.exports = Task;

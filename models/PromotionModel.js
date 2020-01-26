@@ -159,7 +159,7 @@ Task.getPromotionByPromotionCode = function getPromotionByPromotionCode(data) {
             }
             else {
                 const require = {
-                    data: res,
+                    data: res[0],
                     error: [],
                     query_result: true,
                     server_result: true

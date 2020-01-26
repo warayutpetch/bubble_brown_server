@@ -72,6 +72,8 @@ Task.ChangeTel = async function ChangeTel(data, result) {
 }
 
 
+
+
 // Task.deleteCustomerByCode = async function deleteCustomerByCode(data, result) {
 //     var set_data = {
 //         deleted: 1,

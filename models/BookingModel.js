@@ -46,7 +46,7 @@ Task.getBookingByCustomer = function getBookingByCustomer(data) {
             + " LEFT JOIN tb_about ON tb_about.about_code = tb_booking.about_code "
             + " WHERE tb_booking.deleted = '0' "
             + " AND tb_booking.about_code = '" + data.about_code + "'"
-            + " AND tb_booking.customer_id = '" + data.customer_id + "'";
+            + " AND tb_booking.customer_code = '" + data.customer_code + "'";
         console.log(str);
 
         sql.query(str, function (err, res) {
@@ -111,7 +111,7 @@ Task.insertBooking = function insertBooking(data) {
             + "`booking_code`,"
             + "`table_code`,"
             + "`about_code`,"
-            + "`customer_id`,"
+            + "`customer_code`,"
             + "`booking_firstname`,"
             + "`booking_lastname`,"
             + "`booking_tel`, "
@@ -123,7 +123,7 @@ Task.insertBooking = function insertBooking(data) {
             + " '" + data.booking_code + "', "
             + " '" + data.table_code + "', "
             + " '" + data.about_code + "', "
-            + " '" + data.customer_id + "', "
+            + " '" + data.customer_code + "', "
             + " '" + data.booking_firstname + "', "
             + " '" + data.booking_lastname + "', "
             + " '" + data.booking_tel + "', "
@@ -204,6 +204,7 @@ Task.checkBook = function checkBook(data) {
             + " LEFT JOIN tb_booking ON `tb_table`.`table_code` = tb_booking.table_code "
             + " WHERE table_amount = '" + data.table_amount + "'"
             + " AND tb_booking.booking_date = '" + timeController.reformatTo(data.booking_date) + "'"
+            + " AND tb_booking.about_code = '" + data.about_code + "'"
 
         console.log('checkLogin565664646 : ', str);
 
@@ -236,6 +237,7 @@ Task.checkTable = function checkTable(data) {
     return new Promise(function (resolve, reject) {
         var str = "SELECT  * FROM `tb_table` "
             + " WHERE table_amount = '" + data.table_amount + "'"
+            + " AND about_code = '" + data.about_code + "'"
 
 
 

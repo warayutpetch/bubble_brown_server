@@ -211,6 +211,7 @@ Task.getOrderListOldBy = function getOrderListOldBy(data) {
 Task.getOrderListByOrderCode = function getOrderListByOrderCode(data) {
     return new Promise(function (resolve, reject) {//user list
         var str = "SELECT  * FROM tb_order_list "
+            + " LEFT JOIN tb_menu ON tb_menu.menu_code = tb_order_list.menu_code "
             + "WHERE order_code = '" + data.order_code + "' AND revised = 0 ";
 
         console.log('checkLogin : ', str);

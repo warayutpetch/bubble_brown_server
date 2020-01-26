@@ -113,6 +113,7 @@ module.exports = function (app) {
             res.send(task);
         });
     })
+
     app.post('/customer/ChangeEmail', function (req, res) {
         console.log('/customer/ChangeEmail', req.body)
         customerController.ChangeEmail(req.body, function (err, task) {
@@ -123,6 +124,7 @@ module.exports = function (app) {
         });
     })
 
+ 
 
     // app.post('/journal/deleteCoverPage', function (req, res) {
     //     console.log('/journal/deleteCoverPage', req.body)

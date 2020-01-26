@@ -104,6 +104,39 @@ Task.getOrderBy = function getOrderBy(data) {
     });
 };
 
+Task.getOrderByCusOld = function getOrderByCusOld(data) {
+    return new Promise(function (resolve, reject) {//user list
+        var str = "SELECT  * FROM tb_order "
+            + "WHERE tb_order.about_code = '" + data.about_code + "'"
+            + "AND tb_order.customer_code = '" + data.customer_code + "'"
+            + "AND (tb_order.order_status = 0 OR order_status = 1 ) AND revised = 0 ";
+        console.log('order_statuscheckLogin : ', str);
+
+        sql.query(str, function (err, res) {
+
+            if (err) {
+                console.log("error: ", err);
+                const require = {
+                    data: [],
+                    error: err,
+                    query_result: false,
+                    server_result: true
+                };
+                resolve(require);
+            }
+            else {
+                const require = {
+                    data: res[0],
+                    error: [],
+                    query_result: true,
+                    server_result: true
+                };
+                resolve(require);
+            }
+        });
+    });
+};
+
 Task.getOrderMaxCode = function getOrderMaxCode(data) {
     return new Promise(function (resolve, reject) {
         var str = "SELECT  IFNULL(LPAD( SUBSTRING(max(order_code),3 ,7)+1,6, '0'),'000001') AS order_code_max FROM `tb_order` "

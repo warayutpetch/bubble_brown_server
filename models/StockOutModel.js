@@ -22,6 +22,7 @@ Task.insertStockOutByOrder = function insertStockOutByOrder(data) {
             + "`order_code`, "
             + "`product_cost`, "
             + "`unit`, "
+            + "`about_code`, "
             + "`stock_out_date` "
             + ") VALUES ("
             + " '" + data.product_code + "', "
@@ -31,6 +32,7 @@ Task.insertStockOutByOrder = function insertStockOutByOrder(data) {
             + " '" + data.order_code + "', "
             + " '" + data.product_cost + "', "
             + " '" + data.unit + "', "
+            + " '" + data.about_code + "', "
             + " '" + timeController.reformatTo() + "' "
             + " ) "
 

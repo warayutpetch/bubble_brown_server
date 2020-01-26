@@ -179,6 +179,15 @@ module.exports = function (app) {
             res.send(task);
         });
     })
+    app.post('/order/getOrderByCusOld', function (req, res) {
+        console.log('/order/getOrderByCusOld', req.body)
+        OrderController.getOrderByCusOld(req.body, function (err, task) {
+            if (err) {
+                res.send(err);
+            }
+            res.send(task);
+        });
+    })
 
 
 }
