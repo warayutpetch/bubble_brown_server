@@ -2,16 +2,16 @@ var mysql = require('mysql');
 
 //local mysql db connection // // //
 
-// var connection = mysql.createConnection({
-//     connectionimit: 100,
-//     host: 'database-1.c9gynadydeka.ap-southeast-1.rds.amazonaws.com',
-//     user: 'admin',
-//     port: 3306,
-//     password: 'root123456',
-//     database: 'washing_machine',
-//     // charset : 'utf8mb4',
-//     multipleStatements: true
-// }); 
+var connection = mysql.createConnection({
+    connectionimit: 100,
+    host: 'database-1.c9gynadydeka.ap-southeast-1.rds.amazonaws.com',
+    user: 'admin',
+    port: 3306,
+    password: 'root123456',
+    database: 'project62_g20',
+    // charset : 'utf8mb4',
+    multipleStatements: true
+}); 
 
 // host: 'database-rvscs.cdaloohdepaj.ap-southeast-1.rds.amazonaws.com',
 
@@ -25,16 +25,16 @@ var mysql = require('mysql');
 //     // charset : 'utf8mb4',
 //     multipleStatements: true
 // });
-var connection = mysql.createConnection({
-    connectionimit: 100,
-    host: 'it2.sut.ac.th',
-    user: 'project62_g20',
-    port: 3306,
-    password: '170664',
-    database: 'project62_g20',
-    // charset : 'utf8mb4',
-    multipleStatements: true
-}); 
+// var connection = mysql.createConnection({
+//     connectionimit: 100,
+//     host: 'it2.sut.ac.th',
+//     user: 'project62_g20',
+//     port: 3306,
+//     password: '170664',
+//     database: 'project62_g20',
+//     // charset : 'utf8mb4',
+//     multipleStatements: true
+// }); 
 // var connection = mysql.createConnection({
 //     connectionimit: 100,
 //     host: 'localhost',
