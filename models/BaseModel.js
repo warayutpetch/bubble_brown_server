@@ -31,10 +31,20 @@ var connection = mysql.createConnection({
     user: 'project62_g20',
     port: 3306,
     password: '170664',
-    database: 'bubble_brown',
+    database: 'project62_g20',
     // charset : 'utf8mb4',
     multipleStatements: true
 }); 
+// var connection = mysql.createConnection({
+//     connectionimit: 100,
+//     host: 'localhost',
+//     user: 'root',
+//     port: 3306,
+//     password: 'root123456',
+//     database: 'bubble_brown',
+//     // charset : 'utf8mb4',
+//     multipleStatements: true
+// }); 
 
 // var connection = mysql.createConnection({
 //     connectionimit: 100,
