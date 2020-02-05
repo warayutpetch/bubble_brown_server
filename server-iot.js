@@ -4,7 +4,8 @@ const express = require('express'),
 // port = process.env.PORT || 3001;
 port = process.env.PORT || 3004; // AWS
 var exphbs = require('express-handlebars');
-
+const https = require('https');
+const fs = require('fs');
 
 
 
@@ -39,10 +40,15 @@ app.use((req, res, next) => {
   }
 });
 
+https.createServer({
+  key: fs.readFileSync('/etc/letsencrypt/live/aws-wara.xyz/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/aws-wara.xyz/fullchain.pem'),
 
-app.listen(3004, () => {
-  console.log('API Start server at port 3004.')
-})
+}, app)
+.listen(3000);
+// app.listen(3004, () => {
+//   console.log('API Start server at port 3004.')
+// })
 
 var appRouteAbout = require('./routes/appRouteAbout');
 appRouteAbout(app); //Admin the route

@@ -13,7 +13,7 @@ const Pusher = require('pusher');
       key: 'def17c9634c093c2935d',
       secret: '653111250a05509812ec',
       cluster: 'ap1',
-      encrypted: true
+      useTLS: true
     });
     app.set('PORT', process.env.PORT || 5002);
 
